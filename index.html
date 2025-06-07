@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generator Prompt Fashion (Single File)</title>
+    <!-- Memuat Tailwind CSS dari CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Memuat Font Inter dari Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Gaya dasar untuk body dan panah dropdown kustom */
+        body { font-family: 'Inter', sans-serif; }
+        .form-select {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%239ca3af' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+            background-position: right 0.5rem center;
+            background-repeat: no-repeat;
+            background-size: 1.5em 1.5em;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+        }
+        /* Gaya untuk notifikasi 'toast' */
+        .toast { visibility: hidden; opacity: 0; transition: all 0.3s ease-in-out; }
+        .toast.show { visibility: visible; opacity: 1; }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-200 antialiased">
+
+    <!-- Kontainer Utama -->
+    <div class="container mx-auto max-w-2xl p-4 sm:p-6 lg:p-8">
+
+        <!-- Header -->
+        <header class="text-center mb-8">
+            <h1 class="text-3xl sm:text-4xl font-bold tracking-tight text-white">Fashion Prompt Generator</h1>
+            <p class="mt-2 text-lg text-gray-400">Versi file tunggal yang andal.</p>
+        </header>
+
+        <!-- Card Form -->
+        <main class="bg-gray-800 shadow-2xl rounded-2xl p-6 sm:p-8">
+            <div class="space-y-6">
+
+                <!-- Dropdown Etnis dengan data hardcoded -->
+                <div>
+                    <label for="etnis" class="block text-sm font-medium text-gray-300 mb-2">Etnis / Tipe Wajah Model</label>
+                    <select id="etnis" class="form-select w-full bg-gray-700 border border-gray-600 rounded-lg py-2.5 px-3">
+                        <optgroup label="Indonesia / Asia">
+                            <option>Wajah Jawa / Sunda</option>
+                            <option>Wajah Melayu</option>
+                            <option>Wajah Indonesia Timur</option>
+                            <option>Wajah Tionghoa-Indonesia</option>
+                            <option>Wajah Korea / Jepang</option>
+                        </optgroup>
+                        <optgroup label="Kaukasia / Blasteran">
+                            <option>Wajah Eropa Utara</option>
+                            <option>Wajah Mediterania</option>
+                            <option>Wajah Blasteran (Indo-Eropa)</option>
+                            <option>Wajah Eurasia</option>
+                        </optgroup>
+                    </select>
+                </div>
+
+                <!-- Dropdown Tema dengan data hardcoded -->
+                <div>
+                    <label for="tema" class="block text-sm font-medium text-gray-300 mb-2">Tema & Konsep Foto</label>
+                    <select id="tema" class="form-select w-full bg-gray-700 border border-gray-600 rounded-lg py-2.5 px-3">
+                        <optgroup label="Gaya & Estetika">
+                            <option>High Fashion / Editorial</option>
+                            <option>Minimalis Modern</option>
+                            <option>Street Style / Urban</option>
+                            <option>Vintage / Retro</option>
+                            <option>Elegan / Klasik</option>
+                        </optgroup>
+                        <optgroup label="Lokasi & Lingkungan">
+                            <option>Arsitektur Modern</option>
+                            <option>Bangunan Tua / Bersejarah</option>
+                            <option>Pedesaan / Alam Liar</option>
+                            <option>Pantai / Lautan</option>
+                            <option>Kafe / Rooftop Perkotaan</option>
+                        </optgroup>
+                        <optgroup label="Konsep & Budaya">
+                            <option>Fantasi / Negeri Dongeng</option>
+                            <option>Cyberpunk / Futuristik</option>
+                            <option>Era 70-an (Disco)</option>
+                            <option>Era 90-an (Grunge)</option>
+                            <option>Etnik Modern</option>
+                        </optgroup>
+                    </select>
+                </div>
+                
+                <!-- Dropdown Makeup dengan data hardcoded -->
+                <div>
+                    <label for="makeup" class="block text-sm font-medium text-gray-300 mb-2">Gaya Riasan (Makeup)</label>
+                    <select id="makeup" class="form-select w-full bg-gray-700 border border-gray-600 rounded-lg py-2.5 px-3">
+                        <optgroup label="Tampilan Umum">
+                            <option>Natural & Flawless</option>
+                            <option>Bold & Glamour</option>
+                            <option>Smokey Eyes</option>
+                            <option>Dewy Look (Efek Basah)</option>
+                            <option>Matte Look</option>
+                        </optgroup>
+                        <optgroup label="Gaya Artistik">
+                            <option>Makeup Editorial</option>
+                            <option>Korean Look</option>
+                            <option>Western Look</option>
+                            <option>Makeup Fantasi</option>
+                        </optgroup>
+                    </select>
+                </div>
+                
+                <!-- Dropdown Rambut dengan data hardcoded -->
+                <div>
+                     <label for="rambut" class="block text-sm font-medium text-gray-300 mb-2">Gaya Rambut</label>
+                    <select id="rambut" class="form-select w-full bg-gray-700 border border-gray-600 rounded-lg py-2.5 px-3">
+                        <optgroup label="Gaya Wanita">
+                            <option>Lurus & Rapi (Sleek)</option>
+                            <option>Gelombang Pantai (Beach Waves)</option>
+                            <option>Blow-dry Bervolume</option>
+                            <option>Ponytail / Kuncir Kuda</option>
+                            <option>Bun / Cepol Modern</option>
+                            <option>Bob Cut / Pixie Cut</option>
+                        </optgroup>
+                        <optgroup label="Gaya Pria">
+                            <option>Undercut / Fade</option>
+                            <option>Slick Back (Klimis)</option>
+                            <option>Side Part (Belah Samping)</option>
+                            <option>Comma Hair (Gaya Korea)</option>
+                            <option>Rambut Gondrong Terurai</option>
+                        </optgroup>
+                    </select>
+                </div>
+
+                <!-- Dropdown Pose dengan data hardcoded -->
+                <div>
+                    <label for="pose" class="block text-sm font-medium text-gray-300 mb-2">Pose Model</label>
+                    <select id="pose" class="form-select w-full bg-gray-700 border border-gray-600 rounded-lg py-2.5 px-3">
+                        <optgroup label="Pose Individu">
+                            <option>Berdiri Tegak Percaya Diri</option>
+                            <option>Kurva S (S-Curve)</option>
+                            <option>Menyender Santai</option>
+                            <option>Melihat dari Balik Bahu</option>
+                            <option>Duduk Elegan</option>
+                            <option>Close-Up Wajah</option>
+                        </optgroup>
+                        <optgroup label="Interaksi">
+                            <option>Berpegangan Tangan</option>
+                            <option>Pelukan dari Belakang</option>
+                            <option>Saling Menatap Intens</option>
+                        </optgroup>
+                    </select>
+                </div>
+
+                <!-- Checkbox -->
+                <div class="flex items-center">
+                    <input id="proportional-body" type="checkbox" class="h-4 w-4 rounded border-gray-500 bg-gray-600 text-indigo-500 focus:ring-indigo-500">
+                    <label for="proportional-body" class="ml-3 block text-sm font-medium text-gray-300">Tambahkan 'Tubuh Proporsional'</label>
+                </div>
+                
+                <!-- Tombol Aksi -->
+                <div class="pt-2">
+                     <button id="generate-btn" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-4 rounded-lg transition-colors">Buat Prompt</button>
+                </div>
+                
+                <!-- Hasil Prompt (Awalnya tersembunyi) -->
+                <div id="result-container" class="hidden pt-2">
+                    <label for="prompt-result" class="block text-sm font-medium text-gray-300 mb-2">Hasil Prompt:</label>
+                    <div class="relative">
+                        <textarea id="prompt-result" rows="5" class="w-full bg-gray-900 border border-gray-600 rounded-lg p-3 pr-12 text-gray-200 resize-none" readonly></textarea>
+                         <button id="copy-btn" title="Salin ke clipboard" class="absolute top-2.5 right-2.5 p-2 text-gray-400 bg-gray-700 hover:bg-gray-600 rounded-md">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+                         </button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <!-- Notifikasi Toast -->
+    <div id="toast-notification" class="toast fixed bottom-5 left-1/2 -translate-x-1/2 bg-green-500 text-white py-2 px-4 rounded-lg shadow-lg">Prompt berhasil disalin!</div>
+
+    <!-- SEMUA LOGIKA JAVASCRIPT ADA DI SINI -->
+    <script>
+        // Menunggu semua elemen halaman dimuat sebelum menjalankan JavaScript
+        document.addEventListener('DOMContentLoaded', () => {
+
+            // Mengambil semua elemen interaktif dari halaman
+            const UIElements = {
+                etnis: document.getElementById('etnis'),
+                tema: document.getElementById('tema'),
+                makeup: document.getElementById('makeup'),
+                rambut: document.getElementById('rambut'),
+                pose: document.getElementById('pose'),
+                isProportional: document.getElementById('proportional-body'),
+                generateBtn: document.getElementById('generate-btn'),
+                resultContainer: document.getElementById('result-container'),
+                promptResult: document.getElementById('prompt-result'),
+                copyBtn: document.getElementById('copy-btn'),
+                toast: document.getElementById('toast-notification'),
+            };
+
+            // Event listener untuk tombol 'Buat Prompt'
+            UIElements.generateBtn.addEventListener('click', () => {
+                const bodyDesc = UIElements.isProportional.checked ? " dan tubuh proporsional" : "";
+                
+                const prompt = `Foto majalah fashion high-end, gaya editorial. Model dengan tipe wajah ${UIElements.etnis.value}${bodyDesc}, menampilkan konsep ${UIElements.tema.value}. Makeup ${UIElements.makeup.value} yang menawan, dengan gaya rambut ${UIElements.rambut.value}. Model dalam pose ${UIElements.pose.value}, menunjukkan ekspresi percaya diri. Pencahayaan dramatis, sinematik, fokus pada detail fashion dan mood.`;
+                
+                UIElements.promptResult.value = prompt;
+                UIElements.resultContainer.classList.remove('hidden'); // Tampilkan hasil
+            });
+
+            // Event listener untuk tombol 'Salin'
+            UIElements.copyBtn.addEventListener('click', () => {
+                const textToCopy = UIElements.promptResult.value;
+                if (!textToCopy) return;
+
+                navigator.clipboard.writeText(textToCopy).then(() => {
+                    // Jika berhasil, tampilkan notifikasi toast
+                    UIElements.toast.classList.add('show');
+                    // Sembunyikan notifikasi setelah 3 detik
+                    setTimeout(() => { UIElements.toast.classList.remove('show'); }, 3000);
+                }).catch(err => {
+                    console.error('Gagal menyalin:', err); // Tampilkan error di konsol jika gagal
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+
