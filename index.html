@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fashion Prompt Generator (Pro)</title>
+    <title>Fashion Prompt Generator (Tema Diperbarui)</title>
     <!-- Memuat Tailwind CSS dari CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Font utama untuk UI -->
@@ -25,7 +25,6 @@
         /* Gaya untuk notifikasi 'toast' */
         .toast { visibility: hidden; opacity: 0; transition: all 0.3s ease-in-out; }
         .toast.show { visibility: visible; opacity: 1; }
-        /* Placeholder untuk kelas font dinamis */
     </style>
 </head>
 <body class="bg-gray-900 text-gray-200 antialiased">
@@ -36,52 +35,37 @@
         <!-- Header -->
         <header class="text-center mb-8">
             <h1 class="text-3xl sm:text-4xl font-bold tracking-tight text-white">Fashion Prompt Generator</h1>
-            <p class="mt-2 text-lg text-gray-400">Versi Pro dengan Kontrol Gender & Wajah.</p>
+            <p class="mt-2 text-lg text-gray-400">Versi Final dengan Pilihan Tema Terbaru.</p>
         </header>
-        
-        <!-- Preview Judul Majalah (jika judul diaktifkan) -->
-        <div id="preview-container" class="hidden mb-8 p-6 bg-gray-950/50 rounded-lg border border-gray-700 text-center transition-all duration-500">
-            <h2 id="preview-title" class="text-4xl md:text-5xl font-thin text-white break-words transition-all duration-500">[Judul Anda]</h2>
-        </div>
 
         <!-- Card Form -->
         <main class="bg-gray-800 shadow-2xl rounded-2xl p-6 sm:p-8">
             <div class="space-y-6">
                 
-                <!-- Opsi Judul & Tipografi -->
-                <div class="space-y-4 rounded-lg bg-gray-900/50 p-4 border border-gray-700">
-                    <div class="flex items-center">
-                        <input id="include-title" type="checkbox" class="h-4 w-4 rounded border-gray-500 bg-gray-600 text-indigo-500 focus:ring-indigo-500">
-                        <label for="include-title" class="ml-3 block text-sm font-medium text-gray-300">Sertakan Judul pada Gambar?</label>
+                <!-- Pilihan Resolusi & Ukuran -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label for="resolution-type" class="block text-sm font-medium text-gray-300 mb-2">Resolusi & Ukuran</label>
+                        <select id="resolution-type" class="form-select w-full bg-gray-700 border border-gray-600 rounded-lg py-2.5 px-3">
+                            <option value="resolusi maksimal yang tajam" selected>Resolusi Maksimal</option>
+                            <option value="kualitas cetak ukuran A4 potret">Ukuran Cetak A4 (Potret)</option>
+                            <option value="kualitas cetak ukuran A4 lanskap">Ukuran Cetak A4 (Lanskap)</option>
+                            <option value="rasio 9:16 untuk Instagram Story">Rasio Instagram Story (9:16)</option>
+                            <option value="rasio 1:1 untuk Instagram Post">Rasio Instagram Post (1:1)</option>
+                        </select>
                     </div>
-                    <div id="title-controls-container" class="hidden space-y-4 pt-4 border-t border-gray-700">
-                        <div>
-                            <label for="title-text" class="block text-sm font-medium text-gray-300 mb-2">Teks Judul</label>
-                            <input type="text" id="title-text" placeholder="contoh: VOGUE, arva" class="w-full bg-gray-700 border border-gray-600 rounded-lg py-2 px-3 placeholder-gray-400">
-                        </div>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div>
-                                <label for="title-font-style" class="block text-sm font-medium text-gray-300 mb-2">Gaya Font</label>
-                                <select id="title-font-style" class="form-select w-full bg-gray-700 border border-gray-600 rounded-lg py-2.5 px-3"></select>
-                            </div>
-                            <div>
-                                <label for="title-color" class="block text-sm font-medium text-gray-300 mb-2">Warna Judul</label>
-                                <select id="title-color" class="form-select w-full bg-gray-700 border border-gray-600 rounded-lg py-2.5 px-3">
-                                    <option>Putih</option><option>Hitam</option><option>Emas</option><option>Merah Terang</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div>
-                             <label for="title-position" class="block text-sm font-medium text-gray-300 mb-2">Posisi Judul</label>
-                            <select id="title-position" class="form-select w-full bg-gray-700 border border-gray-600 rounded-lg py-2.5 px-3">
-                                <option value="di atas model">di Atas Model</option>
-                                <option value="di depan model">di Depan Model</option>
-                                <option value="di belakang model">di Belakang Model</option>
-                            </select>
-                        </div>
+                    <div>
+                        <label for="shot-type" class="block text-sm font-medium text-gray-300 mb-2">Jenis Pemotretan (Shot Type)</label>
+                        <select id="shot-type" class="form-select w-full bg-gray-700 border border-gray-600 rounded-lg py-2.5 px-3">
+                            <option value="Full Shot">Full Shot (Seluruh Badan)</option>
+                            <option value="Medium Full Shot">Medium Full Shot (3/4 Badan)</option>
+                            <option value="Medium Shot" selected>Medium Shot (Setengah Badan)</option>
+                            <option value="Medium Close-Up">Medium Close-Up (Dada ke Atas)</option>
+                            <option value="Close-Up">Close-Up (Hanya Wajah)</option>
+                        </select>
                     </div>
                 </div>
-
+                
                 <!-- Pilihan Jumlah & Gender Model -->
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
@@ -191,23 +175,24 @@
 
             const DATA = {
                 etnis: {"Indonesia / Nusantara": ["Wajah Indonesia / Nusantara (Umum)","Wajah Melayu","Wajah Jawa","Wajah Sunda","Wajah Bali / Lombok","Wajah Indonesia Timur","Wajah Tionghoa-Indonesia"],"Blasteran (Mixed Race)": ["Blasteran / Indo (Kaukasia-Indonesia)","Eurasia (Kaukasia-Asia)","Afro-Asia"],"Asia": ["Asia Timur (Jepang/Korea)","Asia Tenggara (Thailand/Vietnam)","Asia Selatan (India/Pakistan)"],"Kaukasia / Eropa": ["Eropa Utara / Nordik","Eropa Barat","Eropa Timur / Slavia","Mediterania"],"Afrika": ["Afrika (Umum)","Afrika Utara"]},
-                tema: {"Gaya & Estetika": ["Minimalis","High Fashion / Editorial","Street Style / Urban","Vintage / Retro","Bohemian / Boho","Grunge / Rock & Roll","Elegan / Klasik"],"Lokasi & Lingkungan": ["Arsitektur Modern","Bangunan Tua / Bersejarah","Industri / Pabrik Tua","Pedesaan / Rustic","Alam Liar / Hutan Belantara"],"Konsep & Imajinasi": ["Fantasi / Negeri Dongeng","Surrealisme / Abstrak","Sci-Fi / Futuristik","Cyberpunk / Dystopian"]},
+                tema: {
+                    // -- TEMA TELAH DIPERBARUI --
+                    "Gaya & Estetika": ["Minimalis","High Fashion / Editorial","Street Style / Urban","Vintage / Retro","Bohemian / Boho","Grunge / Rock & Roll","Elegan / Klasik"],
+                    "Lokasi & Lingkungan": ["Arsitektur Modern","Cityscape / Perkotaan Modern","Bangunan Tua / Bersejarah","Industri / Pabrik Tua","Pedesaan / Rustic","Alam Liar / Hutan Belantara"],
+                    "Konsep & Imajinasi": ["Fantasi / Negeri Dongeng","Surrealisme / Abstrak","Sci-Fi / Futuristik", "Galaksi / Luar Angkasa", "Cyberpunk / Dystopian"],
+                    "Momen & Perayaan": ["Pernikahan (Wedding / Bridal)", "Pesta Malam", "Festival Musik"]
+                },
                 makeup: [{"kategori":"Tampilan (Look/Style)","jenis":["Natural","Nude","Glamour","Bold","Smokey Eyes","Dewy Look","Matte Look","Korean Look"]},{"kategori":"Seni & Karakter","jenis":["Makeup Fantasi","Makeup Editorial","Makeup Avant-garde"]}],
                 pose: {
-                    tunggal: { "Pose Individu": ["Berdiri Tegak","Kurva S","Menyender","Tangan di Pinggul","Melihat dari Balik Bahu","Duduk Elegan","Close-Up","Seluruh Badan"] },
+                    tunggal: { "Pose Individu": ["Berdiri Tegak","Kurva S","Menyender","Tangan di Pinggul","Melihat dari Balik Bahu","Duduk Elegan","Close-Up / Portrait","Seluruh Badan (Full Body)"] },
                     kelompok: { "Pose Pasangan": ["Berpegangan Tangan","Pelukan dari Belakang","Saling Menatap"], "Pose Grup": ["Formasi V","Interaksi Candid","Berbaris Lurus"] }
                 },
                 rambut: {"Opsi Fleksibel": ["Normal (sesuai tema)"],"Gaya Pria": {"Pendek": ["Buzz Cut","Side Part","Slick Back","Undercut"],"Sedang & Panjang": ["Quiff","Pompadour","Comma Hair","Man Bun"]},"Gaya Wanita": {"Terurai": ["Lurus & Rapi","Beach Waves","Blow-dry Bervolume"],"Diikat & Diangkat": ["Ponytail","Messy Bun","Chignon"],"Potongan Populer": ["Pixie Cut","Bob Cut","Layered Cut"]}, "Gaya Unisex": ["Mullet","Shag Cut","Rambut Warna Terang"] }
             };
             
-            const FONT_STYLES = [
-                { name: "Modern (ala Arva)", font: "Poppins", weight: 500, transform: "lowercase", tracking: "tracking-wider" },
-                { name: "Elegan (ala Vogue)", font: "Playfair Display", weight: 700, transform: "uppercase", tracking: "tracking-widest" },
-                { name: "Berani (ala Cosmo)", font: "Montserrat", weight: 900, transform: "uppercase", tracking: "tracking-tight" },
-                { name: "Alternatif (ala i-D)", font: "Anton", weight: 400, transform: "lowercase", tracking: "tracking-normal" }
-            ];
-
             const UIElements = {
+                resolutionType: document.getElementById('resolution-type'),
+                shotType: document.getElementById('shot-type'),
                 jumlahModel: document.getElementById('jumlah-model'),
                 genderModel: document.getElementById('gender-model'),
                 faceVariationContainer: document.getElementById('face-variation-container'),
@@ -222,14 +207,6 @@
                 tema: document.getElementById('tema'),
                 includeFabric: document.getElementById('include-fabric'),
                 fabricInputContainer: document.getElementById('fabric-input-container'),
-                includeTitle: document.getElementById('include-title'),
-                titleControlsContainer: document.getElementById('title-controls-container'),
-                titleText: document.getElementById('title-text'),
-                titleFontStyle: document.getElementById('title-font-style'),
-                titleColor: document.getElementById('title-color'),
-                titlePosition: document.getElementById('title-position'),
-                previewContainer: document.getElementById('preview-container'),
-                previewTitle: document.getElementById('preview-title'),
                 makeup: document.getElementById('makeup'),
                 rambut: document.getElementById('rambut'),
                 pose: document.getElementById('pose'),
@@ -244,19 +221,6 @@
             function populateSimpleGroup(select, data) { select.innerHTML = ''; for (const group in data) { const optgroup = document.createElement('optgroup'); optgroup.label = group; data[group].forEach(opt => { const option = document.createElement('option'); option.value = opt; option.textContent = opt; optgroup.appendChild(option); }); select.appendChild(optgroup); } }
             function populateMakeup(select, data) { select.innerHTML = ''; data.forEach(group => { const optgroup = document.createElement('optgroup'); optgroup.label = group.kategori; group.jenis.forEach(opt => { const option = document.createElement('option'); option.value = opt; option.textContent = opt; optgroup.appendChild(option); }); select.appendChild(optgroup); }); }
             function populateRambut(select, data) { select.innerHTML = ''; for (const mainGroup in data) { const subGroups = data[mainGroup]; if (Array.isArray(subGroups)) { const optgroup = document.createElement('optgroup'); optgroup.label = mainGroup; subGroups.forEach(opt => { const option = document.createElement('option'); option.value = opt; option.textContent = opt; optgroup.appendChild(option); }); select.appendChild(optgroup); } else { for (const subGroup in subGroups) { const optgroup = document.createElement('optgroup'); optgroup.label = `${mainGroup} - ${subGroup}`; subGroups[subGroup].forEach(opt => { const option = document.createElement('option'); option.value = opt; option.textContent = opt; optgroup.appendChild(option); }); select.appendChild(optgroup); } } } }
-            
-            function loadFontsAndStyles() {
-                const styleSheet = document.createElement('style');
-                let fontUrls = new Set();
-                FONT_STYLES.forEach(style => {
-                    const fontName = style.font.replace(/ /g, '+');
-                    fontUrls.add(`https://fonts.googleapis.com/css2?family=${fontName}:wght@${style.weight}&display=swap`);
-                    styleSheet.innerHTML += `.font-${style.font.toLowerCase().replace(/ /g, '-')} { font-family: '${style.font}', sans-serif; font-weight: ${style.weight}; }`;
-                });
-                fontUrls.forEach(url => { const link = document.createElement('link'); link.rel = 'stylesheet'; link.href = url; document.head.appendChild(link); });
-                document.head.appendChild(styleSheet);
-                FONT_STYLES.forEach((style, index) => { const option = document.createElement('option'); option.value = index; option.textContent = style.name; UIElements.titleFontStyle.appendChild(option); });
-            }
 
             function updateUIForModelCount(count) {
                 // Reset visibilitas
@@ -295,19 +259,7 @@
                 populateSimpleGroup(UIElements.pose, count === '1' ? DATA.pose.tunggal : DATA.pose.kelompok);
             }
 
-            function updateTitlePreview() {
-                const style = FONT_STYLES[UIElements.titleFontStyle.value];
-                let titleText = UIElements.titleText.value.trim() || '[Judul Anda]';
-                
-                if (style.transform === 'lowercase') titleText = titleText.toLowerCase();
-                else if (style.transform === 'uppercase') titleText = titleText.toUpperCase();
-
-                UIElements.previewTitle.textContent = titleText;
-                UIElements.previewTitle.className = `text-4xl md:text-5xl text-white break-words transition-all duration-500 font-${style.font.toLowerCase().replace(/ /g, '-')} ${style.tracking}`;
-            }
-
             // --- INISIALISASI ---
-            loadFontsAndStyles();
             [UIElements.etnis1, UIElements.etnis2, UIElements.etnis3].forEach(el => populateSimpleGroup(el, DATA.etnis));
             populateSimpleGroup(UIElements.tema, DATA.tema);
             populateMakeup(UIElements.makeup, DATA.makeup);
@@ -317,24 +269,13 @@
             // --- EVENT LISTENERS ---
             UIElements.jumlahModel.addEventListener('change', (e) => updateUIForModelCount(e.target.value));
             UIElements.includeFabric.addEventListener('change', (e) => UIElements.fabricInputContainer.classList.toggle('hidden', !e.target.checked));
-            UIElements.includeTitle.addEventListener('change', (e) => {
-                const isVisible = e.target.checked;
-                UIElements.titleControlsContainer.classList.toggle('hidden', !isVisible);
-                UIElements.previewContainer.classList.toggle('hidden', !isVisible);
-                if (isVisible) updateTitlePreview();
-            });
-            [UIElements.titleText, UIElements.titleFontStyle].forEach(el => el.addEventListener('input', updateTitlePreview));
 
             UIElements.generateBtn.addEventListener('click', () => {
+                const shotType = UIElements.shotType.value;
                 const count = UIElements.jumlahModel.value;
                 const gender = UIElements.genderModel.value;
                 
-                let genderText = {
-                    'pria': 'pria',
-                    'wanita': 'wanita',
-                    'kombinasi': 'pria dan wanita',
-                    'androgini': 'androgini'
-                }[gender] || 'wanita';
+                let genderText = { 'pria': 'pria', 'wanita': 'wanita', 'kombinasi': 'pria dan wanita', 'androgini': 'androgini' }[gender] || 'wanita';
 
                 let modelDesc = '';
                 const etnis = [UIElements.etnis1.value, UIElements.etnis2.value, UIElements.etnis3.value];
@@ -352,18 +293,12 @@
                     const fabrics = Array.from(UIElements.fabricInputContainer.querySelectorAll('input')).map(input => input.value.trim()).filter(Boolean);
                     if (fabrics.length > 0) fabricDesc = `mengenakan busana yang menonjolkan kain ${fabrics.join(', ')}, `;
                 }
-
-                let titleDesc = 'Foto ';
-                if (UIElements.includeTitle.checked && UIElements.titleText.value.trim()) {
-                    const { value: titleText } = UIElements.titleText;
-                    const { value: color } = UIElements.titleColor;
-                    const { value: position } = UIElements.titlePosition;
-                    titleDesc = `Sebuah cover majalah dengan tipografi tebal bertuliskan "${titleText.toUpperCase()}" dalam warna ${color}, ditempatkan secara artistik ${position}. Foto di bawahnya adalah `;
-                }
                 
                 const rambutDesc = UIElements.rambut.value === 'Normal (sesuai tema)' ? 'gaya rambut yang sesuai' : `gaya rambut ${UIElements.rambut.value}`;
+                
+                const resolutionDesc = `Gambar harus dibuat dalam ${UIElements.resolutionType.value}.`;
 
-                const prompt = `${titleDesc}editorial fashion menampilkan ${modelDesc}. Mereka berada dalam konsep ${UIElements.tema.value}, ${fabricDesc}dengan makeup ${UIElements.makeup.value} yang menawan dan ${rambutDesc}. Para model dalam pose ${UIElements.pose.value}, menunjukkan ekspresi percaya diri. Pencahayaan dramatis, sinematik, fokus pada detail fashion dan mood.`;
+                const prompt = `Sebuah ${shotType} foto editorial fashion menampilkan ${modelDesc}. Mereka berada dalam konsep ${UIElements.tema.value}, ${fabricDesc}dengan makeup ${UIElements.makeup.value} yang menawan dan ${rambutDesc}. Para model dalam pose ${UIElements.pose.value}, menunjukkan ekspresi percaya diri. Pencahayaan dramatis, sinematik, fokus pada detail fashion dan mood. ${resolutionDesc}`;
                 
                 UIElements.promptResult.value = prompt;
                 UIElements.resultContainer.classList.remove('hidden');
