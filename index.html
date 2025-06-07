@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fashion Prompt Generator (Pose Dinamis)</title>
+    <title>Fashion Prompt Generator (Multi-Etnis)</title>
     <!-- Memuat Tailwind CSS dari CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Font utama untuk UI -->
@@ -35,42 +35,38 @@
         <!-- Header -->
         <header class="text-center mb-8">
             <h1 class="text-3xl sm:text-4xl font-bold tracking-tight text-white">Fashion Prompt Generator</h1>
-            <p class="mt-2 text-lg text-gray-400">Dengan pilihan pose yang dinamis.</p>
+            <p class="mt-2 text-lg text-gray-400">Dengan pilihan multi-etnis yang dinamis.</p>
         </header>
 
         <!-- Card Form -->
         <main class="bg-gray-800 shadow-2xl rounded-2xl p-6 sm:p-8">
             <div class="space-y-6">
                 
-                <!-- Pilihan Variasi Wajah / Model -->
+                <!-- Pilihan Jumlah Model -->
                 <div>
-                    <label class="block text-sm font-medium text-gray-300 mb-2">Variasi Model</label>
-                    <div class="space-y-2 rounded-lg bg-gray-700/50 p-3">
-                        <div class="flex items-center">
-                            <input id="satu-model" type="radio" name="model-variation" value="satu" checked class="h-4 w-4 text-indigo-500 border-gray-500 focus:ring-indigo-500">
-                            <label for="satu-model" class="ml-3 block text-sm text-gray-300">Satu Model</label>
-                        </div>
-                        <div class="flex items-center">
-                            <input id="multi-model-satu-etnis" type="radio" name="model-variation" value="multi-satu-etnis" class="h-4 w-4 text-indigo-500 border-gray-500 focus:ring-indigo-500">
-                            <label for="multi-model-satu-etnis" class="ml-3 block text-sm text-gray-300">Beberapa Model (Satu Etnis)</label>
-                        </div>
-                        <div class="flex items-center">
-                            <input id="multi-model-beda-etnis" type="radio" name="model-variation" value="multi-beda-etnis" class="h-4 w-4 text-indigo-500 border-gray-500 focus:ring-indigo-500">
-                            <label for="multi-model-beda-etnis" class="ml-3 block text-sm text-gray-300">Dua Model (Beda Etnis)</label>
-                        </div>
+                    <label for="jumlah-model" class="block text-sm font-medium text-gray-300 mb-2">Jumlah Model</label>
+                    <select id="jumlah-model" class="form-select w-full bg-gray-700 border border-gray-600 rounded-lg py-2.5 px-3">
+                        <option value="1" selected>1 Model</option>
+                        <option value="2">2 Model</option>
+                        <option value="3">3 Model</option>
+                        <option value="banyak">Banyak Model (Satu Etnis)</option>
+                    </select>
+                </div>
+                
+                <!-- Kontainer untuk Dropdown Etnis Dinamis -->
+                <div id="etnis-dinamis-container" class="space-y-4">
+                    <div id="etnis1-container">
+                        <label id="etnis1-label" for="etnis1" class="block text-sm font-medium text-gray-300 mb-2">Etnis Model</label>
+                        <select id="etnis1" class="form-select w-full bg-gray-700 border border-gray-600 rounded-lg py-2.5 px-3"></select>
                     </div>
-                </div>
-
-                <!-- Dropdown Etnis 1 -->
-                <div>
-                    <label id="etnis1-label" for="etnis1" class="block text-sm font-medium text-gray-300 mb-2">Etnis Model</label>
-                    <select id="etnis1" class="form-select w-full bg-gray-700 border border-gray-600 rounded-lg py-2.5 px-3"></select>
-                </div>
-
-                <!-- Dropdown Etnis 2 (Awalnya tersembunyi) -->
-                <div id="etnis2-container" class="hidden">
-                    <label for="etnis2" class="block text-sm font-medium text-gray-300 mb-2">Etnis Model Kedua</label>
-                    <select id="etnis2" class="form-select w-full bg-gray-700 border border-gray-600 rounded-lg py-2.5 px-3"></select>
+                    <div id="etnis2-container" class="hidden">
+                        <label for="etnis2" class="block text-sm font-medium text-gray-300 mb-2">Etnis Model ke-2</label>
+                        <select id="etnis2" class="form-select w-full bg-gray-700 border border-gray-600 rounded-lg py-2.5 px-3"></select>
+                    </div>
+                    <div id="etnis3-container" class="hidden">
+                        <label for="etnis3" class="block text-sm font-medium text-gray-300 mb-2">Etnis Model ke-3</label>
+                        <select id="etnis3" class="form-select w-full bg-gray-700 border border-gray-600 rounded-lg py-2.5 px-3"></select>
+                    </div>
                 </div>
 
                 <!-- Dropdown Tema -->
@@ -106,7 +102,7 @@
                 <div id="result-container" class="hidden pt-2">
                     <label for="prompt-result" class="block text-sm font-medium text-gray-300 mb-2">Hasil Prompt:</label>
                     <div class="relative">
-                        <textarea id="prompt-result" rows="7" class="w-full bg-gray-900 border border-gray-600 rounded-lg p-3 pr-12 text-gray-200 resize-none" readonly></textarea>
+                        <textarea id="prompt-result" rows="8" class="w-full bg-gray-900 border border-gray-600 rounded-lg p-3 pr-12 text-gray-200 resize-none" readonly></textarea>
                          <button id="copy-btn" title="Salin ke clipboard" class="absolute top-2.5 right-2.5 p-2 text-gray-400 bg-gray-700 hover:bg-gray-600 rounded-md">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
                          </button>
@@ -128,24 +124,21 @@
                 tema: {"Berdasarkan Gaya & Estetika": ["Minimalis","High Fashion / Editorial","Street Style / Urban","Vintage / Retro","Bohemian / Boho","Grunge / Rock & Roll","Elegan / Klasik","Sinematik (Cinematic)","Gelap / Moody (Dark & Moody)","Ceria / Penuh Warna (Vibrant & Colorful)"],"Berdasarkan Lokasi & Lingkungan": ["Arsitektur Modern","Bangunan Tua / Bersejarah","Industri / Pabrik Tua","Pedesaan / Rustic","Alam Liar / Hutan Belantara","Pantai / Lautan","Gunung / Dataran Tinggi"],"Berdasarkan Konsep & Imajinasi": ["Fantasi / Negeri Dongeng","Surrealisme / Abstrak","Sci-Fi / Futuristik","Cyberpunk / Dystopian","Mimpi / Dreamscape"]},
                 makeup: [{"kategori":"Berdasarkan Tampilan (Look/Style)","jenis":["Natural","Nude","Glamour","Bold","Smokey Eyes","Cat Eye","Dewy Look","Matte Look","Flawless","Vintage/Retro","Korean Look","Western Look","Thai Look"]},{"kategori":"Seni & Karakter","jenis":["Makeup Karakter","Makeup Fantasi","Makeup Editorial","Makeup Avant-garde"]}],
                 pose: {
-                    // -- DATA POSE DIPISAH BERDASARKAN KATEGORI --
-                    tunggal: {
-                        "Pose Individu": ["Berdiri Tegak","Kurva S (S-Curve)","Tumpu Satu Kaki","Menyender / Bersandar","Tangan di Pinggul","Tangan di Saku","Lengan Menyilang","Melihat dari Balik Bahu","Pose Berpikir (The Thinker)","Duduk Santai","Duduk Elegan","Berlutut","Berbaring","Berjalan / Melangkah","Melompat","Close-Up / Portrait","Setengah Badan (Half Body)","Seluruh Badan (Full Body)"]
-                    },
-                    kelompok: {
-                        "Pose Pasangan": ["Berpegangan Tangan","Pelukan dari Depan","Pelukan dari Belakang","Dahi Bertemu Dahi","Saling Menatap","Gendong Belakang (Piggyback)","Cium Pipi / Kening","Dansa","Duduk Berdampingan","Jalan Bersama","Berbisik"],
-                        "Pose Grup / Keluarga": ["Formasi V","Formasi Piramida","Berbaris Lurus","Kombinasi Duduk & Berdiri","Membentuk Lingkaran","Interaksi / Candid Grup","Pelukan Grup","Lompat Bersama","Jalan Bersama"]
-                    }
+                    tunggal: { "Pose Individu": ["Berdiri Tegak","Kurva S (S-Curve)","Menyender / Bersandar","Tangan di Pinggul","Melihat dari Balik Bahu","Duduk Elegan","Close-Up / Portrait","Seluruh Badan (Full Body)"] },
+                    kelompok: { "Pose Pasangan": ["Berpegangan Tangan","Pelukan dari Belakang","Saling Menatap","Dansa","Jalan Bersama"], "Pose Grup": ["Formasi V","Kombinasi Duduk & Berdiri","Interaksi / Candid Grup","Berbaris Lurus","Pelukan Grup"] }
                 },
-                rambut: {"Opsi Fleksibel": ["Normal (sesuai tema)"],"Gaya Rambut Pria": {"Potongan Rambut Pendek": ["Buzz Cut","Crew Cut","French Crop","Side Part (Belah Samping)","Slick Back (Rambut Klimis ke Belakang)","Undercut","Fade"],"Potongan Rambut Sedang & Panjang": ["Quiff","Pompadour","Comma Hair (Gaya Korea)","Mullet","Man Bun (Cepol Pria)","Gondrong Terurai"]},"Gaya Rambut Wanita": {"Gaya Rambut Terurai": ["Lurus & Rapi (Sleek Straight)","Blow-dry Bervolume","Beach Waves","Hollywood Waves","Wet Look"],"Gaya Rambut Diikat & Diangkat": ["Ponytail / Kuncir Kuda","Half-Up, Half-Down","Bun / Cepol (Messy, Sleek)","Chignon"],"Gaya Rambut Kepang": ["French Braid","Dutch Braid","Fishtail Braid","Crown Braid"],"Potongan Rambut Populer": ["Pixie Cut","Bob Cut","Layered Cut","Butterfly Cut"]}, "Gaya Rambut Unisex": ["Mullet","Shag Cut","Pixie Cut","Rambut Warna Terang"] }
+                rambut: {"Opsi Fleksibel": ["Normal (sesuai tema)"],"Gaya Rambut Pria": {"Potongan Rambut Pendek": ["Buzz Cut","Crew Cut","Side Part (Belah Samping)","Slick Back (Rambut Klimis ke Belakang)","Undercut"],"Potongan Rambut Sedang & Panjang": ["Quiff","Pompadour","Comma Hair (Gaya Korea)","Mullet","Man Bun (Cepol Pria)"]},"Gaya Rambut Wanita": {"Gaya Rambut Terurai": ["Lurus & Rapi (Sleek Straight)","Blow-dry Bervolume","Beach Waves","Hollywood Waves","Wet Look"],"Gaya Rambut Diikat & Diangkat": ["Ponytail / Kuncir Kuda","Half-Up, Half-Down","Bun / Cepol (Messy, Sleek)","Chignon"],"Gaya Rambut Kepang": ["French Braid","Dutch Braid","Fishtail Braid"]}, "Gaya Rambut Unisex": ["Mullet","Shag Cut","Pixie Cut","Rambut Warna Terang"] }
             };
             
             const UIElements = {
-                etnis1: document.getElementById('etnis1'),
+                jumlahModel: document.getElementById('jumlah-model'),
+                etnis1Container: document.getElementById('etnis1-container'),
                 etnis1Label: document.getElementById('etnis1-label'),
-                etnis2: document.getElementById('etnis2'),
+                etnis1: document.getElementById('etnis1'),
                 etnis2Container: document.getElementById('etnis2-container'),
-                modelVariationRadios: document.querySelectorAll('input[name="model-variation"]'),
+                etnis2: document.getElementById('etnis2'),
+                etnis3Container: document.getElementById('etnis3-container'),
+                etnis3: document.getElementById('etnis3'),
                 tema: document.getElementById('tema'),
                 makeup: document.getElementById('makeup'),
                 rambut: document.getElementById('rambut'),
@@ -158,67 +151,32 @@
             };
             
             // --- FUNGSI-FUNGSI PARSING DATA ---
-            function populateSimpleGroup(selectElement, data) {
-                selectElement.innerHTML = ''; // Kosongkan dulu
-                for (const groupLabel in data) {
-                    const optgroup = document.createElement('optgroup');
-                    optgroup.label = groupLabel;
-                    data[groupLabel].forEach(optionText => {
-                        const option = document.createElement('option');
-                        option.value = optionText;
-                        option.textContent = optionText;
-                        optgroup.appendChild(option);
-                    });
-                    selectElement.appendChild(optgroup);
-                }
-            }
-            function populateMakeup(selectElement, data) {
-                selectElement.innerHTML = '';
-                data.forEach(group => {
-                    const optgroup = document.createElement('optgroup');
-                    optgroup.label = group.kategori;
-                    group.jenis.forEach(optionText => {
-                        const option = document.createElement('option');
-                        option.value = optionText;
-                        option.textContent = optionText;
-                        optgroup.appendChild(option);
-                    });
-                    selectElement.appendChild(optgroup);
-                });
-            }
-            function populateRambut(selectElement, data) {
-                selectElement.innerHTML = '';
-                for (const mainGroupLabel in data) {
-                    const subGroups = data[mainGroupLabel];
-                    if (Array.isArray(subGroups)) {
-                        const optgroup = document.createElement('optgroup');
-                        optgroup.label = mainGroupLabel;
-                        subGroups.forEach(optionText => {
-                            const option = document.createElement('option');
-                            option.value = optionText;
-                            option.textContent = optionText;
-                            optgroup.appendChild(option);
-                        });
-                        selectElement.appendChild(optgroup);
-                    } else {
-                        for (const subGroupLabel in subGroups) {
-                            const optgroup = document.createElement('optgroup');
-                            optgroup.label = `${mainGroupLabel} - ${subGroupLabel}`;
-                            subGroups[subGroupLabel].forEach(optionText => {
-                                const option = document.createElement('option');
-                                option.value = optionText;
-                                option.textContent = optionText;
-                                optgroup.appendChild(option);
-                            });
-                            selectElement.appendChild(optgroup);
-                        }
-                    }
-                }
-            }
+            function populateSimpleGroup(selectElement, data) { selectElement.innerHTML = ''; for (const groupLabel in data) { const optgroup = document.createElement('optgroup'); optgroup.label = groupLabel; data[groupLabel].forEach(optionText => { const option = document.createElement('option'); option.value = optionText; option.textContent = optionText; optgroup.appendChild(option); }); selectElement.appendChild(optgroup); } }
+            function populateMakeup(selectElement, data) { selectElement.innerHTML = ''; data.forEach(group => { const optgroup = document.createElement('optgroup'); optgroup.label = group.kategori; group.jenis.forEach(optionText => { const option = document.createElement('option'); option.value = optionText; option.textContent = optionText; optgroup.appendChild(option); }); selectElement.appendChild(optgroup); }); }
+            function populateRambut(selectElement, data) { selectElement.innerHTML = ''; for (const mainGroupLabel in data) { const subGroups = data[mainGroupLabel]; if (Array.isArray(subGroups)) { const optgroup = document.createElement('optgroup'); optgroup.label = mainGroupLabel; subGroups.forEach(optionText => { const option = document.createElement('option'); option.value = optionText; option.textContent = optionText; optgroup.appendChild(option); }); selectElement.appendChild(optgroup); } else { for (const subGroupLabel in subGroups) { const optgroup = document.createElement('optgroup'); optgroup.label = `${mainGroupLabel} - ${subGroupLabel}`; subGroups[subGroupLabel].forEach(optionText => { const option = document.createElement('option'); option.value = optionText; option.textContent = optionText; optgroup.appendChild(option); }); selectElement.appendChild(optgroup); } } } }
 
-            // --- FUNGSI BARU UNTUK UPDATE POSE DINAMIS ---
-            function updatePoseOptions(variationType) {
-                if (variationType === 'satu') {
+            // --- FUNGSI UPDATE UI BERDASARKAN JUMLAH MODEL ---
+            function updateUIForModelCount(count) {
+                // Sembunyikan semua kontainer etnis tambahan dulu
+                UIElements.etnis2Container.classList.add('hidden');
+                UIElements.etnis3Container.classList.add('hidden');
+
+                // Tampilkan kontainer etnis berdasarkan jumlah
+                if (count === '2') {
+                    UIElements.etnis2Container.classList.remove('hidden');
+                    UIElements.etnis1Label.textContent = 'Etnis Model ke-1';
+                } else if (count === '3') {
+                    UIElements.etnis2Container.classList.remove('hidden');
+                    UIElements.etnis3Container.classList.remove('hidden');
+                    UIElements.etnis1Label.textContent = 'Etnis Model ke-1';
+                } else if (count === 'banyak') {
+                    UIElements.etnis1Label.textContent = 'Etnis Grup Model';
+                } else { // Untuk '1'
+                    UIElements.etnis1Label.textContent = 'Etnis Model';
+                }
+
+                // Update pilihan pose
+                if (count === '1') {
                     populateSimpleGroup(UIElements.pose, DATA.pose.tunggal);
                 } else {
                     populateSimpleGroup(UIElements.pose, DATA.pose.kelompok);
@@ -228,46 +186,40 @@
             // --- INISIALISASI ---
             populateSimpleGroup(UIElements.etnis1, DATA.etnis);
             populateSimpleGroup(UIElements.etnis2, DATA.etnis);
+            populateSimpleGroup(UIElements.etnis3, DATA.etnis);
             populateSimpleGroup(UIElements.tema, DATA.tema);
             populateMakeup(UIElements.makeup, DATA.makeup);
             populateRambut(UIElements.rambut, DATA.rambut);
-            updatePoseOptions('satu'); // Panggil saat awal untuk mengisi pose tunggal
+            updateUIForModelCount('1'); // Panggil saat awal untuk set default UI
 
             // --- EVENT LISTENERS ---
             
-            // Mengatur visibilitas dropdown dan mengubah pose
-            UIElements.modelVariationRadios.forEach(radio => {
-                radio.addEventListener('change', (event) => {
-                    const variation = event.target.value;
-                    updatePoseOptions(variation); // Update pose dropdown
-                    
-                    if (variation === 'multi-beda-etnis') {
-                        UIElements.etnis2Container.classList.remove('hidden');
-                        UIElements.etnis1Label.textContent = 'Etnis Model Pertama';
-                    } else {
-                        UIElements.etnis2Container.classList.add('hidden');
-                        UIElements.etnis1Label.textContent = 'Etnis Model';
-                    }
-                });
+            // Mengatur UI saat pilihan jumlah model berubah
+            UIElements.jumlahModel.addEventListener('change', (event) => {
+                updateUIForModelCount(event.target.value);
             });
 
             // Tombol Generate Prompt
             UIElements.generateBtn.addEventListener('click', () => {
-                const variation = document.querySelector('input[name="model-variation"]:checked').value;
+                const count = UIElements.jumlahModel.value;
                 const etnis1 = UIElements.etnis1.value;
                 const etnis2 = UIElements.etnis2.value;
+                const etnis3 = UIElements.etnis3.value;
                 
                 let modelDesc = '';
                 
-                switch (variation) {
-                    case 'satu':
+                switch (count) {
+                    case '1':
                         modelDesc = `seorang model dengan tipe wajah ${etnis1} dan tubuh proporsional`;
                         break;
-                    case 'multi-satu-etnis':
-                        modelDesc = `beberapa model dengan tipe wajah ${etnis1} yang beragam namun tetap dalam satu etnis, semuanya memiliki tubuh proporsional seorang model`;
-                        break;
-                    case 'multi-beda-etnis':
+                    case '2':
                         modelDesc = `dua model dengan tipe wajah yang kontras, satu model ${etnis1} dan satu lagi ${etnis2}, keduanya dengan tubuh proporsional`;
+                        break;
+                    case '3':
+                        modelDesc = `tiga model dengan kombinasi etnis yang beragam: ${etnis1}, ${etnis2}, dan ${etnis3}, semuanya dengan tubuh proporsional`;
+                        break;
+                    case 'banyak':
+                        modelDesc = `sekelompok model dengan tipe wajah ${etnis1} yang beragam namun tetap dalam satu etnis, semuanya memiliki tubuh proporsional seorang model`;
                         break;
                 }
 
@@ -295,4 +247,5 @@
     </script>
 </body>
 </html>
+
 
