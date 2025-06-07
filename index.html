@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fashion Prompt Generator (Ultimate)</title>
+    <title>Fashion Prompt Generator (Pro)</title>
     <!-- Memuat Tailwind CSS dari CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Font utama untuk UI -->
@@ -25,6 +25,7 @@
         /* Gaya untuk notifikasi 'toast' */
         .toast { visibility: hidden; opacity: 0; transition: all 0.3s ease-in-out; }
         .toast.show { visibility: visible; opacity: 1; }
+        /* Placeholder untuk kelas font dinamis */
     </style>
 </head>
 <body class="bg-gray-900 text-gray-200 antialiased">
@@ -35,8 +36,13 @@
         <!-- Header -->
         <header class="text-center mb-8">
             <h1 class="text-3xl sm:text-4xl font-bold tracking-tight text-white">Fashion Prompt Generator</h1>
-            <p class="mt-2 text-lg text-gray-400">Versi Ultimate dengan Kontrol Tipografi.</p>
+            <p class="mt-2 text-lg text-gray-400">Versi Pro dengan Kontrol Gender & Wajah.</p>
         </header>
+        
+        <!-- Preview Judul Majalah (jika judul diaktifkan) -->
+        <div id="preview-container" class="hidden mb-8 p-6 bg-gray-950/50 rounded-lg border border-gray-700 text-center transition-all duration-500">
+            <h2 id="preview-title" class="text-4xl md:text-5xl font-thin text-white break-words transition-all duration-500">[Judul Anda]</h2>
+        </div>
 
         <!-- Card Form -->
         <main class="bg-gray-800 shadow-2xl rounded-2xl p-6 sm:p-8">
@@ -51,39 +57,59 @@
                     <div id="title-controls-container" class="hidden space-y-4 pt-4 border-t border-gray-700">
                         <div>
                             <label for="title-text" class="block text-sm font-medium text-gray-300 mb-2">Teks Judul</label>
-                            <input type="text" id="title-text" placeholder="contoh: VOGUE, ARVA" class="w-full bg-gray-700 border border-gray-600 rounded-lg py-2 px-3 placeholder-gray-400">
+                            <input type="text" id="title-text" placeholder="contoh: VOGUE, arva" class="w-full bg-gray-700 border border-gray-600 rounded-lg py-2 px-3 placeholder-gray-400">
                         </div>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
-                                <label for="title-color" class="block text-sm font-medium text-gray-300 mb-2">Warna Judul</label>
-                                <select id="title-color" class="form-select w-full bg-gray-700 border border-gray-600 rounded-lg py-2.5 px-3">
-                                    <option>Putih</option>
-                                    <option>Hitam</option>
-                                    <option>Emas</option>
-                                    <option>Merah Terang</option>
-                                </select>
+                                <label for="title-font-style" class="block text-sm font-medium text-gray-300 mb-2">Gaya Font</label>
+                                <select id="title-font-style" class="form-select w-full bg-gray-700 border border-gray-600 rounded-lg py-2.5 px-3"></select>
                             </div>
                             <div>
-                                <label for="title-position" class="block text-sm font-medium text-gray-300 mb-2">Posisi Judul</label>
-                                <select id="title-position" class="form-select w-full bg-gray-700 border border-gray-600 rounded-lg py-2.5 px-3">
-                                    <option value="di atas model">di Atas Model</option>
-                                    <option value="di depan model">di Depan Model</option>
-                                    <option value="di belakang model">di Belakang Model</option>
+                                <label for="title-color" class="block text-sm font-medium text-gray-300 mb-2">Warna Judul</label>
+                                <select id="title-color" class="form-select w-full bg-gray-700 border border-gray-600 rounded-lg py-2.5 px-3">
+                                    <option>Putih</option><option>Hitam</option><option>Emas</option><option>Merah Terang</option>
                                 </select>
                             </div>
+                        </div>
+                        <div>
+                             <label for="title-position" class="block text-sm font-medium text-gray-300 mb-2">Posisi Judul</label>
+                            <select id="title-position" class="form-select w-full bg-gray-700 border border-gray-600 rounded-lg py-2.5 px-3">
+                                <option value="di atas model">di Atas Model</option>
+                                <option value="di depan model">di Depan Model</option>
+                                <option value="di belakang model">di Belakang Model</option>
+                            </select>
                         </div>
                     </div>
                 </div>
 
-                <!-- Pilihan Jumlah Model -->
-                <div>
-                    <label for="jumlah-model" class="block text-sm font-medium text-gray-300 mb-2">Jumlah Model</label>
-                    <select id="jumlah-model" class="form-select w-full bg-gray-700 border border-gray-600 rounded-lg py-2.5 px-3">
-                        <option value="1" selected>1 Model</option>
-                        <option value="2">2 Model</option>
-                        <option value="3">3 Model</option>
-                        <option value="banyak">Banyak Model (Satu Etnis)</option>
-                    </select>
+                <!-- Pilihan Jumlah & Gender Model -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label for="jumlah-model" class="block text-sm font-medium text-gray-300 mb-2">Jumlah Model</label>
+                        <select id="jumlah-model" class="form-select w-full bg-gray-700 border border-gray-600 rounded-lg py-2.5 px-3">
+                            <option value="1" selected>1 Model</option>
+                            <option value="2">2 Model</option>
+                            <option value="3">3 Model</option>
+                            <option value="banyak">Banyak Model (Satu Etnis)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="gender-model" class="block text-sm font-medium text-gray-300 mb-2">Gender Model</label>
+                        <select id="gender-model" class="form-select w-full bg-gray-700 border border-gray-600 rounded-lg py-2.5 px-3">
+                            <option value="wanita">Wanita</option>
+                            <option value="pria">Pria</option>
+                            <option value="kombinasi">Kombinasi (Pria & Wanita)</option>
+                            <option value="androgini">Androgini / Sesuai Tema</option>
+                        </select>
+                    </div>
+                </div>
+                
+                 <!-- Opsi Variasi Wajah (Dinamis) -->
+                <div id="face-variation-container" class="hidden space-y-2 rounded-lg bg-gray-700/50 p-3">
+                    <div class="flex items-center">
+                        <input id="face-variation-checkbox" type="checkbox" class="h-4 w-4 rounded border-gray-500 bg-gray-600 text-indigo-500 focus:ring-indigo-500">
+                        <label for="face-variation-checkbox" class="ml-3 block text-sm font-medium text-gray-300">Sertakan variasi wajah (fitur wajah berbeda)</label>
+                    </div>
                 </div>
                 
                 <!-- Kontainer untuk Dropdown Etnis Dinamis -->
@@ -164,18 +190,28 @@
         document.addEventListener('DOMContentLoaded', () => {
 
             const DATA = {
-                etnis: {"Indonesia / Nusantara": ["Wajah Indonesia / Nusantara (Umum)","Wajah Melayu (Sumatera, Kalimantan)","Wajah Jawa","Wajah Sunda","Wajah Bali / Lombok","Wajah Indonesia Timur (Papua, Maluku, NTT)","Wajah Tionghoa-Indonesia (Chindo)","Kulit Sawo Matang","Kulit Kuning Langsat","Kulit Gelap Eksotis"],"Blasteran (Mixed Race)": ["Blasteran / Indo (Kaukasia-Indonesia)","Eurasia (Kaukasia-Asia)","Afro-Asia (Afrika-Asia)","Latino-Asia","Blatina/o (Afrika-Latin)"],"Asia": ["Pan-Asian (Tampilan komersial Asia)","Asia Timur (Umum)","Tipe Wajah Jepang","Tipe Wajah Korea","Tipe Wajah Tiongkok / Mandarin","Asia Tenggara (Umum)","Tipe Wajah Thailand / Vietnam","Tipe Wajah Filipina","Asia Selatan (Umum)","Tipe Wajah India / Pakistan"],"Kaukasia / Eropa": ["Kaukasia (Umum)","Eropa Utara / Nordik (Skandinavia)","Eropa Barat (Inggris, Jerman, Perancis)","Eropa Timur / Slavia (Rusia, Polandia)","Mediterania (Italia, Spanyol, Yunani)","Kaukasia Amerika"],"Afrika": ["Afrika (Umum)","Afrika Utara (Maroko, Mesir)"]},
-                tema: {"Berdasarkan Gaya & Estetika": ["Minimalis","High Fashion / Editorial","Street Style / Urban","Vintage / Retro","Bohemian / Boho","Grunge / Rock & Roll","Elegan / Klasik","Sinematik (Cinematic)","Gelap / Moody (Dark & Moody)","Ceria / Penuh Warna (Vibrant & Colorful)"],"Berdasarkan Lokasi & Lingkungan": ["Arsitektur Modern","Bangunan Tua / Bersejarah","Industri / Pabrik Tua","Pedesaan / Rustic","Alam Liar / Hutan Belantara","Pantai / Lautan","Gunung / Dataran Tinggi"],"Berdasarkan Konsep & Imajinasi": ["Fantasi / Negeri Dongeng","Surrealisme / Abstrak","Sci-Fi / Futuristik","Cyberpunk / Dystopian","Mimpi / Dreamscape"]},
-                makeup: [{"kategori":"Berdasarkan Tampilan (Look/Style)","jenis":["Natural","Nude","Glamour","Bold","Smokey Eyes","Cat Eye","Dewy Look","Matte Look","Flawless","Vintage/Retro","Korean Look","Western Look","Thai Look"]},{"kategori":"Seni & Karakter","jenis":["Makeup Karakter","Makeup Fantasi","Makeup Editorial","Makeup Avant-garde"]}],
+                etnis: {"Indonesia / Nusantara": ["Wajah Indonesia / Nusantara (Umum)","Wajah Melayu","Wajah Jawa","Wajah Sunda","Wajah Bali / Lombok","Wajah Indonesia Timur","Wajah Tionghoa-Indonesia"],"Blasteran (Mixed Race)": ["Blasteran / Indo (Kaukasia-Indonesia)","Eurasia (Kaukasia-Asia)","Afro-Asia"],"Asia": ["Asia Timur (Jepang/Korea)","Asia Tenggara (Thailand/Vietnam)","Asia Selatan (India/Pakistan)"],"Kaukasia / Eropa": ["Eropa Utara / Nordik","Eropa Barat","Eropa Timur / Slavia","Mediterania"],"Afrika": ["Afrika (Umum)","Afrika Utara"]},
+                tema: {"Gaya & Estetika": ["Minimalis","High Fashion / Editorial","Street Style / Urban","Vintage / Retro","Bohemian / Boho","Grunge / Rock & Roll","Elegan / Klasik"],"Lokasi & Lingkungan": ["Arsitektur Modern","Bangunan Tua / Bersejarah","Industri / Pabrik Tua","Pedesaan / Rustic","Alam Liar / Hutan Belantara"],"Konsep & Imajinasi": ["Fantasi / Negeri Dongeng","Surrealisme / Abstrak","Sci-Fi / Futuristik","Cyberpunk / Dystopian"]},
+                makeup: [{"kategori":"Tampilan (Look/Style)","jenis":["Natural","Nude","Glamour","Bold","Smokey Eyes","Dewy Look","Matte Look","Korean Look"]},{"kategori":"Seni & Karakter","jenis":["Makeup Fantasi","Makeup Editorial","Makeup Avant-garde"]}],
                 pose: {
-                    tunggal: { "Pose Individu": ["Berdiri Tegak","Kurva S (S-Curve)","Menyender / Bersandar","Tangan di Pinggul","Melihat dari Balik Bahu","Duduk Elegan","Close-Up / Portrait","Seluruh Badan (Full Body)"] },
-                    kelompok: { "Pose Pasangan": ["Berpegangan Tangan","Pelukan dari Belakang","Saling Menatap","Dansa","Jalan Bersama"], "Pose Grup": ["Formasi V","Kombinasi Duduk & Berdiri","Interaksi / Candid Grup","Berbaris Lurus","Pelukan Grup"] }
+                    tunggal: { "Pose Individu": ["Berdiri Tegak","Kurva S","Menyender","Tangan di Pinggul","Melihat dari Balik Bahu","Duduk Elegan","Close-Up","Seluruh Badan"] },
+                    kelompok: { "Pose Pasangan": ["Berpegangan Tangan","Pelukan dari Belakang","Saling Menatap"], "Pose Grup": ["Formasi V","Interaksi Candid","Berbaris Lurus"] }
                 },
-                rambut: {"Opsi Fleksibel": ["Normal (sesuai tema)"],"Gaya Rambut Pria": {"Potongan Rambut Pendek": ["Buzz Cut","Crew Cut","Side Part (Belah Samping)","Slick Back (Rambut Klimis ke Belakang)","Undercut"],"Potongan Rambut Sedang & Panjang": ["Quiff","Pompadour","Comma Hair (Gaya Korea)","Mullet","Man Bun (Cepol Pria)"]},"Gaya Rambut Wanita": {"Gaya Rambut Terurai": ["Lurus & Rapi (Sleek Straight)","Blow-dry Bervolume","Beach Waves","Hollywood Waves","Wet Look"],"Gaya Rambut Diikat & Diangkat": ["Ponytail / Kuncir Kuda","Half-Up, Half-Down","Bun / Cepol (Messy, Sleek)","Chignon"],"Gaya Rambut Kepang": ["French Braid","Dutch Braid","Fishtail Braid"]}, "Gaya Rambut Unisex": ["Mullet","Shag Cut","Pixie Cut","Rambut Warna Terang"] }
+                rambut: {"Opsi Fleksibel": ["Normal (sesuai tema)"],"Gaya Pria": {"Pendek": ["Buzz Cut","Side Part","Slick Back","Undercut"],"Sedang & Panjang": ["Quiff","Pompadour","Comma Hair","Man Bun"]},"Gaya Wanita": {"Terurai": ["Lurus & Rapi","Beach Waves","Blow-dry Bervolume"],"Diikat & Diangkat": ["Ponytail","Messy Bun","Chignon"],"Potongan Populer": ["Pixie Cut","Bob Cut","Layered Cut"]}, "Gaya Unisex": ["Mullet","Shag Cut","Rambut Warna Terang"] }
             };
             
+            const FONT_STYLES = [
+                { name: "Modern (ala Arva)", font: "Poppins", weight: 500, transform: "lowercase", tracking: "tracking-wider" },
+                { name: "Elegan (ala Vogue)", font: "Playfair Display", weight: 700, transform: "uppercase", tracking: "tracking-widest" },
+                { name: "Berani (ala Cosmo)", font: "Montserrat", weight: 900, transform: "uppercase", tracking: "tracking-tight" },
+                { name: "Alternatif (ala i-D)", font: "Anton", weight: 400, transform: "lowercase", tracking: "tracking-normal" }
+            ];
+
             const UIElements = {
                 jumlahModel: document.getElementById('jumlah-model'),
+                genderModel: document.getElementById('gender-model'),
+                faceVariationContainer: document.getElementById('face-variation-container'),
+                faceVariationCheckbox: document.getElementById('face-variation-checkbox'),
                 etnis1Container: document.getElementById('etnis1-container'),
                 etnis1Label: document.getElementById('etnis1-label'),
                 etnis1: document.getElementById('etnis1'),
@@ -189,8 +225,11 @@
                 includeTitle: document.getElementById('include-title'),
                 titleControlsContainer: document.getElementById('title-controls-container'),
                 titleText: document.getElementById('title-text'),
+                titleFontStyle: document.getElementById('title-font-style'),
                 titleColor: document.getElementById('title-color'),
                 titlePosition: document.getElementById('title-position'),
+                previewContainer: document.getElementById('preview-container'),
+                previewTitle: document.getElementById('preview-title'),
                 makeup: document.getElementById('makeup'),
                 rambut: document.getElementById('rambut'),
                 pose: document.getElementById('pose'),
@@ -201,21 +240,36 @@
                 toast: document.getElementById('toast-notification'),
             };
             
-            // --- FUNGSI-FUNGSI PARSING DATA ---
-            function populateSimpleGroup(selectElement, data) { selectElement.innerHTML = ''; for (const groupLabel in data) { const optgroup = document.createElement('optgroup'); optgroup.label = groupLabel; data[groupLabel].forEach(optionText => { const option = document.createElement('option'); option.value = optionText; option.textContent = optionText; optgroup.appendChild(option); }); selectElement.appendChild(optgroup); } }
-            function populateMakeup(selectElement, data) { selectElement.innerHTML = ''; data.forEach(group => { const optgroup = document.createElement('optgroup'); optgroup.label = group.kategori; group.jenis.forEach(optionText => { const option = document.createElement('option'); option.value = optionText; option.textContent = optionText; optgroup.appendChild(option); }); selectElement.appendChild(optgroup); }); }
-            function populateRambut(selectElement, data) { selectElement.innerHTML = ''; for (const mainGroupLabel in data) { const subGroups = data[mainGroupLabel]; if (Array.isArray(subGroups)) { const optgroup = document.createElement('optgroup'); optgroup.label = mainGroupLabel; subGroups.forEach(optionText => { const option = document.createElement('option'); option.value = optionText; option.textContent = optionText; optgroup.appendChild(option); }); selectElement.appendChild(optgroup); } else { for (const subGroupLabel in subGroups) { const optgroup = document.createElement('optgroup'); optgroup.label = `${mainGroupLabel} - ${subGroupLabel}`; subGroups[subGroupLabel].forEach(optionText => { const option = document.createElement('option'); option.value = optionText; option.textContent = optionText; optgroup.appendChild(option); }); selectElement.appendChild(optgroup); } } } }
+            // --- FUNGSI-FUNGSI UTAMA ---
+            function populateSimpleGroup(select, data) { select.innerHTML = ''; for (const group in data) { const optgroup = document.createElement('optgroup'); optgroup.label = group; data[group].forEach(opt => { const option = document.createElement('option'); option.value = opt; option.textContent = opt; optgroup.appendChild(option); }); select.appendChild(optgroup); } }
+            function populateMakeup(select, data) { select.innerHTML = ''; data.forEach(group => { const optgroup = document.createElement('optgroup'); optgroup.label = group.kategori; group.jenis.forEach(opt => { const option = document.createElement('option'); option.value = opt; option.textContent = opt; optgroup.appendChild(option); }); select.appendChild(optgroup); }); }
+            function populateRambut(select, data) { select.innerHTML = ''; for (const mainGroup in data) { const subGroups = data[mainGroup]; if (Array.isArray(subGroups)) { const optgroup = document.createElement('optgroup'); optgroup.label = mainGroup; subGroups.forEach(opt => { const option = document.createElement('option'); option.value = opt; option.textContent = opt; optgroup.appendChild(option); }); select.appendChild(optgroup); } else { for (const subGroup in subGroups) { const optgroup = document.createElement('optgroup'); optgroup.label = `${mainGroup} - ${subGroup}`; subGroups[subGroup].forEach(opt => { const option = document.createElement('option'); option.value = opt; option.textContent = opt; optgroup.appendChild(option); }); select.appendChild(optgroup); } } } }
+            
+            function loadFontsAndStyles() {
+                const styleSheet = document.createElement('style');
+                let fontUrls = new Set();
+                FONT_STYLES.forEach(style => {
+                    const fontName = style.font.replace(/ /g, '+');
+                    fontUrls.add(`https://fonts.googleapis.com/css2?family=${fontName}:wght@${style.weight}&display=swap`);
+                    styleSheet.innerHTML += `.font-${style.font.toLowerCase().replace(/ /g, '-')} { font-family: '${style.font}', sans-serif; font-weight: ${style.weight}; }`;
+                });
+                fontUrls.forEach(url => { const link = document.createElement('link'); link.rel = 'stylesheet'; link.href = url; document.head.appendChild(link); });
+                document.head.appendChild(styleSheet);
+                FONT_STYLES.forEach((style, index) => { const option = document.createElement('option'); option.value = index; option.textContent = style.name; UIElements.titleFontStyle.appendChild(option); });
+            }
 
-            // --- FUNGSI UPDATE UI BERDASARKAN JUMLAH MODEL ---
             function updateUIForModelCount(count) {
-                // Sembunyikan semua kontainer dinamis dulu
-                UIElements.etnis2Container.classList.add('hidden');
-                UIElements.etnis3Container.classList.add('hidden');
-                UIElements.fabricInputContainer.innerHTML = ''; // Kosongkan input kain
-
-                let fabricInputCount = 0;
+                // Reset visibilitas
+                ['etnis2Container', 'etnis3Container', 'faceVariationContainer'].forEach(id => UIElements[id].classList.add('hidden'));
+                UIElements.fabricInputContainer.innerHTML = '';
                 
-                // Tampilkan kontainer etnis berdasarkan jumlah
+                let fabricInputCount = 0;
+                const isMultiModel = count === '2' || count === '3';
+                
+                if (isMultiModel) {
+                    UIElements.faceVariationContainer.classList.remove('hidden');
+                }
+                
                 if (count === '2') {
                     UIElements.etnis2Container.classList.remove('hidden');
                     UIElements.etnis1Label.textContent = 'Etnis Model ke-1';
@@ -227,103 +281,87 @@
                     fabricInputCount = 3;
                 } else if (count === 'banyak') {
                     UIElements.etnis1Label.textContent = 'Etnis Grup Model';
-                    fabricInputCount = 1; // Untuk grup, cukup 1 deskripsi kain umum
-                } else { // Untuk '1'
+                    fabricInputCount = 1;
+                } else { // count === '1'
                     UIElements.etnis1Label.textContent = 'Etnis Model';
                     fabricInputCount = 1;
                 }
 
-                // Buat input kain dinamis
                 for (let i = 1; i <= fabricInputCount; i++) {
                     const labelText = fabricInputCount > 1 ? `Jenis Kain Model ke-${i}` : 'Jenis Kain';
-                    const inputHTML = `
-                        <div>
-                            <label for="fabric-type-${i}" class="block text-xs font-medium text-gray-400 mb-1">${labelText}</label>
-                            <input type="text" id="fabric-type-${i}" placeholder="contoh: sutra, satin, denim..." class="w-full bg-gray-600 border border-gray-500 rounded-lg py-2 px-3 text-sm placeholder-gray-400">
-                        </div>
-                    `;
-                    UIElements.fabricInputContainer.insertAdjacentHTML('beforeend', inputHTML);
+                    UIElements.fabricInputContainer.insertAdjacentHTML('beforeend', `<div><label for="fabric-type-${i}" class="block text-xs font-medium text-gray-400 mb-1">${labelText}</label><input type="text" id="fabric-type-${i}" placeholder="sutra, satin, denim..." class="w-full bg-gray-600 border border-gray-500 rounded-lg py-2 px-3 text-sm placeholder-gray-400"></div>`);
                 }
 
-
-                // Update pilihan pose
-                if (count === '1') {
-                    populateSimpleGroup(UIElements.pose, DATA.pose.tunggal);
-                } else {
-                    populateSimpleGroup(UIElements.pose, DATA.pose.kelompok);
-                }
+                populateSimpleGroup(UIElements.pose, count === '1' ? DATA.pose.tunggal : DATA.pose.kelompok);
             }
-            
+
+            function updateTitlePreview() {
+                const style = FONT_STYLES[UIElements.titleFontStyle.value];
+                let titleText = UIElements.titleText.value.trim() || '[Judul Anda]';
+                
+                if (style.transform === 'lowercase') titleText = titleText.toLowerCase();
+                else if (style.transform === 'uppercase') titleText = titleText.toUpperCase();
+
+                UIElements.previewTitle.textContent = titleText;
+                UIElements.previewTitle.className = `text-4xl md:text-5xl text-white break-words transition-all duration-500 font-${style.font.toLowerCase().replace(/ /g, '-')} ${style.tracking}`;
+            }
+
             // --- INISIALISASI ---
-            populateSimpleGroup(UIElements.etnis1, DATA.etnis);
-            populateSimpleGroup(UIElements.etnis2, DATA.etnis);
-            populateSimpleGroup(UIElements.etnis3, DATA.etnis);
+            loadFontsAndStyles();
+            [UIElements.etnis1, UIElements.etnis2, UIElements.etnis3].forEach(el => populateSimpleGroup(el, DATA.etnis));
             populateSimpleGroup(UIElements.tema, DATA.tema);
             populateMakeup(UIElements.makeup, DATA.makeup);
             populateRambut(UIElements.rambut, DATA.rambut);
-            updateUIForModelCount('1'); // Panggil saat awal untuk set default UI
+            updateUIForModelCount('1'); 
 
             // --- EVENT LISTENERS ---
-            
-            // Mengatur UI saat pilihan jumlah model berubah
-            UIElements.jumlahModel.addEventListener('change', (event) => {
-                updateUIForModelCount(event.target.value);
+            UIElements.jumlahModel.addEventListener('change', (e) => updateUIForModelCount(e.target.value));
+            UIElements.includeFabric.addEventListener('change', (e) => UIElements.fabricInputContainer.classList.toggle('hidden', !e.target.checked));
+            UIElements.includeTitle.addEventListener('change', (e) => {
+                const isVisible = e.target.checked;
+                UIElements.titleControlsContainer.classList.toggle('hidden', !isVisible);
+                UIElements.previewContainer.classList.toggle('hidden', !isVisible);
+                if (isVisible) updateTitlePreview();
             });
+            [UIElements.titleText, UIElements.titleFontStyle].forEach(el => el.addEventListener('input', updateTitlePreview));
 
-            // Menampilkan/menyembunyikan input jenis kain
-            UIElements.includeFabric.addEventListener('change', (event) => {
-                if(event.target.checked) {
-                    UIElements.fabricInputContainer.classList.remove('hidden');
-                } else {
-                    UIElements.fabricInputContainer.classList.add('hidden');
-                }
-            });
-
-            // Menampilkan/menyembunyikan kontrol judul
-            UIElements.includeTitle.addEventListener('change', (event) => {
-                if(event.target.checked) {
-                    UIElements.titleControlsContainer.classList.remove('hidden');
-                } else {
-                    UIElements.titleControlsContainer.classList.add('hidden');
-                }
-            });
-
-            // Tombol Generate Prompt
             UIElements.generateBtn.addEventListener('click', () => {
                 const count = UIElements.jumlahModel.value;
-                const etnis1 = UIElements.etnis1.value;
-                const etnis2 = UIElements.etnis2.value;
-                const etnis3 = UIElements.etnis3.value;
+                const gender = UIElements.genderModel.value;
                 
+                let genderText = {
+                    'pria': 'pria',
+                    'wanita': 'wanita',
+                    'kombinasi': 'pria dan wanita',
+                    'androgini': 'androgini'
+                }[gender] || 'wanita';
+
                 let modelDesc = '';
+                const etnis = [UIElements.etnis1.value, UIElements.etnis2.value, UIElements.etnis3.value];
+                const faceVariationText = UIElements.faceVariationCheckbox.checked ? " dengan fitur wajah yang berbeda satu sama lain" : "";
                 
                 switch (count) {
-                    case '1': modelDesc = `seorang model dengan tipe wajah ${etnis1} dan tubuh proporsional`; break;
-                    case '2': modelDesc = `dua model dengan tipe wajah yang kontras, satu model ${etnis1} dan satu lagi ${etnis2}, keduanya dengan tubuh proporsional`; break;
-                    case '3': modelDesc = `tiga model dengan kombinasi etnis yang beragam: ${etnis1}, ${etnis2}, dan ${etnis3}, semuanya dengan tubuh proporsional`; break;
-                    case 'banyak': modelDesc = `sekelompok model dengan tipe wajah ${etnis1} yang beragam namun tetap dalam satu etnis, semuanya memiliki tubuh proporsional seorang model`; break;
+                    case '1': modelDesc = `seorang model ${genderText} dengan tipe wajah ${etnis[0]} dan tubuh proporsional`; break;
+                    case '2': modelDesc = `dua model ${genderText}${faceVariationText}, satu ${etnis[0]} dan satu lagi ${etnis[1]}, keduanya dengan tubuh proporsional`; break;
+                    case '3': modelDesc = `tiga model ${genderText}${faceVariationText} dengan kombinasi etnis: ${etnis[0]}, ${etnis[1]}, dan ${etnis[2]}, semuanya dengan tubuh proporsional`; break;
+                    case 'banyak': modelDesc = `sekelompok model ${genderText} dengan tipe wajah ${etnis[0]} yang beragam, semuanya memiliki tubuh proporsional`; break;
                 }
-
-                const rambutValue = UIElements.rambut.value;
-                const rambutDesc = rambutValue === 'Normal (sesuai tema)' ? 'gaya rambut yang sesuai dengan tema' : `gaya rambut ${rambutValue}`;
-                    
+                
                 let fabricDesc = 'mengenakan busana dengan desain yang detail dan menawan, ';
                 if (UIElements.includeFabric.checked) {
-                    const fabrics = [];
-                    const fabricInputs = UIElements.fabricInputContainer.querySelectorAll('input[type="text"]');
-                    fabricInputs.forEach(input => { if (input.value.trim() !== '') { fabrics.push(input.value.trim()); } });
-                    if (fabrics.length > 0) { fabricDesc = `mengenakan busana yang menonjolkan kombinasi kain seperti ${fabrics.join(', ')}, `; }
+                    const fabrics = Array.from(UIElements.fabricInputContainer.querySelectorAll('input')).map(input => input.value.trim()).filter(Boolean);
+                    if (fabrics.length > 0) fabricDesc = `mengenakan busana yang menonjolkan kain ${fabrics.join(', ')}, `;
                 }
 
-                let titleDesc = '';
-                if (UIElements.includeTitle.checked) {
-                    const titleText = UIElements.titleText.value.trim() || 'FASHION';
-                    const titleColor = UIElements.titleColor.value;
-                    const titlePosition = UIElements.titlePosition.value;
-                    titleDesc = `Sebuah cover majalah fashion dengan tipografi tebal bertuliskan "${titleText.toUpperCase()}" dalam warna ${titleColor}, ditempatkan secara artistik ${titlePosition}. Foto di bawahnya adalah `;
-                } else {
-                    titleDesc = 'Foto ';
+                let titleDesc = 'Foto ';
+                if (UIElements.includeTitle.checked && UIElements.titleText.value.trim()) {
+                    const { value: titleText } = UIElements.titleText;
+                    const { value: color } = UIElements.titleColor;
+                    const { value: position } = UIElements.titlePosition;
+                    titleDesc = `Sebuah cover majalah dengan tipografi tebal bertuliskan "${titleText.toUpperCase()}" dalam warna ${color}, ditempatkan secara artistik ${position}. Foto di bawahnya adalah `;
                 }
+                
+                const rambutDesc = UIElements.rambut.value === 'Normal (sesuai tema)' ? 'gaya rambut yang sesuai' : `gaya rambut ${UIElements.rambut.value}`;
 
                 const prompt = `${titleDesc}editorial fashion menampilkan ${modelDesc}. Mereka berada dalam konsep ${UIElements.tema.value}, ${fabricDesc}dengan makeup ${UIElements.makeup.value} yang menawan dan ${rambutDesc}. Para model dalam pose ${UIElements.pose.value}, menunjukkan ekspresi percaya diri. Pencahayaan dramatis, sinematik, fokus pada detail fashion dan mood.`;
                 
@@ -331,14 +369,13 @@
                 UIElements.resultContainer.classList.remove('hidden');
             });
 
-            // Tombol Copy
             UIElements.copyBtn.addEventListener('click', () => {
                 const textToCopy = UIElements.promptResult.value;
                 if (!textToCopy) return;
                 navigator.clipboard.writeText(textToCopy).then(() => {
                     UIElements.toast.classList.add('show');
                     setTimeout(() => { UIElements.toast.classList.remove('show'); }, 3000);
-                }).catch(err => { console.error('Gagal menyalin:', err); });
+                }).catch(err => console.error('Gagal menyalin:', err));
             });
         });
     </script>
