@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fashion Prompt Generator (Kain Dinamis)</title>
+    <title>Fashion Prompt Generator (Ultimate)</title>
     <!-- Memuat Tailwind CSS dari CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Font utama untuk UI -->
@@ -35,13 +35,46 @@
         <!-- Header -->
         <header class="text-center mb-8">
             <h1 class="text-3xl sm:text-4xl font-bold tracking-tight text-white">Fashion Prompt Generator</h1>
-            <p class="mt-2 text-lg text-gray-400">Dengan pilihan kain dinamis per model.</p>
+            <p class="mt-2 text-lg text-gray-400">Versi Ultimate dengan Kontrol Tipografi.</p>
         </header>
 
         <!-- Card Form -->
         <main class="bg-gray-800 shadow-2xl rounded-2xl p-6 sm:p-8">
             <div class="space-y-6">
                 
+                <!-- Opsi Judul & Tipografi -->
+                <div class="space-y-4 rounded-lg bg-gray-900/50 p-4 border border-gray-700">
+                    <div class="flex items-center">
+                        <input id="include-title" type="checkbox" class="h-4 w-4 rounded border-gray-500 bg-gray-600 text-indigo-500 focus:ring-indigo-500">
+                        <label for="include-title" class="ml-3 block text-sm font-medium text-gray-300">Sertakan Judul pada Gambar?</label>
+                    </div>
+                    <div id="title-controls-container" class="hidden space-y-4 pt-4 border-t border-gray-700">
+                        <div>
+                            <label for="title-text" class="block text-sm font-medium text-gray-300 mb-2">Teks Judul</label>
+                            <input type="text" id="title-text" placeholder="contoh: VOGUE, ARVA" class="w-full bg-gray-700 border border-gray-600 rounded-lg py-2 px-3 placeholder-gray-400">
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label for="title-color" class="block text-sm font-medium text-gray-300 mb-2">Warna Judul</label>
+                                <select id="title-color" class="form-select w-full bg-gray-700 border border-gray-600 rounded-lg py-2.5 px-3">
+                                    <option>Putih</option>
+                                    <option>Hitam</option>
+                                    <option>Emas</option>
+                                    <option>Merah Terang</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="title-position" class="block text-sm font-medium text-gray-300 mb-2">Posisi Judul</label>
+                                <select id="title-position" class="form-select w-full bg-gray-700 border border-gray-600 rounded-lg py-2.5 px-3">
+                                    <option value="di atas model">di Atas Model</option>
+                                    <option value="di depan model">di Depan Model</option>
+                                    <option value="di belakang model">di Belakang Model</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Pilihan Jumlah Model -->
                 <div>
                     <label for="jumlah-model" class="block text-sm font-medium text-gray-300 mb-2">Jumlah Model</label>
@@ -153,6 +186,11 @@
                 tema: document.getElementById('tema'),
                 includeFabric: document.getElementById('include-fabric'),
                 fabricInputContainer: document.getElementById('fabric-input-container'),
+                includeTitle: document.getElementById('include-title'),
+                titleControlsContainer: document.getElementById('title-controls-container'),
+                titleText: document.getElementById('title-text'),
+                titleColor: document.getElementById('title-color'),
+                titlePosition: document.getElementById('title-position'),
                 makeup: document.getElementById('makeup'),
                 rambut: document.getElementById('rambut'),
                 pose: document.getElementById('pose'),
@@ -241,6 +279,15 @@
                 }
             });
 
+            // Menampilkan/menyembunyikan kontrol judul
+            UIElements.includeTitle.addEventListener('change', (event) => {
+                if(event.target.checked) {
+                    UIElements.titleControlsContainer.classList.remove('hidden');
+                } else {
+                    UIElements.titleControlsContainer.classList.add('hidden');
+                }
+            });
+
             // Tombol Generate Prompt
             UIElements.generateBtn.addEventListener('click', () => {
                 const count = UIElements.jumlahModel.value;
@@ -263,20 +310,22 @@
                 let fabricDesc = 'mengenakan busana dengan desain yang detail dan menawan, ';
                 if (UIElements.includeFabric.checked) {
                     const fabrics = [];
-                    // Mengambil nilai dari input kain yang ada
                     const fabricInputs = UIElements.fabricInputContainer.querySelectorAll('input[type="text"]');
-                    fabricInputs.forEach(input => {
-                        if (input.value.trim() !== '') {
-                            fabrics.push(input.value.trim());
-                        }
-                    });
-
-                    if (fabrics.length > 0) {
-                        fabricDesc = `mengenakan busana yang menonjolkan kombinasi kain seperti ${fabrics.join(', ')}, `;
-                    }
+                    fabricInputs.forEach(input => { if (input.value.trim() !== '') { fabrics.push(input.value.trim()); } });
+                    if (fabrics.length > 0) { fabricDesc = `mengenakan busana yang menonjolkan kombinasi kain seperti ${fabrics.join(', ')}, `; }
                 }
 
-                const prompt = `Foto editorial fashion menampilkan ${modelDesc}. Mereka berada dalam konsep ${UIElements.tema.value}, ${fabricDesc}dengan makeup ${UIElements.makeup.value} yang menawan dan ${rambutDesc}. Para model dalam pose ${UIElements.pose.value}, menunjukkan ekspresi percaya diri. Pencahayaan dramatis, sinematik, fokus pada detail fashion dan mood.`;
+                let titleDesc = '';
+                if (UIElements.includeTitle.checked) {
+                    const titleText = UIElements.titleText.value.trim() || 'FASHION';
+                    const titleColor = UIElements.titleColor.value;
+                    const titlePosition = UIElements.titlePosition.value;
+                    titleDesc = `Sebuah cover majalah fashion dengan tipografi tebal bertuliskan "${titleText.toUpperCase()}" dalam warna ${titleColor}, ditempatkan secara artistik ${titlePosition}. Foto di bawahnya adalah `;
+                } else {
+                    titleDesc = 'Foto ';
+                }
+
+                const prompt = `${titleDesc}editorial fashion menampilkan ${modelDesc}. Mereka berada dalam konsep ${UIElements.tema.value}, ${fabricDesc}dengan makeup ${UIElements.makeup.value} yang menawan dan ${rambutDesc}. Para model dalam pose ${UIElements.pose.value}, menunjukkan ekspresi percaya diri. Pencahayaan dramatis, sinematik, fokus pada detail fashion dan mood.`;
                 
                 UIElements.promptResult.value = prompt;
                 UIElements.resultContainer.classList.remove('hidden');
