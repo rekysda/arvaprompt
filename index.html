@@ -4,11 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fashion Prompt Generator (Ultimate Pro)</title>
-    <!-- Favicon Kamera dari CDN -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📸</text></svg>">
-    <!-- Memuat Tailwind CSS dari CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Font utama untuk UI -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -31,20 +28,16 @@
 </head>
 <body class="bg-gray-900 text-gray-200 antialiased">
 
-    <!-- Kontainer Utama -->
     <div class="container mx-auto max-w-2xl p-4 sm:p-6 lg:p-8">
 
-        <!-- Header -->
         <header class="text-center mb-8">
             <h1 class="text-3xl sm:text-4xl font-bold tracking-tight text-white">Fashion Prompt Generator</h1>
-            <p class="mt-2 text-lg text-gray-400">Versi Ultimate dengan Definisi Model Berbasis Gambar.</p>
+            <p class="mt-2 text-lg text-gray-400">Versi Ultimate dengan Definisi Model yang Lebih Detail.</p>
         </header>
 
-        <!-- Card Form -->
         <main class="bg-gray-800 shadow-2xl rounded-2xl p-6 sm:p-8">
             <div class="space-y-6">
                 
-                <!-- Pilihan Resolusi & Ukuran -->
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
                         <label for="resolution-type" class="block text-sm font-medium text-gray-300 mb-2">Resolusi & Ukuran</label>
@@ -73,24 +66,21 @@
                     </div>
                 </div>
                 
-                <!-- Pilihan Jumlah Model -->
                 <div>
                     <label for="jumlah-model" class="block text-sm font-medium text-gray-300 mb-2">Jumlah Model</label>
                     <select id="jumlah-model" class="form-select w-full bg-gray-700 border border-gray-600 rounded-lg py-2.5 px-3">
-                        <option value="1" selected>1 Model (berdasarkan 1 desain)</option>
-                        <option value="2">2 Model (berdasarkan 2 desain)</option>
-                        <option value="3">3 Model (berdasarkan 3 desain)</option>
-                        <option value="banyak">Banyak Model (Satu Etnis & Desain)</option>
+                        <option value="1" selected>1 Model</option>
+                        <option value="2">2 Model</option>
+                        <option value="3">3 Model</option>
+                        <option value="banyak">Banyak Model (Satu Grup)</option>
                     </select>
                 </div>
-                 
-                 <!-- Input Jumlah Model Spesifik (Dinamis) -->
+                
                  <div id="banyak-model-container" class="hidden">
-                    <label for="banyak-model-input" class="block text-sm font-medium text-gray-400 mb-2">Jumlah Spesifik untuk 'Banyak Model'</label>
-                    <input type="number" id="banyak-model-input" value="5" min="2" class="w-full bg-gray-600 border border-gray-500 rounded-lg py-2 px-3 placeholder-gray-400">
-                </div>
+                     <label for="banyak-model-input" class="block text-sm font-medium text-gray-400 mb-2">Jumlah Spesifik untuk 'Banyak Model'</label>
+                     <input type="number" id="banyak-model-input" value="5" min="2" class="w-full bg-gray-600 border border-gray-500 rounded-lg py-2 px-3 placeholder-gray-400">
+                 </div>
 
-                <!-- Opsi Variasi Wajah (Dinamis) -->
                 <div id="face-variation-container" class="hidden space-y-2 rounded-lg bg-gray-700/50 p-3">
                     <div class="flex items-center">
                         <input id="face-variation-checkbox" type="checkbox" class="h-4 w-4 rounded border-gray-500 bg-gray-600 text-indigo-500 focus:ring-indigo-500">
@@ -98,12 +88,9 @@
                     </div>
                 </div>
 
-                <!-- Kontainer untuk Kartu Definisi Model Dinamis -->
                 <div id="model-definition-container" class="space-y-6">
-                    <!-- Kartu Model akan dibuat oleh JavaScript di sini -->
-                </div>
+                    </div>
 
-                <!-- Dropdown Tema & Lokasi Spesifik -->
                 <div>
                     <label for="tema" class="block text-sm font-medium text-gray-300 mb-2">Tema & Konsep Foto</label>
                     <select id="tema" class="form-select w-full bg-gray-700 border border-gray-600 rounded-lg py-2.5 px-3"></select>
@@ -117,41 +104,35 @@
                 </div>
 
 
-                <!-- Opsi Jenis Kain -->
                 <div class="space-y-4 rounded-lg bg-gray-700/50 p-3">
                     <div class="flex items-center">
                         <input id="include-fabric" type="checkbox" class="h-4 w-4 rounded border-gray-500 bg-gray-600 text-indigo-500 focus:ring-indigo-500">
                         <label for="include-fabric" class="ml-3 block text-sm font-medium text-gray-300">Sertakan Jenis Kain Spesifik?</label>
                     </div>
                     <div id="fabric-input-container" class="hidden space-y-4">
-                        <!-- Input kain dinamis akan ditambahkan di sini oleh JavaScript -->
-                    </div>
+                        </div>
                 </div>
                 
-                <!-- Dropdown Makeup -->
                 <div>
                     <label for="makeup" class="block text-sm font-medium text-gray-300 mb-2">Gaya Riasan (Makeup)</label>
                     <select id="makeup" class="form-select w-full bg-gray-700 border border-gray-600 rounded-lg py-2.5 px-3"></select>
                 </div>
 
-                <!-- Dropdown Pose (Dinamis) -->
                 <div>
                     <label for="pose" class="block text-sm font-medium text-gray-300 mb-2">Pose Model</label>
                     <select id="pose" class="form-select w-full bg-gray-700 border border-gray-600 rounded-lg py-2.5 px-3"></select>
                 </div>
                 
-                <!-- Tombol Aksi -->
                 <div class="pt-2">
                      <button id="generate-btn" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-4 rounded-lg transition-colors">Buat Prompt</button>
                 </div>
                 
-                <!-- Hasil Prompt (Awalnya tersembunyi) -->
                 <div id="result-container" class="hidden pt-2">
                     <label for="prompt-result" class="block text-sm font-medium text-gray-300 mb-2">Hasil Prompt:</label>
                     <div class="relative">
                         <textarea id="prompt-result" rows="9" class="w-full bg-gray-900 border border-gray-600 rounded-lg p-3 pr-12 text-gray-200 resize-none" readonly></textarea>
                          <button id="copy-btn" title="Salin ke clipboard" class="absolute top-2.5 right-2.5 p-2 text-gray-400 bg-gray-700 hover:bg-gray-600 rounded-md">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
                          </button>
                     </div>
                 </div>
@@ -163,10 +144,8 @@
         </footer>
     </div>
     
-    <!-- Notifikasi Toast -->
     <div id="toast-notification" class="toast fixed bottom-5 left-1/2 -translate-x-1/2 bg-green-500 text-white py-2 px-4 rounded-lg shadow-lg">Prompt berhasil disalin!</div>
 
-    <!-- SEMUA LOGIKA JAVASCRIPT ADA DI SINI -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
 
@@ -183,7 +162,6 @@
                 resolutionType: document.getElementById('resolution-type'),
                 shotType: document.getElementById('shot-type'),
                 jumlahModel: document.getElementById('jumlah-model'),
-                genderModel: document.getElementById('gender-model'), // Dihapus dari UI, tapi tetap di sini untuk referensi logika
                 banyakModelContainer: document.getElementById('banyak-model-container'),
                 banyakModelInput: document.getElementById('banyak-model-input'),
                 modelDefinitionContainer: document.getElementById('model-definition-container'),
@@ -212,19 +190,23 @@
 
             function createModelCard(index) {
                 const cardId = `model-card-${index}`;
-                const labelSuffix = UIElements.jumlahModel.value === 'banyak' ? 'Grup' : `Model ke-${index}`;
+                const labelSuffix = UIElements.jumlahModel.value === 'banyak' ? 'Grup Model' : `Model ke-${index}`;
 
                 const cardHTML = `
                     <div id="${cardId}" class="p-4 border border-gray-700 rounded-lg space-y-4 bg-gray-900/50">
                         <h3 class="text-md font-semibold text-indigo-400">${labelSuffix}</h3>
-                        <div class="space-y-2">
-                            <label for="design-upload-${index}" class="block text-sm font-medium text-gray-300">Upload Desain Referensi</label>
-                            <input type="file" id="design-upload-${index}" accept="image/*" class="w-full text-sm text-gray-400 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-indigo-100 file:text-indigo-700 hover:file:bg-indigo-200 cursor-pointer">
-                            <img id="design-preview-${index}" src="" alt="Preview Desain" class="hidden w-full h-auto max-h-32 rounded-lg object-contain mt-2">
-                        </div>
-                        <div>
-                            <label for="etnis-model-${index}" class="block text-sm font-medium text-gray-300 mb-2">Etnis</label>
-                            <select id="etnis-model-${index}" class="form-select w-full bg-gray-700 border border-gray-600 rounded-lg py-2.5 px-3"></select>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label for="gender-model-${index}" class="block text-sm font-medium text-gray-300 mb-2">Gender</label>
+                                <select id="gender-model-${index}" class="form-select w-full bg-gray-700 border border-gray-600 rounded-lg py-2.5 px-3">
+                                    <option value="Wanita" selected>Wanita</option>
+                                    <option value="Pria">Pria</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="etnis-model-${index}" class="block text-sm font-medium text-gray-300 mb-2">Etnis</label>
+                                <select id="etnis-model-${index}" class="form-select w-full bg-gray-700 border border-gray-600 rounded-lg py-2.5 px-3"></select>
+                            </div>
                         </div>
                         <div>
                             <label for="rambut-model-${index}" class="block text-sm font-medium text-gray-300 mb-2">Gaya Rambut</label>
@@ -235,15 +217,6 @@
                 UIElements.modelDefinitionContainer.insertAdjacentHTML('beforeend', cardHTML);
                 populateSimpleGroup(document.getElementById(`etnis-model-${index}`), DATA.etnis);
                 populateRambut(document.getElementById(`rambut-model-${index}`), DATA.rambut);
-
-                document.getElementById(`design-upload-${index}`).addEventListener('change', (e) => {
-                    const preview = document.getElementById(`design-preview-${index}`);
-                    const [file] = e.target.files;
-                    if (file) {
-                        preview.src = URL.createObjectURL(file);
-                        preview.classList.remove('hidden');
-                    }
-                });
             }
 
 
@@ -308,26 +281,36 @@
 
             UIElements.generateBtn.addEventListener('click', () => {
                 const count = UIElements.jumlahModel.value;
-                const faceVariationText = UIElements.faceVariationCheckbox.checked ? " dengan fitur wajah yang berbeda satu sama lain" : "";
-                
-                let modelClauses = [];
-                const modelCards = UIElements.modelDefinitionContainer.querySelectorAll('[id^="model-card-"]');
-                
+                const faceVariationChecked = UIElements.faceVariationCheckbox.checked;
+
+                let modelDesc = '';
+
                 if (count === 'banyak') {
                     const num = UIElements.banyakModelInput.value;
+                    const gender = document.getElementById('gender-model-1').value;
                     const etnis = document.getElementById('etnis-model-1').value;
-                    modelClauses.push(`sekelompok ${num} model dengan gender yang sesuai dengan desain referensi, semuanya dari etnis ${etnis}${faceVariationText} dan memiliki tubuh proporsional`);
-                } else {
+                    const faceVariationText = faceVariationChecked ? " dengan fitur wajah yang berbeda satu sama lain" : "";
+                    modelDesc = `sekelompok ${num} model ${gender}, semuanya dari etnis ${etnis}${faceVariationText} dan memiliki tubuh proporsional`;
+                } else if (count === '1') {
+                    const gender = document.getElementById('gender-model-1').value;
+                    const etnis = document.getElementById('etnis-model-1').value;
+                    modelDesc = `seorang model ${gender} dengan tipe wajah ${etnis} dan tubuh proporsional`;
+                } else { // '2' atau '3'
+                    let modelClauses = [];
+                    const modelCards = UIElements.modelDefinitionContainer.querySelectorAll('[id^="model-card-"]');
                     modelCards.forEach((card, index) => {
                         const i = index + 1;
+                        const gender = document.getElementById(`gender-model-${i}`).value;
                         const etnis = document.getElementById(`etnis-model-${i}`).value;
-                        const clause = `model ke-${i} dengan gender yang sesuai dengan desain referensi ke-${i}, bertipe wajah ${etnis} dan tubuh proporsional`;
+                        const clause = `model ke-${i} adalah seorang ${gender} dengan tipe wajah ${etnis}`;
                         modelClauses.push(clause);
                     });
+                    modelDesc = `${modelClauses.join(' dan ')}, semuanya memiliki tubuh proporsional`;
+                    if (faceVariationChecked) {
+                        modelDesc += " dan fitur wajah yang berbeda satu sama lain";
+                    }
                 }
                 
-                const modelDesc = modelClauses.join(', ');
-
                 let fabricDesc = 'mengenakan busana dengan desain yang detail dan menawan, ';
                 if (UIElements.includeFabric.checked) {
                     const fabrics = Array.from(UIElements.fabricInputContainer.querySelectorAll('input')).map(input => input.value.trim()).filter(Boolean);
@@ -353,8 +336,10 @@
                 else { temaDesc = `dalam konsep ${selectedTheme}`; }
 
                 const resolutionDesc = `Gambar harus dibuat dalam ${UIElements.resolutionType.value}.`;
+                const subject = (count === '1') ? 'Ia' : 'Mereka';
+                const modelSubject = (count === '1') ? 'Model tersebut' : 'Para model';
 
-                const prompt = `Sebuah ${UIElements.shotType.value} foto editorial fashion menampilkan ${modelDesc}. Mereka berada ${temaDesc}, ${fabricDesc}dengan makeup ${UIElements.makeup.value} yang menawan dan ${rambutDesc}. Para model dalam pose ${UIElements.pose.value}, menunjukkan ekspresi percaya diri. Pencahayaan dramatis, sinematik, fokus pada detail fashion dan mood. ${resolutionDesc}`;
+                const prompt = `Sebuah ${UIElements.shotType.value} foto editorial fashion menampilkan ${modelDesc}. ${subject} berada ${temaDesc}, ${fabricDesc}dengan makeup ${UIElements.makeup.value} yang menawan dan ${rambutDesc}. ${modelSubject} dalam pose ${UIElements.pose.value}, menunjukkan ekspresi percaya diri. Pencahayaan dramatis, sinematik, fokus pada detail fashion dan mood. ${resolutionDesc}`;
                 
                 UIElements.promptResult.value = prompt;
                 UIElements.resultContainer.classList.remove('hidden');
