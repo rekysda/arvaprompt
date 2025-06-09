@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fashion Prompt Generator (Ultimate Pro)</title>
+    <title>Fashion Prompt Generator (Pro)</title>
+    <!-- Favicon Kamera dari CDN -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📸</text></svg>">
     <!-- Memuat Tailwind CSS dari CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Font utama untuk UI -->
@@ -35,7 +37,7 @@
         <!-- Header -->
         <header class="text-center mb-8">
             <h1 class="text-3xl sm:text-4xl font-bold tracking-tight text-white">Fashion Prompt Generator</h1>
-            <p class="mt-2 text-lg text-gray-400">Versi Ultimate dengan Rambut Dinamis per Model.</p>
+            <p class="mt-2 text-lg text-gray-400">Versi Ultimate dengan Lokasi Spesifik.</p>
         </header>
 
         <!-- Card Form -->
@@ -57,11 +59,16 @@
                     <div>
                         <label for="shot-type" class="block text-sm font-medium text-gray-300 mb-2">Jenis Pemotretan (Shot Type)</label>
                         <select id="shot-type" class="form-select w-full bg-gray-700 border border-gray-600 rounded-lg py-2.5 px-3">
-                            <option value="Full Shot">Full Shot (Seluruh Badan)</option>
-                            <option value="Medium Full Shot">Medium Full Shot (3/4 Badan)</option>
-                            <option value="Medium Shot" selected>Medium Shot (Setengah Badan)</option>
+                            <option value="Extreme Close-Up">Extreme Close-Up (Detail Wajah)</option>
+                            <option value="Close-Up">Close-Up (Kepala & Bahu)</option>
                             <option value="Medium Close-Up">Medium Close-Up (Dada ke Atas)</option>
-                            <option value="Close-Up">Close-Up (Hanya Wajah)</option>
+                            <option value="Medium Shot" selected>Medium Shot (Pinggang ke Atas)</option>
+                            <option value="Cowboy Shot">Cowboy Shot (Paha ke Atas)</option>
+                            <option value="Medium Full Shot">Medium Full Shot (Lutut ke Atas)</option>
+                            <option value="Full Shot">Full Shot (Ujung Kepala sampai Kaki)</option>
+                            <option value="Long Shot">Long Shot (Seluruh Badan & Ruang)</option>
+                            <option value="Wide Shot">Wide Shot (Model di dalam Lingkungan)</option>
+                            <option value="Extreme Wide Shot">Extreme Wide Shot (Lingkungan Dominan)</option>
                         </select>
                     </div>
                 </div>
@@ -80,14 +87,17 @@
                     <div>
                         <label for="gender-model" class="block text-sm font-medium text-gray-300 mb-2">Gender Model</label>
                         <select id="gender-model" class="form-select w-full bg-gray-700 border border-gray-600 rounded-lg py-2.5 px-3">
-                            <option value="wanita">Wanita</option>
-                            <option value="pria">Pria</option>
-                            <option value="kombinasi">Kombinasi (Pria & Wanita)</option>
-                            <option value="androgini">Androgini / Sesuai Tema</option>
+                            <!-- Opsi akan diisi oleh JavaScript -->
                         </select>
                     </div>
                 </div>
                 
+                 <!-- Input Jumlah Model Spesifik (Dinamis) -->
+                 <div id="banyak-model-container" class="hidden">
+                    <label for="banyak-model-input" class="block text-sm font-medium text-gray-400 mb-2">Jumlah Spesifik untuk 'Banyak Model'</label>
+                    <input type="number" id="banyak-model-input" value="5" min="2" class="w-full bg-gray-600 border border-gray-500 rounded-lg py-2 px-3 placeholder-gray-400">
+                </div>
+
                  <!-- Opsi Variasi Wajah (Dinamis) -->
                 <div id="face-variation-container" class="hidden space-y-2 rounded-lg bg-gray-700/50 p-3">
                     <div class="flex items-center">
@@ -112,11 +122,24 @@
                     </div>
                 </div>
 
-                <!-- Dropdown Tema -->
+                <!-- Kontainer untuk Dropdown Gaya Rambut Dinamis -->
+                <div id="rambut-dinamis-container" class="space-y-4">
+                    <!-- Dropdown rambut dinamis akan ditambahkan di sini oleh JavaScript -->
+                </div>
+
+                <!-- Dropdown Tema & Lokasi Spesifik -->
                 <div>
                     <label for="tema" class="block text-sm font-medium text-gray-300 mb-2">Tema & Konsep Foto</label>
                     <select id="tema" class="form-select w-full bg-gray-700 border border-gray-600 rounded-lg py-2.5 px-3"></select>
                 </div>
+                <div id="specific-area-container" class="hidden space-y-2">
+                    <label for="specific-area-select" class="block text-sm font-medium text-gray-400">Area Spesifik</label>
+                    <select id="specific-area-select" class="form-select w-full bg-gray-600 border border-gray-500 rounded-lg py-2.5 px-3"></select>
+                    <div id="specific-area-other-container" class="hidden pt-2">
+                        <input type="text" id="specific-area-other-input" placeholder="Ketik lokasi spesifik lainnya..." class="w-full bg-gray-600 border border-gray-500 rounded-lg py-2 px-3 placeholder-gray-400">
+                    </div>
+                </div>
+
 
                 <!-- Opsi Jenis Kain -->
                 <div class="space-y-4 rounded-lg bg-gray-700/50 p-3">
@@ -133,11 +156,6 @@
                 <div>
                     <label for="makeup" class="block text-sm font-medium text-gray-300 mb-2">Gaya Riasan (Makeup)</label>
                     <select id="makeup" class="form-select w-full bg-gray-700 border border-gray-600 rounded-lg py-2.5 px-3"></select>
-                </div>
-                
-                <!-- Kontainer untuk Dropdown Gaya Rambut Dinamis -->
-                <div id="rambut-dinamis-container" class="space-y-4">
-                    <!-- Dropdown rambut dinamis akan ditambahkan di sini oleh JavaScript -->
                 </div>
 
                 <!-- Dropdown Pose (Dinamis) -->
@@ -163,6 +181,10 @@
                 </div>
             </div>
         </main>
+        
+        <footer class="text-center mt-8">
+            <p class="text-sm text-gray-500">dibuat oleh rekysda@gmail.com</p>
+        </footer>
     </div>
     
     <!-- Notifikasi Toast -->
@@ -174,23 +196,17 @@
 
             const DATA = {
                 etnis: {"Indonesia / Nusantara": ["Wajah Indonesia / Nusantara (Umum)","Wajah Melayu","Wajah Jawa","Wajah Sunda","Wajah Bali / Lombok","Wajah Indonesia Timur","Wajah Tionghoa-Indonesia"],"Blasteran (Mixed Race)": ["Blasteran / Indo (Kaukasia-Indonesia)","Eurasia (Kaukasia-Asia)","Afro-Asia"],"Asia": ["Asia Timur (Jepang/Korea)","Asia Tenggara (Thailand/Vietnam)","Asia Selatan (India/Pakistan)"],"Kaukasia / Eropa": ["Eropa Utara / Nordik","Eropa Barat","Eropa Timur / Slavia","Mediterania"],"Afrika": ["Afrika (Umum)","Afrika Utara"]},
-                tema: {"Gaya & Estetika": ["Minimalis","High Fashion / Editorial","Street Style / Urban","Vintage / Retro","Bohemian / Boho","Grunge / Rock & Roll","Elegan / Klasik"],"Lokasi & Lingkungan": ["Arsitektur Modern","Cityscape / Perkotaan Modern","Bangunan Tua / Bersejarah","Industri / Pabrik Tua","Pedesaan / Rustic","Alam Liar / Hutan Belantara"],"Konsep & Imajinasi": ["Fantasi / Negeri Dongeng","Surrealisme / Abstrak","Sci-Fi / Futuristik","Galaksi / Luar Angkasa","Cyberpunk / Dystopian"],"Momen & Perayaan": ["Pernikahan (Wedding / Bridal)","Pesta Malam","Festival Musik"]},
-                makeup: [{"kategori":"Tampilan (Look/Style)","jenis":["Natural","Nude","Glamour","Bold","Smokey Eyes","Dewy Look","Matte Look","Korean Look"]},{"kategori":"Seni & Karakter","jenis":["Makeup Fantasi","Makeup Editorial","Makeup Avant-garde"]}],
-                pose: {
-                    // -- DATA POSE TELAH DIPERLUAS --
-                    tunggal: { 
-                        "Pose Berdiri (Standing)": ["Berdiri Tegak (Power Stance)", "Kurva S (Contrapposto)", "Menyender Santai", "Tangan di Pinggul", "Berjalan di Tempat"],
-                        "Pose Duduk (Sitting)": ["Duduk Elegan di Kursi", "Duduk di Lantai", "Pose Berpikir (The Thinker)", "Duduk Menyamping"],
-                        "Dinamis & Ekspresif": ["Melompat", "Menari", "Rambut Tertipu Angin", "Tertawa Lepas"],
-                        "Potret": ["Close-Up Wajah (Beauty Shot)", "Melihat dari Balik Bahu", "Tangan Membingkai Wajah"]
-                    },
-                    kelompok: {
-                        "Formasi Klasik": ["Berbaris Sejajar", "Formasi Segitiga (Piramida)", "Berdiri Berdampingan"],
-                        "Komposisi & Level": ["Kombinasi Duduk & Berdiri", "Bertumpu Satu Sama Lain", "Pose Bertingkat (Foreground/Background)"],
-                        "Interaksi Dinamis": ["Interaksi Candid (Tertawa/Berbicara)", "Berjalan Bersama", "Pelukan Grup", "Saling Menatap Intens"],
-                        "Pose Berpasangan": ["Berpegangan Tangan", "Pelukan dari Belakang", "Punggung Bertemu Punggung (Back to Back)"]
-                    }
+                tema: {
+                    "Gaya & Estetika": ["Minimalis","High Fashion / Editorial","Street Style / Urban","Vintage / Retro","Bohemian / Boho","Grunge / Rock & Roll","Elegan / Klasik"],
+                    "Lokasi Kota (Indonesia)": ["Bali", "Yogyakarta", "Papua", "Jakarta", "Bandung", "Surabaya", "Semarang", "Medan", "Makassar", "Palembang", "Manado", "Labuan Bajo", "Lombok", "Bromo", "Raja Ampat", "Sumba", "Danau Toba", "Bogor", "Malang", "Solo"],
+                    "Lokasi Kota (Luar Negeri)": ["Paris", "New York", "Tokyo", "London", "Roma", "Seoul", "Dubai", "Santorini", "Kyoto", "Marrakech"],
+                    "Lokasi Umum": ["Arsitektur Modern","Cityscape / Perkotaan Modern","Pantai Tropis","Bangunan Tua / Bersejarah","Industri / Pabrik Tua","Pedesaan / Rustic","Alam Liar / Hutan Belantara"],
+                    "Konsep & Imajinasi": ["Fantasi / Negeri Dongeng","Surrealisme / Abstrak","Sci-Fi / Futuristik","Galaksi / Luar Angkasa","Permukaan Bulan","Bawah Laut / Aquarium","Cyberpunk / Dystopian"],
+                    "Momen & Perayaan": ["Pernikahan (Wedding / Bridal)","Pesta Malam","Festival Musik"]
                 },
+                lokasiSpesifik: { "Bali": ["Pura Uluwatu", "Teras Sawah Tegalalang", "Pantai Kuta", "Tanah Lot", "Nusa Penida", "Pura Lempuyang", "Seminyak", "Canggu", "Ubud Monkey Forest", "Tirta Empul"], "Yogyakarta": ["Candi Prambanan", "Jalan Malioboro", "Keraton Yogyakarta", "Taman Sari", "Candi Borobudur", "Hutan Pinus Mangunan", "Pantai Timang", "Gumuk Pasir Parangkusumo", "HeHa Sky View", "Punthuk Setumbu"], "Papua": ["Raja Ampat", "Lembah Baliem", "Danau Sentani", "Taman Nasional Lorentz", "Puncak Jayawijaya", "Pantai Bosnik", "Desa Sauwandarek", "Pulau Biak", "Air Terjun Wafsarak", "Teluk Cenderawasih"], "Jakarta": ["Kota Tua Jakarta", "Monumen Nasional (Monas)", "Bundaran HI", "Taman Mini Indonesia Indah", "Masjid Istiqlal & Katedral", "Pelabuhan Sunda Kelapa", "Ancol", "SCBD", "Kepulauan Seribu", "Hutan Mangrove PIK"], "Bandung": ["Kawah Putih", "Tangkuban Perahu", "Jalan Braga", "Gedung Sate", "Farmhouse Lembang", "The Great Asia Africa", "Ciwidey", "Floating Market Lembang", "Observatorium Bosscha", "Curug Dago"], "Paris": ["Eiffel Tower", "Louvre Museum", "Montmartre", "Arc de Triomphe", "Notre-Dame Cathedral", "Seine River Cruise", "Palace of Versailles", "Musée d'Orsay", "Sainte-Chapelle", "Jardin du Luxembourg"], "Tokyo": ["Shibuya Crossing", "Tokyo Tower", "Senso-ji Temple", "Tsukiji Fish Market", "Meiji Jingu Shrine", "Shinjuku Gyoen National Garden", "Akihabara", "Ginza District", "teamLab Borderless", "Imperial Palace"], "New York": ["Times Square", "Central Park", "Statue of Liberty", "Empire State Building", "Brooklyn Bridge", "The Metropolitan Museum of Art (The Met)", "Grand Central Terminal", "Rockefeller Center", "DUMBO", "The High Line"], "London": ["Tower Bridge", "Buckingham Palace", "The Shard", "London Eye", "Big Ben & Houses of Parliament", "British Museum", "Notting Hill", "Camden Market", "Hyde Park", "Trafalgar Square"], "Roma": ["Colosseum", "Trevi Fountain", "Pantheon", "Roman Forum", "Vatican City (St. Peter's Basilica, Vatican Museums)", "Spanish Steps", "Trastevere", "Piazza Navona", "Castel Sant'Angelo", "Villa Borghese"], },
+                makeup: [{"kategori":"Tampilan (Look/Style)","jenis":["Natural","Nude","Glamour","Bold","Smokey Eyes","Dewy Look","Matte Look","Korean Look"]},{"kategori":"Seni & Karakter","jenis":["Makeup Fantasi","Makeup Editorial","Makeup Avant-garde"]}],
+                pose: { tunggal: { "Pose Berdiri (Standing)": ["Berdiri Tegak (Power Stance)", "Kurva S (Contrapposto)", "Menyender Santai", "Tangan di Pinggul", "Berjalan di Tempat"], "Pose Duduk (Sitting)": ["Duduk Elegan di Kursi", "Duduk di Lantai", "Pose Berpikir (The Thinker)", "Duduk Menyamping"], "Dinamis & Ekspresif": ["Melompat", "Menari", "Rambut Tertipu Angin", "Tertawa Lepas"],"Potret": ["Close-Up Wajah (Beauty Shot)", "Melihat dari Balik Bahu", "Tangan Membingkai Wajah"] }, kelompok: { "Formasi Klasik": ["Berbaris Sejajar", "Formasi Segitiga (Piramida)", "Berdiri Berdampingan"], "Komposisi & Level": ["Kombinasi Duduk & Berdiri", "Bertumpu Satu Sama Lain", "Pose Bertingkat (Foreground/Background)"], "Interaksi Dinamis": ["Interaksi Candid (Tertawa/Berbicara)", "Berjalan Bersama", "Pelukan Grup", "Saling Menatap Intens"], "Pose Berpasangan": ["Berpegangan Tangan", "Pelukan dari Belakang", "Punggung Bertemu Punggung (Back to Back)"] } },
                 rambut: {"Opsi Fleksibel": ["Normal (sesuai tema)"],"Gaya Pria": {"Pendek": ["Buzz Cut","Side Part","Slick Back","Undercut"],"Sedang & Panjang": ["Quiff","Pompadour","Comma Hair","Man Bun"]},"Gaya Wanita": {"Terurai": ["Lurus & Rapi","Beach Waves","Blow-dry Bervolume"],"Diikat & Diangkat": ["Ponytail","Messy Bun","Chignon"],"Potongan Populer": ["Pixie Cut","Bob Cut","Layered Cut"]}, "Gaya Unisex": ["Mullet","Shag Cut","Rambut Warna Terang"] }
             };
             
@@ -199,6 +215,8 @@
                 shotType: document.getElementById('shot-type'),
                 jumlahModel: document.getElementById('jumlah-model'),
                 genderModel: document.getElementById('gender-model'),
+                banyakModelContainer: document.getElementById('banyak-model-container'),
+                banyakModelInput: document.getElementById('banyak-model-input'),
                 faceVariationContainer: document.getElementById('face-variation-container'),
                 faceVariationCheckbox: document.getElementById('face-variation-checkbox'),
                 etnis1Container: document.getElementById('etnis1-container'),
@@ -209,6 +227,10 @@
                 etnis3Container: document.getElementById('etnis3-container'),
                 etnis3: document.getElementById('etnis3'),
                 tema: document.getElementById('tema'),
+                specificAreaContainer: document.getElementById('specific-area-container'),
+                specificAreaSelect: document.getElementById('specific-area-select'),
+                specificAreaOtherContainer: document.getElementById('specific-area-other-container'),
+                specificAreaOtherInput: document.getElementById('specific-area-other-input'),
                 includeFabric: document.getElementById('include-fabric'),
                 fabricInputContainer: document.getElementById('fabric-input-container'),
                 makeup: document.getElementById('makeup'),
@@ -226,60 +248,63 @@
             function populateMakeup(select, data) { select.innerHTML = ''; data.forEach(group => { const optgroup = document.createElement('optgroup'); optgroup.label = group.kategori; group.jenis.forEach(opt => { const option = document.createElement('option'); option.value = opt; option.textContent = opt; optgroup.appendChild(option); }); select.appendChild(optgroup); }); }
             function populateRambut(select, data) { select.innerHTML = ''; for (const mainGroup in data) { const subGroups = data[mainGroup]; if (Array.isArray(subGroups)) { const optgroup = document.createElement('optgroup'); optgroup.label = mainGroup; subGroups.forEach(opt => { const option = document.createElement('option'); option.value = opt; option.textContent = opt; optgroup.appendChild(option); }); select.appendChild(optgroup); } else { for (const subGroup in subGroups) { const optgroup = document.createElement('optgroup'); optgroup.label = `${mainGroup} - ${subGroup}`; subGroups[subGroup].forEach(opt => { const option = document.createElement('option'); option.value = opt; option.textContent = opt; optgroup.appendChild(option); }); select.appendChild(optgroup); } } } }
 
+            function updateGenderOptions(count) {
+                const select = UIElements.genderModel;
+                select.innerHTML = '';
+                let options = [];
+                switch(count) {
+                    case '1': options = {'Umum': ['Wanita', 'Pria', 'Androgini / Sesuai Tema']}; break;
+                    case '2': options = {'Kombinasi 2 Model': ['2 Wanita', '2 Pria', '1 Wanita, 1 Pria']}; break;
+                    case '3': options = {'Kombinasi 3 Model': ['3 Wanita', '3 Pria', '2 Wanita, 1 Pria', '1 Wanita, 2 Pria']}; break;
+                    case 'banyak': options = {'Grup': ['Semua Wanita', 'Semua Pria', 'Kombinasi Pria & Wanita', 'Androgini / Sesuai Tema']}; break;
+                }
+                populateSimpleGroup(select, options);
+            }
+
             function updateUIForModelCount(count) {
-                // Reset visibilitas dan konten dinamis
-                ['etnis2Container', 'etnis3Container', 'faceVariationContainer'].forEach(id => UIElements[id].classList.add('hidden'));
+                ['etnis2Container', 'etnis3Container', 'faceVariationContainer', 'banyakModelContainer'].forEach(id => UIElements[id].classList.add('hidden'));
                 UIElements.fabricInputContainer.innerHTML = '';
                 UIElements.rambutDinamisContainer.innerHTML = '';
                 
                 let dynamicInputCount = 0;
-                const isMultiModel = count === '2' || count === '3';
+                const isMultiModel = count === '2' || count === '3' || count === 'banyak';
                 
-                if (isMultiModel) {
-                    UIElements.faceVariationContainer.classList.remove('hidden');
-                }
+                if (isMultiModel) { UIElements.faceVariationContainer.classList.remove('hidden'); }
+                if (count === 'banyak') { UIElements.banyakModelContainer.classList.remove('hidden'); }
                 
-                if (count === '2') {
-                    UIElements.etnis2Container.classList.remove('hidden');
-                    UIElements.etnis1Label.textContent = 'Etnis Model ke-1';
-                    dynamicInputCount = 2;
-                } else if (count === '3') {
-                    UIElements.etnis2Container.classList.remove('hidden');
-                    UIElements.etnis3Container.classList.remove('hidden');
-                    UIElements.etnis1Label.textContent = 'Etnis Model ke-1';
-                    dynamicInputCount = 3;
-                } else if (count === 'banyak') {
-                    UIElements.etnis1Label.textContent = 'Etnis Grup Model';
-                    dynamicInputCount = 1; 
-                } else { // Untuk '1'
-                    UIElements.etnis1Label.textContent = 'Etnis Model';
-                    dynamicInputCount = 1;
-                }
+                if (count === '2') { UIElements.etnis2Container.classList.remove('hidden'); UIElements.etnis1Label.textContent = 'Etnis Model ke-1'; dynamicInputCount = 2; } 
+                else if (count === '3') { UIElements.etnis2Container.classList.remove('hidden'); UIElements.etnis3Container.classList.remove('hidden'); UIElements.etnis1Label.textContent = 'Etnis Model ke-1'; dynamicInputCount = 3; } 
+                else if (count === 'banyak') { UIElements.etnis1Label.textContent = 'Etnis Grup Model'; dynamicInputCount = 1; } 
+                else { UIElements.etnis1Label.textContent = 'Etnis Model'; dynamicInputCount = 1; }
 
-                // Buat input dinamis untuk kain dan rambut
                 for (let i = 1; i <= dynamicInputCount; i++) {
                     const labelSuffix = dynamicInputCount > 1 ? `Model ke-${i}` : 'Model';
-                    
-                    // Input Kain
                     const fabricInputHTML = `<div><label for="fabric-type-${i}" class="block text-xs font-medium text-gray-400 mb-1">Jenis Kain ${labelSuffix}</label><input type="text" id="fabric-type-${i}" placeholder="sutra, satin, denim..." class="w-full bg-gray-600 border border-gray-500 rounded-lg py-2 px-3 text-sm placeholder-gray-400"></div>`;
                     UIElements.fabricInputContainer.insertAdjacentHTML('beforeend', fabricInputHTML);
-                    
-                    // Dropdown Rambut
                     const rambutDropdownHTML = `<div><label for="rambut-model-${i}" class="block text-sm font-medium text-gray-300 mb-2">Gaya Rambut ${labelSuffix}</label><select id="rambut-model-${i}" class="form-select w-full bg-gray-700 border border-gray-600 rounded-lg py-2.5 px-3"></select></div>`;
                     UIElements.rambutDinamisContainer.insertAdjacentHTML('beforeend', rambutDropdownHTML);
                     populateRambut(document.getElementById(`rambut-model-${i}`), DATA.rambut);
                 }
                 
-                // Ganti label untuk grup
                 if (count === 'banyak') {
                     const fabricLabel = UIElements.fabricInputContainer.querySelector('label');
                     const rambutLabel = UIElements.rambutDinamisContainer.querySelector('label');
                     if(fabricLabel) fabricLabel.textContent = 'Jenis Kain Grup';
                     if(rambutLabel) rambutLabel.textContent = 'Gaya Rambut Grup';
                 }
-
-                // Update pilihan pose
+                
+                updateGenderOptions(count);
                 populateSimpleGroup(UIElements.pose, count === '1' ? DATA.pose.tunggal : DATA.pose.kelompok);
+            }
+
+            function updateSpecificArea(selectedCity) {
+                const locations = DATA.lokasiSpesifik[selectedCity];
+                const select = UIElements.specificAreaSelect;
+                select.innerHTML = '';
+                if (locations) {
+                    locations.forEach(loc => { const option = document.createElement('option'); option.value = loc; option.textContent = loc; select.appendChild(option); });
+                }
+                const otherOption = document.createElement('option'); otherOption.value = 'Lainnya...'; otherOption.textContent = 'Lainnya...'; select.appendChild(otherOption);
             }
 
             // --- INISIALISASI ---
@@ -291,24 +316,35 @@
             // --- EVENT LISTENERS ---
             UIElements.jumlahModel.addEventListener('change', (e) => updateUIForModelCount(e.target.value));
             UIElements.includeFabric.addEventListener('change', (e) => UIElements.fabricInputContainer.classList.toggle('hidden', !e.target.checked));
+            UIElements.tema.addEventListener('change', (e) => {
+                const selectedOptgroup = e.target.selectedOptions[0].parentElement;
+                const isLocation = selectedOptgroup.label.startsWith('Lokasi Kota');
+                UIElements.specificAreaContainer.classList.toggle('hidden', !isLocation);
+                if (isLocation) { updateSpecificArea(e.target.value); UIElements.specificAreaOtherContainer.classList.add('hidden'); UIElements.specificAreaOtherInput.value = ''; } 
+                else { UIElements.specificAreaOtherInput.value = ''; }
+            });
+            UIElements.specificAreaSelect.addEventListener('change', (e) => {
+                UIElements.specificAreaOtherContainer.classList.toggle('hidden', e.target.value !== 'Lainnya...');
+            });
 
             UIElements.generateBtn.addEventListener('click', () => {
-                const shotType = UIElements.shotType.value;
                 const count = UIElements.jumlahModel.value;
-                const gender = UIElements.genderModel.value;
+                const genderSelection = UIElements.genderModel.value;
+                let genderText = '';
+                switch (genderSelection) {
+                    case '2 Wanita, 1 Pria': genderText = 'terdiri dari 2 wanita dan 1 pria'; break;
+                    case '1 Wanita, 2 Pria': genderText = 'terdiri dari 1 wanita dan 2 pria'; break;
+                    default: genderText = genderSelection;
+                }
                 
-                let genderText = { 'pria': 'pria', 'wanita': 'wanita', 'kombinasi': 'pria dan wanita', 'androgini': 'androgini' }[gender] || 'wanita';
-
                 let modelDesc = '';
                 const etnis = [UIElements.etnis1.value, UIElements.etnis2.value, UIElements.etnis3.value];
                 const faceVariationText = UIElements.faceVariationCheckbox.checked ? " dengan fitur wajah yang berbeda satu sama lain" : "";
                 
-                switch (count) {
-                    case '1': modelDesc = `seorang model ${genderText} dengan tipe wajah ${etnis[0]} dan tubuh proporsional`; break;
-                    case '2': modelDesc = `dua model ${genderText}${faceVariationText}, satu ${etnis[0]} dan satu lagi ${etnis[1]}, keduanya dengan tubuh proporsional`; break;
-                    case '3': modelDesc = `tiga model ${genderText}${faceVariationText} dengan kombinasi etnis: ${etnis[0]}, ${etnis[1]}, dan ${etnis[2]}, semuanya dengan tubuh proporsional`; break;
-                    case 'banyak': modelDesc = `sekelompok model ${genderText} dengan tipe wajah ${etnis[0]} yang beragam, semuanya memiliki tubuh proporsional`; break;
-                }
+                if (count === '1') { modelDesc = `seorang model ${genderText} dengan tipe wajah ${etnis[0]} dan tubuh proporsional`; }
+                else if (count === '2') { modelDesc = `dua model ${genderText}${faceVariationText}, satu ${etnis[0]} dan satu lagi ${etnis[1]}, keduanya dengan tubuh proporsional`; }
+                else if (count === '3') { modelDesc = `tiga model ${faceVariationText} ${genderText}, dengan kombinasi etnis: ${etnis[0]}, ${etnis[1]}, dan ${etnis[2]}, semuanya dengan tubuh proporsional`; }
+                else if (count === 'banyak') { const num = UIElements.banyakModelInput.value; modelDesc = `sekelompok ${num} model ${genderText}${faceVariationText}, semuanya dari etnis ${etnis[0]} dan memiliki tubuh proporsional`; }
                 
                 let fabricDesc = 'mengenakan busana dengan desain yang detail dan menawan, ';
                 if (UIElements.includeFabric.checked) {
@@ -319,17 +355,21 @@
                 const rambutSelects = UIElements.rambutDinamisContainer.querySelectorAll('select');
                 const rambutValues = Array.from(rambutSelects).map(select => select.value);
                 let rambutDesc = '';
-                if (rambutValues.every(val => val === 'Normal (sesuai tema)')) {
-                    rambutDesc = 'gaya rambut yang sesuai dengan tema';
-                } else if (rambutValues.length === 1) {
-                    rambutDesc = `gaya rambut ${rambutValues[0]}`;
-                } else {
-                    rambutDesc = `gaya rambut yang bervariasi: ${rambutValues.join(', ')}`;
-                }
+                if (rambutValues.every(val => val === 'Normal (sesuai tema)')) { rambutDesc = 'gaya rambut yang sesuai dengan tema'; }
+                else if (rambutValues.length === 1) { rambutDesc = `gaya rambut ${rambutValues[0]}`; }
+                else { rambutDesc = `gaya rambut yang bervariasi: ${rambutValues.join(', ')}`; }
                 
+                let temaDesc = '';
+                const selectedTheme = UIElements.tema.value;
+                const isLocationTheme = !UIElements.specificAreaContainer.classList.contains('hidden');
+                let specificArea = UIElements.specificAreaSelect.value;
+                if (specificArea === 'Lainnya...') { specificArea = UIElements.specificAreaOtherInput.value.trim(); }
+                if (isLocationTheme) { temaDesc = specificArea ? `di lokasi ${specificArea}, ${selectedTheme}` : `di kota ${selectedTheme}`; }
+                else { temaDesc = `dalam konsep ${selectedTheme}`; }
+
                 const resolutionDesc = `Gambar harus dibuat dalam ${UIElements.resolutionType.value}.`;
 
-                const prompt = `Sebuah ${shotType} foto editorial fashion menampilkan ${modelDesc}. Mereka berada dalam konsep ${UIElements.tema.value}, ${fabricDesc}dengan makeup ${UIElements.makeup.value} yang menawan dan ${rambutDesc}. Para model dalam pose ${UIElements.pose.value}, menunjukkan ekspresi percaya diri. Pencahayaan dramatis, sinematik, fokus pada detail fashion dan mood. ${resolutionDesc}`;
+                const prompt = `Sebuah ${UIElements.shotType.value} foto editorial fashion menampilkan ${modelDesc}. Mereka berada ${temaDesc}, ${fabricDesc}dengan makeup ${UIElements.makeup.value} yang menawan dan ${rambutDesc}. Para model dalam pose ${UIElements.pose.value}, menunjukkan ekspresi percaya diri. Pencahayaan dramatis, sinematik, fokus pada detail fashion dan mood. ${resolutionDesc}`;
                 
                 UIElements.promptResult.value = prompt;
                 UIElements.resultContainer.classList.remove('hidden');
