@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fashion Prompt Generator (Pro)</title>
+    <title>Fashion Prompt Generator (Ultimate Pro)</title>
     <!-- Favicon Kamera dari CDN -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📸</text></svg>">
     <!-- Memuat Tailwind CSS dari CDN -->
@@ -37,7 +37,7 @@
         <!-- Header -->
         <header class="text-center mb-8">
             <h1 class="text-3xl sm:text-4xl font-bold tracking-tight text-white">Fashion Prompt Generator</h1>
-            <p class="mt-2 text-lg text-gray-400">Versi Ultimate dengan Lokasi Spesifik.</p>
+            <p class="mt-2 text-lg text-gray-400">Versi Ultimate dengan Definisi Model Berbasis Gambar.</p>
         </header>
 
         <!-- Card Form -->
@@ -73,58 +73,34 @@
                     </div>
                 </div>
                 
-                <!-- Pilihan Jumlah & Gender Model -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                        <label for="jumlah-model" class="block text-sm font-medium text-gray-300 mb-2">Jumlah Model</label>
-                        <select id="jumlah-model" class="form-select w-full bg-gray-700 border border-gray-600 rounded-lg py-2.5 px-3">
-                            <option value="1" selected>1 Model</option>
-                            <option value="2">2 Model</option>
-                            <option value="3">3 Model</option>
-                            <option value="banyak">Banyak Model (Satu Etnis)</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label for="gender-model" class="block text-sm font-medium text-gray-300 mb-2">Gender Model</label>
-                        <select id="gender-model" class="form-select w-full bg-gray-700 border border-gray-600 rounded-lg py-2.5 px-3">
-                            <!-- Opsi akan diisi oleh JavaScript -->
-                        </select>
-                    </div>
+                <!-- Pilihan Jumlah Model -->
+                <div>
+                    <label for="jumlah-model" class="block text-sm font-medium text-gray-300 mb-2">Jumlah Model</label>
+                    <select id="jumlah-model" class="form-select w-full bg-gray-700 border border-gray-600 rounded-lg py-2.5 px-3">
+                        <option value="1" selected>1 Model (berdasarkan 1 desain)</option>
+                        <option value="2">2 Model (berdasarkan 2 desain)</option>
+                        <option value="3">3 Model (berdasarkan 3 desain)</option>
+                        <option value="banyak">Banyak Model (Satu Etnis & Desain)</option>
+                    </select>
                 </div>
-                
+                 
                  <!-- Input Jumlah Model Spesifik (Dinamis) -->
                  <div id="banyak-model-container" class="hidden">
                     <label for="banyak-model-input" class="block text-sm font-medium text-gray-400 mb-2">Jumlah Spesifik untuk 'Banyak Model'</label>
                     <input type="number" id="banyak-model-input" value="5" min="2" class="w-full bg-gray-600 border border-gray-500 rounded-lg py-2 px-3 placeholder-gray-400">
                 </div>
 
-                 <!-- Opsi Variasi Wajah (Dinamis) -->
+                <!-- Opsi Variasi Wajah (Dinamis) -->
                 <div id="face-variation-container" class="hidden space-y-2 rounded-lg bg-gray-700/50 p-3">
                     <div class="flex items-center">
                         <input id="face-variation-checkbox" type="checkbox" class="h-4 w-4 rounded border-gray-500 bg-gray-600 text-indigo-500 focus:ring-indigo-500">
                         <label for="face-variation-checkbox" class="ml-3 block text-sm font-medium text-gray-300">Sertakan variasi wajah (fitur wajah berbeda)</label>
                     </div>
                 </div>
-                
-                <!-- Kontainer untuk Dropdown Etnis Dinamis -->
-                <div id="etnis-dinamis-container" class="space-y-4">
-                    <div id="etnis1-container">
-                        <label id="etnis1-label" for="etnis1" class="block text-sm font-medium text-gray-300 mb-2">Etnis Model</label>
-                        <select id="etnis1" class="form-select w-full bg-gray-700 border border-gray-600 rounded-lg py-2.5 px-3"></select>
-                    </div>
-                    <div id="etnis2-container" class="hidden">
-                        <label for="etnis2" class="block text-sm font-medium text-gray-300 mb-2">Etnis Model ke-2</label>
-                        <select id="etnis2" class="form-select w-full bg-gray-700 border border-gray-600 rounded-lg py-2.5 px-3"></select>
-                    </div>
-                    <div id="etnis3-container" class="hidden">
-                        <label for="etnis3" class="block text-sm font-medium text-gray-300 mb-2">Etnis Model ke-3</label>
-                        <select id="etnis3" class="form-select w-full bg-gray-700 border border-gray-600 rounded-lg py-2.5 px-3"></select>
-                    </div>
-                </div>
 
-                <!-- Kontainer untuk Dropdown Gaya Rambut Dinamis -->
-                <div id="rambut-dinamis-container" class="space-y-4">
-                    <!-- Dropdown rambut dinamis akan ditambahkan di sini oleh JavaScript -->
+                <!-- Kontainer untuk Kartu Definisi Model Dinamis -->
+                <div id="model-definition-container" class="space-y-6">
+                    <!-- Kartu Model akan dibuat oleh JavaScript di sini -->
                 </div>
 
                 <!-- Dropdown Tema & Lokasi Spesifik -->
@@ -196,14 +172,7 @@
 
             const DATA = {
                 etnis: {"Indonesia / Nusantara": ["Wajah Indonesia / Nusantara (Umum)","Wajah Melayu","Wajah Jawa","Wajah Sunda","Wajah Bali / Lombok","Wajah Indonesia Timur","Wajah Tionghoa-Indonesia"],"Blasteran (Mixed Race)": ["Blasteran / Indo (Kaukasia-Indonesia)","Eurasia (Kaukasia-Asia)","Afro-Asia"],"Asia": ["Asia Timur (Jepang/Korea)","Asia Tenggara (Thailand/Vietnam)","Asia Selatan (India/Pakistan)"],"Kaukasia / Eropa": ["Eropa Utara / Nordik","Eropa Barat","Eropa Timur / Slavia","Mediterania"],"Afrika": ["Afrika (Umum)","Afrika Utara"]},
-                tema: {
-                    "Gaya & Estetika": ["Minimalis","High Fashion / Editorial","Street Style / Urban","Vintage / Retro","Bohemian / Boho","Grunge / Rock & Roll","Elegan / Klasik"],
-                    "Lokasi Kota (Indonesia)": ["Bali", "Yogyakarta", "Papua", "Jakarta", "Bandung", "Surabaya", "Semarang", "Medan", "Makassar", "Palembang", "Manado", "Labuan Bajo", "Lombok", "Bromo", "Raja Ampat", "Sumba", "Danau Toba", "Bogor", "Malang", "Solo"],
-                    "Lokasi Kota (Luar Negeri)": ["Paris", "New York", "Tokyo", "London", "Roma", "Seoul", "Dubai", "Santorini", "Kyoto", "Marrakech"],
-                    "Lokasi Umum": ["Arsitektur Modern","Cityscape / Perkotaan Modern","Pantai Tropis","Bangunan Tua / Bersejarah","Industri / Pabrik Tua","Pedesaan / Rustic","Alam Liar / Hutan Belantara"],
-                    "Konsep & Imajinasi": ["Fantasi / Negeri Dongeng","Surrealisme / Abstrak","Sci-Fi / Futuristik","Galaksi / Luar Angkasa","Permukaan Bulan","Bawah Laut / Aquarium","Cyberpunk / Dystopian"],
-                    "Momen & Perayaan": ["Pernikahan (Wedding / Bridal)","Pesta Malam","Festival Musik"]
-                },
+                tema: { "Gaya & Estetika": ["Minimalis","High Fashion / Editorial","Street Style / Urban","Vintage / Retro","Bohemian / Boho","Grunge / Rock & Roll","Elegan / Klasik"], "Lokasi Kota (Indonesia)": ["Bali", "Yogyakarta", "Papua", "Jakarta", "Bandung", "Surabaya", "Semarang", "Medan", "Makassar", "Palembang", "Manado", "Labuan Bajo", "Lombok", "Bromo", "Raja Ampat", "Sumba", "Danau Toba", "Bogor", "Malang", "Solo"], "Lokasi Kota (Luar Negeri)": ["Paris", "New York", "Tokyo", "London", "Roma", "Seoul", "Dubai", "Santorini", "Kyoto", "Marrakech"], "Lokasi Umum": ["Arsitektur Modern","Cityscape / Perkotaan Modern","Pantai Tropis","Bangunan Tua / Bersejarah","Industri / Pabrik Tua","Pedesaan / Rustic","Alam Liar / Hutan Belantara"], "Konsep & Imajinasi": ["Fantasi / Negeri Dongeng","Surrealisme / Abstrak","Sci-Fi / Futuristik","Galaksi / Luar Angkasa","Permukaan Bulan","Bawah Laut / Aquarium","Cyberpunk / Dystopian"], "Momen & Perayaan": ["Pernikahan (Wedding / Bridal)","Pesta Malam","Festival Musik"] },
                 lokasiSpesifik: { "Bali": ["Pura Uluwatu", "Teras Sawah Tegalalang", "Pantai Kuta", "Tanah Lot", "Nusa Penida", "Pura Lempuyang", "Seminyak", "Canggu", "Ubud Monkey Forest", "Tirta Empul"], "Yogyakarta": ["Candi Prambanan", "Jalan Malioboro", "Keraton Yogyakarta", "Taman Sari", "Candi Borobudur", "Hutan Pinus Mangunan", "Pantai Timang", "Gumuk Pasir Parangkusumo", "HeHa Sky View", "Punthuk Setumbu"], "Papua": ["Raja Ampat", "Lembah Baliem", "Danau Sentani", "Taman Nasional Lorentz", "Puncak Jayawijaya", "Pantai Bosnik", "Desa Sauwandarek", "Pulau Biak", "Air Terjun Wafsarak", "Teluk Cenderawasih"], "Jakarta": ["Kota Tua Jakarta", "Monumen Nasional (Monas)", "Bundaran HI", "Taman Mini Indonesia Indah", "Masjid Istiqlal & Katedral", "Pelabuhan Sunda Kelapa", "Ancol", "SCBD", "Kepulauan Seribu", "Hutan Mangrove PIK"], "Bandung": ["Kawah Putih", "Tangkuban Perahu", "Jalan Braga", "Gedung Sate", "Farmhouse Lembang", "The Great Asia Africa", "Ciwidey", "Floating Market Lembang", "Observatorium Bosscha", "Curug Dago"], "Paris": ["Eiffel Tower", "Louvre Museum", "Montmartre", "Arc de Triomphe", "Notre-Dame Cathedral", "Seine River Cruise", "Palace of Versailles", "Musée d'Orsay", "Sainte-Chapelle", "Jardin du Luxembourg"], "Tokyo": ["Shibuya Crossing", "Tokyo Tower", "Senso-ji Temple", "Tsukiji Fish Market", "Meiji Jingu Shrine", "Shinjuku Gyoen National Garden", "Akihabara", "Ginza District", "teamLab Borderless", "Imperial Palace"], "New York": ["Times Square", "Central Park", "Statue of Liberty", "Empire State Building", "Brooklyn Bridge", "The Metropolitan Museum of Art (The Met)", "Grand Central Terminal", "Rockefeller Center", "DUMBO", "The High Line"], "London": ["Tower Bridge", "Buckingham Palace", "The Shard", "London Eye", "Big Ben & Houses of Parliament", "British Museum", "Notting Hill", "Camden Market", "Hyde Park", "Trafalgar Square"], "Roma": ["Colosseum", "Trevi Fountain", "Pantheon", "Roman Forum", "Vatican City (St. Peter's Basilica, Vatican Museums)", "Spanish Steps", "Trastevere", "Piazza Navona", "Castel Sant'Angelo", "Villa Borghese"], },
                 makeup: [{"kategori":"Tampilan (Look/Style)","jenis":["Natural","Nude","Glamour","Bold","Smokey Eyes","Dewy Look","Matte Look","Korean Look"]},{"kategori":"Seni & Karakter","jenis":["Makeup Fantasi","Makeup Editorial","Makeup Avant-garde"]}],
                 pose: { tunggal: { "Pose Berdiri (Standing)": ["Berdiri Tegak (Power Stance)", "Kurva S (Contrapposto)", "Menyender Santai", "Tangan di Pinggul", "Berjalan di Tempat"], "Pose Duduk (Sitting)": ["Duduk Elegan di Kursi", "Duduk di Lantai", "Pose Berpikir (The Thinker)", "Duduk Menyamping"], "Dinamis & Ekspresif": ["Melompat", "Menari", "Rambut Tertipu Angin", "Tertawa Lepas"],"Potret": ["Close-Up Wajah (Beauty Shot)", "Melihat dari Balik Bahu", "Tangan Membingkai Wajah"] }, kelompok: { "Formasi Klasik": ["Berbaris Sejajar", "Formasi Segitiga (Piramida)", "Berdiri Berdampingan"], "Komposisi & Level": ["Kombinasi Duduk & Berdiri", "Bertumpu Satu Sama Lain", "Pose Bertingkat (Foreground/Background)"], "Interaksi Dinamis": ["Interaksi Candid (Tertawa/Berbicara)", "Berjalan Bersama", "Pelukan Grup", "Saling Menatap Intens"], "Pose Berpasangan": ["Berpegangan Tangan", "Pelukan dari Belakang", "Punggung Bertemu Punggung (Back to Back)"] } },
@@ -214,18 +183,12 @@
                 resolutionType: document.getElementById('resolution-type'),
                 shotType: document.getElementById('shot-type'),
                 jumlahModel: document.getElementById('jumlah-model'),
-                genderModel: document.getElementById('gender-model'),
+                genderModel: document.getElementById('gender-model'), // Dihapus dari UI, tapi tetap di sini untuk referensi logika
                 banyakModelContainer: document.getElementById('banyak-model-container'),
                 banyakModelInput: document.getElementById('banyak-model-input'),
+                modelDefinitionContainer: document.getElementById('model-definition-container'),
                 faceVariationContainer: document.getElementById('face-variation-container'),
                 faceVariationCheckbox: document.getElementById('face-variation-checkbox'),
-                etnis1Container: document.getElementById('etnis1-container'),
-                etnis1Label: document.getElementById('etnis1-label'),
-                etnis1: document.getElementById('etnis1'),
-                etnis2Container: document.getElementById('etnis2-container'),
-                etnis2: document.getElementById('etnis2'),
-                etnis3Container: document.getElementById('etnis3-container'),
-                etnis3: document.getElementById('etnis3'),
                 tema: document.getElementById('tema'),
                 specificAreaContainer: document.getElementById('specific-area-container'),
                 specificAreaSelect: document.getElementById('specific-area-select'),
@@ -234,7 +197,6 @@
                 includeFabric: document.getElementById('include-fabric'),
                 fabricInputContainer: document.getElementById('fabric-input-container'),
                 makeup: document.getElementById('makeup'),
-                rambutDinamisContainer: document.getElementById('rambut-dinamis-container'),
                 pose: document.getElementById('pose'),
                 generateBtn: document.getElementById('generate-btn'),
                 resultContainer: document.getElementById('result-container'),
@@ -248,23 +210,47 @@
             function populateMakeup(select, data) { select.innerHTML = ''; data.forEach(group => { const optgroup = document.createElement('optgroup'); optgroup.label = group.kategori; group.jenis.forEach(opt => { const option = document.createElement('option'); option.value = opt; option.textContent = opt; optgroup.appendChild(option); }); select.appendChild(optgroup); }); }
             function populateRambut(select, data) { select.innerHTML = ''; for (const mainGroup in data) { const subGroups = data[mainGroup]; if (Array.isArray(subGroups)) { const optgroup = document.createElement('optgroup'); optgroup.label = mainGroup; subGroups.forEach(opt => { const option = document.createElement('option'); option.value = opt; option.textContent = opt; optgroup.appendChild(option); }); select.appendChild(optgroup); } else { for (const subGroup in subGroups) { const optgroup = document.createElement('optgroup'); optgroup.label = `${mainGroup} - ${subGroup}`; subGroups[subGroup].forEach(opt => { const option = document.createElement('option'); option.value = opt; option.textContent = opt; optgroup.appendChild(option); }); select.appendChild(optgroup); } } } }
 
-            function updateGenderOptions(count) {
-                const select = UIElements.genderModel;
-                select.innerHTML = '';
-                let options = [];
-                switch(count) {
-                    case '1': options = {'Umum': ['Wanita', 'Pria', 'Androgini / Sesuai Tema']}; break;
-                    case '2': options = {'Kombinasi 2 Model': ['2 Wanita', '2 Pria', '1 Wanita, 1 Pria']}; break;
-                    case '3': options = {'Kombinasi 3 Model': ['3 Wanita', '3 Pria', '2 Wanita, 1 Pria', '1 Wanita, 2 Pria']}; break;
-                    case 'banyak': options = {'Grup': ['Semua Wanita', 'Semua Pria', 'Kombinasi Pria & Wanita', 'Androgini / Sesuai Tema']}; break;
-                }
-                populateSimpleGroup(select, options);
+            function createModelCard(index) {
+                const cardId = `model-card-${index}`;
+                const labelSuffix = UIElements.jumlahModel.value === 'banyak' ? 'Grup' : `Model ke-${index}`;
+
+                const cardHTML = `
+                    <div id="${cardId}" class="p-4 border border-gray-700 rounded-lg space-y-4 bg-gray-900/50">
+                        <h3 class="text-md font-semibold text-indigo-400">${labelSuffix}</h3>
+                        <div class="space-y-2">
+                            <label for="design-upload-${index}" class="block text-sm font-medium text-gray-300">Upload Desain Referensi</label>
+                            <input type="file" id="design-upload-${index}" accept="image/*" class="w-full text-sm text-gray-400 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-indigo-100 file:text-indigo-700 hover:file:bg-indigo-200 cursor-pointer">
+                            <img id="design-preview-${index}" src="" alt="Preview Desain" class="hidden w-full h-auto max-h-32 rounded-lg object-contain mt-2">
+                        </div>
+                        <div>
+                            <label for="etnis-model-${index}" class="block text-sm font-medium text-gray-300 mb-2">Etnis</label>
+                            <select id="etnis-model-${index}" class="form-select w-full bg-gray-700 border border-gray-600 rounded-lg py-2.5 px-3"></select>
+                        </div>
+                        <div>
+                            <label for="rambut-model-${index}" class="block text-sm font-medium text-gray-300 mb-2">Gaya Rambut</label>
+                            <select id="rambut-model-${index}" class="form-select w-full bg-gray-700 border border-gray-600 rounded-lg py-2.5 px-3"></select>
+                        </div>
+                    </div>
+                `;
+                UIElements.modelDefinitionContainer.insertAdjacentHTML('beforeend', cardHTML);
+                populateSimpleGroup(document.getElementById(`etnis-model-${index}`), DATA.etnis);
+                populateRambut(document.getElementById(`rambut-model-${index}`), DATA.rambut);
+
+                document.getElementById(`design-upload-${index}`).addEventListener('change', (e) => {
+                    const preview = document.getElementById(`design-preview-${index}`);
+                    const [file] = e.target.files;
+                    if (file) {
+                        preview.src = URL.createObjectURL(file);
+                        preview.classList.remove('hidden');
+                    }
+                });
             }
 
+
             function updateUIForModelCount(count) {
-                ['etnis2Container', 'etnis3Container', 'faceVariationContainer', 'banyakModelContainer'].forEach(id => UIElements[id].classList.add('hidden'));
+                ['faceVariationContainer', 'banyakModelContainer'].forEach(id => UIElements[id].classList.add('hidden'));
                 UIElements.fabricInputContainer.innerHTML = '';
-                UIElements.rambutDinamisContainer.innerHTML = '';
+                UIElements.modelDefinitionContainer.innerHTML = '';
                 
                 let dynamicInputCount = 0;
                 const isMultiModel = count === '2' || count === '3' || count === 'banyak';
@@ -272,28 +258,22 @@
                 if (isMultiModel) { UIElements.faceVariationContainer.classList.remove('hidden'); }
                 if (count === 'banyak') { UIElements.banyakModelContainer.classList.remove('hidden'); }
                 
-                if (count === '2') { UIElements.etnis2Container.classList.remove('hidden'); UIElements.etnis1Label.textContent = 'Etnis Model ke-1'; dynamicInputCount = 2; } 
-                else if (count === '3') { UIElements.etnis2Container.classList.remove('hidden'); UIElements.etnis3Container.classList.remove('hidden'); UIElements.etnis1Label.textContent = 'Etnis Model ke-1'; dynamicInputCount = 3; } 
-                else if (count === 'banyak') { UIElements.etnis1Label.textContent = 'Etnis Grup Model'; dynamicInputCount = 1; } 
-                else { UIElements.etnis1Label.textContent = 'Etnis Model'; dynamicInputCount = 1; }
+                if (count === '2') { dynamicInputCount = 2; } 
+                else if (count === '3') { dynamicInputCount = 3; } 
+                else { dynamicInputCount = 1; }
 
                 for (let i = 1; i <= dynamicInputCount; i++) {
+                    createModelCard(i);
                     const labelSuffix = dynamicInputCount > 1 ? `Model ke-${i}` : 'Model';
                     const fabricInputHTML = `<div><label for="fabric-type-${i}" class="block text-xs font-medium text-gray-400 mb-1">Jenis Kain ${labelSuffix}</label><input type="text" id="fabric-type-${i}" placeholder="sutra, satin, denim..." class="w-full bg-gray-600 border border-gray-500 rounded-lg py-2 px-3 text-sm placeholder-gray-400"></div>`;
                     UIElements.fabricInputContainer.insertAdjacentHTML('beforeend', fabricInputHTML);
-                    const rambutDropdownHTML = `<div><label for="rambut-model-${i}" class="block text-sm font-medium text-gray-300 mb-2">Gaya Rambut ${labelSuffix}</label><select id="rambut-model-${i}" class="form-select w-full bg-gray-700 border border-gray-600 rounded-lg py-2.5 px-3"></select></div>`;
-                    UIElements.rambutDinamisContainer.insertAdjacentHTML('beforeend', rambutDropdownHTML);
-                    populateRambut(document.getElementById(`rambut-model-${i}`), DATA.rambut);
                 }
                 
                 if (count === 'banyak') {
                     const fabricLabel = UIElements.fabricInputContainer.querySelector('label');
-                    const rambutLabel = UIElements.rambutDinamisContainer.querySelector('label');
                     if(fabricLabel) fabricLabel.textContent = 'Jenis Kain Grup';
-                    if(rambutLabel) rambutLabel.textContent = 'Gaya Rambut Grup';
                 }
-                
-                updateGenderOptions(count);
+
                 populateSimpleGroup(UIElements.pose, count === '1' ? DATA.pose.tunggal : DATA.pose.kelompok);
             }
 
@@ -308,7 +288,6 @@
             }
 
             // --- INISIALISASI ---
-            [UIElements.etnis1, UIElements.etnis2, UIElements.etnis3].forEach(el => populateSimpleGroup(el, DATA.etnis));
             populateSimpleGroup(UIElements.tema, DATA.tema);
             populateMakeup(UIElements.makeup, DATA.makeup);
             updateUIForModelCount('1'); 
@@ -329,35 +308,41 @@
 
             UIElements.generateBtn.addEventListener('click', () => {
                 const count = UIElements.jumlahModel.value;
-                const genderSelection = UIElements.genderModel.value;
-                let genderText = '';
-                switch (genderSelection) {
-                    case '2 Wanita, 1 Pria': genderText = 'terdiri dari 2 wanita dan 1 pria'; break;
-                    case '1 Wanita, 2 Pria': genderText = 'terdiri dari 1 wanita dan 2 pria'; break;
-                    default: genderText = genderSelection;
-                }
-                
-                let modelDesc = '';
-                const etnis = [UIElements.etnis1.value, UIElements.etnis2.value, UIElements.etnis3.value];
                 const faceVariationText = UIElements.faceVariationCheckbox.checked ? " dengan fitur wajah yang berbeda satu sama lain" : "";
                 
-                if (count === '1') { modelDesc = `seorang model ${genderText} dengan tipe wajah ${etnis[0]} dan tubuh proporsional`; }
-                else if (count === '2') { modelDesc = `dua model ${genderText}${faceVariationText}, satu ${etnis[0]} dan satu lagi ${etnis[1]}, keduanya dengan tubuh proporsional`; }
-                else if (count === '3') { modelDesc = `tiga model ${faceVariationText} ${genderText}, dengan kombinasi etnis: ${etnis[0]}, ${etnis[1]}, dan ${etnis[2]}, semuanya dengan tubuh proporsional`; }
-                else if (count === 'banyak') { const num = UIElements.banyakModelInput.value; modelDesc = `sekelompok ${num} model ${genderText}${faceVariationText}, semuanya dari etnis ${etnis[0]} dan memiliki tubuh proporsional`; }
+                let modelClauses = [];
+                const modelCards = UIElements.modelDefinitionContainer.querySelectorAll('[id^="model-card-"]');
                 
+                if (count === 'banyak') {
+                    const num = UIElements.banyakModelInput.value;
+                    const etnis = document.getElementById('etnis-model-1').value;
+                    modelClauses.push(`sekelompok ${num} model dengan gender yang sesuai dengan desain referensi, semuanya dari etnis ${etnis}${faceVariationText} dan memiliki tubuh proporsional`);
+                } else {
+                    modelCards.forEach((card, index) => {
+                        const i = index + 1;
+                        const etnis = document.getElementById(`etnis-model-${i}`).value;
+                        const clause = `model ke-${i} dengan gender yang sesuai dengan desain referensi ke-${i}, bertipe wajah ${etnis} dan tubuh proporsional`;
+                        modelClauses.push(clause);
+                    });
+                }
+                
+                const modelDesc = modelClauses.join(', ');
+
                 let fabricDesc = 'mengenakan busana dengan desain yang detail dan menawan, ';
                 if (UIElements.includeFabric.checked) {
                     const fabrics = Array.from(UIElements.fabricInputContainer.querySelectorAll('input')).map(input => input.value.trim()).filter(Boolean);
                     if (fabrics.length > 0) fabricDesc = `mengenakan busana yang menonjolkan kain ${fabrics.join(', ')}, `;
                 }
                 
-                const rambutSelects = UIElements.rambutDinamisContainer.querySelectorAll('select');
+                const rambutSelects = UIElements.modelDefinitionContainer.querySelectorAll('[id^="rambut-model-"]');
                 const rambutValues = Array.from(rambutSelects).map(select => select.value);
                 let rambutDesc = '';
                 if (rambutValues.every(val => val === 'Normal (sesuai tema)')) { rambutDesc = 'gaya rambut yang sesuai dengan tema'; }
                 else if (rambutValues.length === 1) { rambutDesc = `gaya rambut ${rambutValues[0]}`; }
-                else { rambutDesc = `gaya rambut yang bervariasi: ${rambutValues.join(', ')}`; }
+                else {
+                    const rambutTextParts = rambutValues.map((val, index) => `model ke-${index+1} memiliki gaya rambut ${val}`);
+                    rambutDesc = rambutTextParts.join(', ');
+                }
                 
                 let temaDesc = '';
                 const selectedTheme = UIElements.tema.value;
