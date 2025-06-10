@@ -111,16 +111,16 @@
                 <div>
                     <label for="gaya-editorial" class="block text-sm font-semibold text-gray-700">6. Gaya Editorial</label>
                     <select id="gaya-editorial" name="gaya-editorial" class="mt-2 block w-full pl-3 pr-10 py-2.5 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md shadow-sm">
-                        <option selected disabled>Pilih gaya editorial...</option>
-                        <option>Vogue (Klasik, Mewah, High Fashion)</option>
-                        <option>Harper's Bazaar (Elegan, Artistik, Modern)</option>
-                        <option>Dazed & Confused (Avant-Garde, Sureal)</option>
-                        <option>i-D (Street Style, Potret Unik, Raw)</option>
-                        <option>Numéro (Provokatif, Minimalis, Arsitektural)</option>
-                        <option>W Magazine (Sinematik, Glamor, Naratif)</option>
-                        <option>AnOther Magazine (Intelektual, Konseptual)</option>
-                        <option>Self Service (Intim, Spontan, Candid)</option>
-                        <option>The Gentlewoman (Cerdas, Subtel, Berkarakter)</option>
+                        <option disabled>Pilih gaya editorial...</option>
+                        <option>Klasik, Mewah, High Fashion</option>
+                        <option selected>Elegan, Artistik, Modern</option>
+                        <option>Avant-Garde, Sureal</option>
+                        <option>Street Style, Potret Unik, Raw</option>
+                        <option>Provokatif, Minimalis, Arsitektural</option>
+                        <option>Sinematik, Glamor, Naratif</option>
+                        <option>Intelektual, Konseptual</option>
+                        <option>Intim, Spontan, Candid</option>
+                        <option>Cerdas, Subtel, Berkarakter</option>
                     </select>
                 </div>
 
@@ -190,7 +190,7 @@
             e.preventDefault();
 
             // Validation
-            const allDropdownsSelected = Array.from(form.querySelectorAll('select')).every(select => select.selectedIndex > 0);
+            const allDropdownsSelected = Array.from(form.querySelectorAll('select')).every(select => select.selectedIndex > 0 || select.id === 'gaya-editorial');
             if (!allDropdownsSelected) {
                 showNotification('Harap lengkapi semua pilihan untuk menghasilkan prompt.');
                 return;
@@ -211,7 +211,7 @@
             const finalInstruction = "Pastikan bentuk, warna, dan detail desain baju tidak berubah — tetap sama persis dengan gambar asli. Fokus pada menampilkan baju secara realistis seperti dalam katalog fashion. Hindari distorsi pada bentuk baju.";
 
             // Build the prompt with new structure
-            let generatedPrompt = `Hasilkan sebuah foto fashion profesional dalam format ${selections.format}. Gaya foto terinspirasi dari editorial ${selections.gaya}, menampilkan ${selections.model} dalam pose ${selections.pose}. Gunakan jenis pemotretan ${selections.shot} dengan ${selections.pencahayaan} pada latar belakang ${selections.latar}.`;
+            let generatedPrompt = `Hasilkan sebuah foto fashion profesional dalam format ${selections.format}. Gaya foto terinspirasi dari editorial (${selections.gaya}), menampilkan ${selections.model} dalam pose ${selections.pose}. Gunakan jenis pemotretan ${selections.shot} dengan ${selections.pencahayaan} pada latar belakang ${selections.latar}.`;
 
             // List of poses that imply multiple models
             const groupPoses = [
