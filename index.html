@@ -3,357 +3,266 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fashion Prompt Generator (Ultimate Pro)</title>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📸</text></svg>">
+    <title>Formulir Generator Prompt Fashion</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* Gaya dasar untuk body dan panah dropdown kustom */
-        body { font-family: 'Inter', sans-serif; }
-        .form-select {
-            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%239ca3af' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
-            background-position: right 0.5rem center;
-            background-repeat: no-repeat;
-            background-size: 1.5em 1.5em;
-            -webkit-appearance: none;
-            -moz-appearance: none;
-            appearance: none;
+        body {
+            font-family: 'Inter', sans-serif;
         }
-        /* Gaya untuk notifikasi 'toast' */
-        .toast { visibility: hidden; opacity: 0; transition: all 0.3s ease-in-out; }
-        .toast.show { visibility: visible; opacity: 1; }
     </style>
 </head>
-<body class="bg-gray-900 text-gray-200 antialiased">
+<body class="bg-gray-100 min-h-screen flex items-center justify-center p-4">
+    <div class="bg-white p-8 md:p-10 rounded-2xl shadow-lg w-full max-w-2xl">
+        
+        <!-- Header -->
+        <div class="text-center mb-8">
+            <h1 class="text-3xl font-bold text-gray-800">Formulir Generator Prompt Fashion</h1>
+            <p class="text-gray-500 mt-2">Atur parameter untuk menghasilkan prompt photoshoot yang detail.</p>
+        </div>
 
-    <div class="container mx-auto max-w-2xl p-4 sm:p-6 lg:p-8">
+        <form id="prompt-generator-form" class="space-y-8">
 
-        <header class="text-center mb-8">
-            <h1 class="text-3xl sm:text-4xl font-bold tracking-tight text-white">Fashion Prompt Generator</h1>
-            <p class="mt-2 text-lg text-gray-400">Versi Ultimate dengan Definisi Model yang Lebih Detail.</p>
-        </header>
-
-        <main class="bg-gray-800 shadow-2xl rounded-2xl p-6 sm:p-8">
-            <div class="space-y-6">
-                
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                        <label for="resolution-type" class="block text-sm font-medium text-gray-300 mb-2">Resolusi & Ukuran</label>
-                        <select id="resolution-type" class="form-select w-full bg-gray-700 border border-gray-600 rounded-lg py-2.5 px-3">
-                            <option value="resolusi maksimal yang tajam" selected>Resolusi Maksimal</option>
-                            <option value="kualitas cetak ukuran A4 potret">Ukuran Cetak A4 (Potret)</option>
-                            <option value="kualitas cetak ukuran A4 lanskap">Ukuran Cetak A4 (Lanskap)</option>
-                            <option value="rasio 9:16 untuk Instagram Story">Rasio Instagram Story (9:16)</option>
-                            <option value="rasio 1:1 untuk Instagram Post">Rasio Instagram Post (1:1)</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label for="shot-type" class="block text-sm font-medium text-gray-300 mb-2">Jenis Pemotretan (Shot Type)</label>
-                        <select id="shot-type" class="form-select w-full bg-gray-700 border border-gray-600 rounded-lg py-2.5 px-3">
-                            <option value="Extreme Close-Up">Extreme Close-Up (Detail Wajah)</option>
-                            <option value="Close-Up">Close-Up (Kepala & Bahu)</option>
-                            <option value="Medium Close-Up">Medium Close-Up (Dada ke Atas)</option>
-                            <option value="Medium Shot" selected>Medium Shot (Pinggang ke Atas)</option>
-                            <option value="Cowboy Shot">Cowboy Shot (Paha ke Atas)</option>
-                            <option value="Medium Full Shot">Medium Full Shot (Lutut ke Atas)</option>
-                            <option value="Full Shot">Full Shot (Ujung Kepala sampai Kaki)</option>
-                            <option value="Long Shot">Long Shot (Seluruh Badan & Ruang)</option>
-                            <option value="Wide Shot">Wide Shot (Model di dalam Lingkungan)</option>
-                            <option value="Extreme Wide Shot">Extreme Wide Shot (Lingkungan Dominan)</option>
-                        </select>
-                    </div>
-                </div>
-                
+            <!-- Dropdown Selections -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Model Selection -->
                 <div>
-                    <label for="jumlah-model" class="block text-sm font-medium text-gray-300 mb-2">Jumlah Model</label>
-                    <select id="jumlah-model" class="form-select w-full bg-gray-700 border border-gray-600 rounded-lg py-2.5 px-3">
-                        <option value="1" selected>1 Model</option>
-                        <option value="2">2 Model</option>
-                        <option value="3">3 Model</option>
-                        <option value="banyak">Banyak Model (Satu Grup)</option>
+                    <label for="model" class="block text-sm font-semibold text-gray-700">1. Model</label>
+                    <select id="model" name="model" class="mt-2 block w-full pl-3 pr-10 py-2.5 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md shadow-sm">
+                        <option selected disabled>Pilih tipe model...</option>
+                        <option>Model Wanita Indonesia</option>
+                        <option>Model Pria Indonesia</option>
+                        <option>Model Hijab Indonesia</option>
+                        <option>Model Etnis (Jawa, Bali, dll.)</option>
+                        <option>Model Indonesia (Grup)</option>
                     </select>
                 </div>
                 
-                 <div id="banyak-model-container" class="hidden">
-                     <label for="banyak-model-input" class="block text-sm font-medium text-gray-400 mb-2">Jumlah Spesifik untuk 'Banyak Model'</label>
-                     <input type="number" id="banyak-model-input" value="5" min="2" class="w-full bg-gray-600 border border-gray-500 rounded-lg py-2 px-3 placeholder-gray-400">
-                 </div>
-
-                <div id="face-variation-container" class="hidden space-y-2 rounded-lg bg-gray-700/50 p-3">
-                    <div class="flex items-center">
-                        <input id="face-variation-checkbox" type="checkbox" class="h-4 w-4 rounded border-gray-500 bg-gray-600 text-indigo-500 focus:ring-indigo-500">
-                        <label for="face-variation-checkbox" class="ml-3 block text-sm font-medium text-gray-300">Sertakan variasi wajah (fitur wajah berbeda)</label>
-                    </div>
-                </div>
-
-                <div id="model-definition-container" class="space-y-6">
-                    </div>
-
+                <!-- Lighting Selection -->
                 <div>
-                    <label for="tema" class="block text-sm font-medium text-gray-300 mb-2">Tema & Konsep Foto</label>
-                    <select id="tema" class="form-select w-full bg-gray-700 border border-gray-600 rounded-lg py-2.5 px-3"></select>
-                </div>
-                <div id="specific-area-container" class="hidden space-y-2">
-                    <label for="specific-area-select" class="block text-sm font-medium text-gray-400">Area Spesifik</label>
-                    <select id="specific-area-select" class="form-select w-full bg-gray-600 border border-gray-500 rounded-lg py-2.5 px-3"></select>
-                    <div id="specific-area-other-container" class="hidden pt-2">
-                        <input type="text" id="specific-area-other-input" placeholder="Ketik lokasi spesifik lainnya..." class="w-full bg-gray-600 border border-gray-500 rounded-lg py-2 px-3 placeholder-gray-400">
-                    </div>
+                    <label for="pencahayaan" class="block text-sm font-semibold text-gray-700">2. Pencahayaan</label>
+                    <select id="pencahayaan" name="pencahayaan" class="mt-2 block w-full pl-3 pr-10 py-2.5 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md shadow-sm">
+                        <option selected disabled>Pilih jenis pencahayaan...</option>
+                        <option>Cahaya Studio (Netral & Terkontrol)</option>
+                        <option>Cahaya Alami (Golden Hour)</option>
+                        <option>Cahaya Alami (Siang Hari Cerah)</option>
+                        <option>High-Key (Terang & Bersih)</option>
+                        <option>Low-Key (Dramatis & Bayangan)</option>
+                    </select>
                 </div>
 
+                <!-- Background Theme Selection -->
+                <div>
+                    <label for="latar-belakang" class="block text-sm font-semibold text-gray-700">3. Tema Latar Belakang</label>
+                    <select id="latar-belakang" name="latar-belakang" class="mt-2 block w-full pl-3 pr-10 py-2.5 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md shadow-sm">
+                        <option selected disabled>Pilih tema latar...</option>
+                        <option>Studio Putih/Abu-abu Polos</option>
+                        <option>Arsitektur Minimalis Modern</option>
+                        <option>Latar Alam (Taman, Pantai)</option>
+                        <option>Interior Kafe/Ruangan Estetik</option>
+                        <option>Dinding Tekstur (Beton, Kayu)</option>
+                        <option>Tema Galactica</option>
+                        <option>Tema Cityscape</option>
+                    </select>
+                </div>
 
-                <div class="space-y-4 rounded-lg bg-gray-700/50 p-3">
-                    <div class="flex items-center">
-                        <input id="include-fabric" type="checkbox" class="h-4 w-4 rounded border-gray-500 bg-gray-600 text-indigo-500 focus:ring-indigo-500">
-                        <label for="include-fabric" class="ml-3 block text-sm font-medium text-gray-300">Sertakan Jenis Kain Spesifik?</label>
-                    </div>
-                    <div id="fabric-input-container" class="hidden space-y-4">
-                        </div>
+                <!-- Pose Selection -->
+                <div>
+                    <label for="pose" class="block text-sm font-semibold text-gray-700">4. Pose Model</label>
+                    <select id="pose" name="pose" class="mt-2 block w-full pl-3 pr-10 py-2.5 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md shadow-sm">
+                        <option selected disabled>Pilih jumlah & pose...</option>
+                        <optgroup label="Satu Model (Solo)">
+                            <option>Pose Katalog (Depan, Samping, Belakang)</option>
+                            <option>Pose Dinamis & Ekspresif (Editorial)</option>
+                            <option>Pose Close-up (Fokus Detail Produk)</option>
+                            <option>Pose Lifestyle (Santai & Natural)</option>
+                            <option>Pose Duduk (Elegan/Kasual)</option>
+                        </optgroup>
+                        <optgroup label="Dua Model (Duo/Pasangan)">
+                            <option>Pose Pasangan Interaktif (Pria & Wanita)</option>
+                            <option>Pose Duo Simetris (Sama Gender)</option>
+                            <option>Pose Back-to-Back</option>
+                        </optgroup>
+                        <optgroup label="Tiga Model (Trio)">
+                             <option>Komposisi Trio Dinamis</option>
+                             <option>Pose Trio Berjejer (Lookbook)</option>
+                        </optgroup>
+                        <optgroup label="Grup (4+ Model)">
+                            <option>Pose Grup Terstruktur (Komposisi)</option>
+                            <option>Pose Grup Lifestyle (Candid/Bergerak)</option>
+                        </optgroup>
+                    </select>
                 </div>
                 
+                <!-- Shot Type Selection -->
                 <div>
-                    <label for="makeup" class="block text-sm font-medium text-gray-300 mb-2">Gaya Riasan (Makeup)</label>
-                    <select id="makeup" class="form-select w-full bg-gray-700 border border-gray-600 rounded-lg py-2.5 px-3"></select>
+                    <label for="shot-type" class="block text-sm font-semibold text-gray-700">5. Jenis Pemotretan</label>
+                    <select id="shot-type" name="shot-type" class="mt-2 block w-full pl-3 pr-10 py-2.5 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md shadow-sm">
+                        <option selected disabled>Pilih jenis pemotretan...</option>
+                        <option>Full Body Shot (Seluruh badan)</option>
+                        <option>Three-Quarter Shot (Dari lutut ke atas)</option>
+                        <option>Medium Shot (Dari pinggang ke atas)</option>
+                        <option>Close-up Shot (Bahu ke atas)</option>
+                        <option>Detail Shot (Fokus pada detail produk)</option>
+                    </select>
                 </div>
 
+                <!-- Editorial Style Selection -->
                 <div>
-                    <label for="pose" class="block text-sm font-medium text-gray-300 mb-2">Pose Model</label>
-                    <select id="pose" class="form-select w-full bg-gray-700 border border-gray-600 rounded-lg py-2.5 px-3"></select>
+                    <label for="gaya-editorial" class="block text-sm font-semibold text-gray-700">6. Gaya Editorial</label>
+                    <select id="gaya-editorial" name="gaya-editorial" class="mt-2 block w-full pl-3 pr-10 py-2.5 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md shadow-sm">
+                        <option selected disabled>Pilih gaya editorial...</option>
+                        <option>Vogue (Klasik, Mewah, High Fashion)</option>
+                        <option>Harper's Bazaar (Elegan, Artistik, Modern)</option>
+                        <option>Dazed & Confused (Avant-Garde, Sureal)</option>
+                        <option>i-D (Street Style, Potret Unik, Raw)</option>
+                        <option>Numéro (Provokatif, Minimalis, Arsitektural)</option>
+                        <option>W Magazine (Sinematik, Glamor, Naratif)</option>
+                        <option>AnOther Magazine (Intelektual, Konseptual)</option>
+                        <option>Self Service (Intim, Spontan, Candid)</option>
+                        <option>The Gentlewoman (Cerdas, Subtel, Berkarakter)</option>
+                    </select>
                 </div>
-                
-                <div class="pt-2">
-                     <button id="generate-btn" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-4 rounded-lg transition-colors">Buat Prompt</button>
-                </div>
-                
-                <div id="result-container" class="hidden pt-2">
-                    <label for="prompt-result" class="block text-sm font-medium text-gray-300 mb-2">Hasil Prompt:</label>
-                    <div class="relative">
-                        <textarea id="prompt-result" rows="9" class="w-full bg-gray-900 border border-gray-600 rounded-lg p-3 pr-12 text-gray-200 resize-none" readonly></textarea>
-                         <button id="copy-btn" title="Salin ke clipboard" class="absolute top-2.5 right-2.5 p-2 text-gray-400 bg-gray-700 hover:bg-gray-600 rounded-md">
-                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
-                         </button>
-                    </div>
+
+                <!-- Format & Resolution Selection -->
+                <div class="md:col-span-2">
+                    <label for="format-resolusi" class="block text-sm font-semibold text-gray-700">7. Format & Resolusi</label>
+                    <select id="format-resolusi" name="format-resolusi" class="mt-2 block w-full pl-3 pr-10 py-2.5 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md shadow-sm">
+                        <option selected disabled>Pilih format output...</option>
+                        <option>Resolusi HD (1920x1080px)</option>
+                        <option>Resolusi 4K (3840x2160px)</option>
+                        <option>Ukuran Cetak A4 (Resolusi Tinggi 300dpi)</option>
+                        <option>Format Instagram Post (1080x1080px)</option>
+                        <option>Format Instagram Story (1080x1920px)</option>
+                        <option>Resolusi Ultra-Tinggi (Untuk Cetak Besar)</option>
+                    </select>
                 </div>
             </div>
-        </main>
-        
-        <footer class="text-center mt-8">
-            <p class="text-sm text-gray-500">dibuat oleh rekysda@gmail.com</p>
-        </footer>
+
+            <!-- Unique Faces Checkbox -->
+            <div class="relative flex items-start">
+                <div class="flex items-center h-5">
+                    <input id="unique-faces" name="unique-faces" type="checkbox" class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded" checked>
+                </div>
+                <div class="ml-3 text-sm">
+                    <label for="unique-faces" class="font-medium text-gray-700">Pastikan wajah model berbeda untuk gender yang sama</label>
+                </div>
+            </div>
+
+            <!-- Submit Button -->
+            <div>
+                <button type="submit" class="w-full flex justify-center py-3 px-4 mt-2 border border-transparent rounded-lg shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-all transform hover:scale-105">
+                    Hasilkan Prompt
+                </button>
+            </div>
+        </form>
+
+        <!-- Prompt Output Area -->
+        <div id="prompt-output-container" class="mt-8 hidden">
+            <label for="generated-prompt" class="block text-sm font-semibold text-gray-700">Prompt yang Dihasilkan:</label>
+            <div class="mt-2 relative">
+                <textarea id="generated-prompt" rows="8" class="block w-full text-sm text-gray-700 border-gray-300 rounded-md shadow-sm bg-gray-50 p-3 pr-20" readonly></textarea>
+                <button id="copy-btn" type="button" class="absolute top-2 right-2 inline-flex items-center px-3 py-1.5 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                    Salin
+                </button>
+            </div>
+        </div>
+
     </div>
-    
-    <div id="toast-notification" class="toast fixed bottom-5 left-1/2 -translate-x-1/2 bg-green-500 text-white py-2 px-4 rounded-lg shadow-lg">Prompt berhasil disalin!</div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
+        const form = document.getElementById('prompt-generator-form');
+        const modelSelect = document.getElementById('model');
+        const pencahayaanSelect = document.getElementById('pencahayaan');
+        const latarBelakangSelect = document.getElementById('latar-belakang');
+        const poseSelect = document.getElementById('pose');
+        const shotTypeSelect = document.getElementById('shot-type');
+        const gayaEditorialSelect = document.getElementById('gaya-editorial');
+        const formatResolusiSelect = document.getElementById('format-resolusi');
+        const uniqueFacesCheckbox = document.getElementById('unique-faces');
 
-            const DATA = {
-                etnis: {"Indonesia / Nusantara": ["Wajah Indonesia / Nusantara (Umum)","Wajah Melayu","Wajah Jawa","Wajah Sunda","Wajah Bali / Lombok","Wajah Indonesia Timur","Wajah Tionghoa-Indonesia"],"Blasteran (Mixed Race)": ["Blasteran / Indo (Kaukasia-Indonesia)","Eurasia (Kaukasia-Asia)","Afro-Asia"],"Asia": ["Asia Timur (Jepang/Korea)","Asia Tenggara (Thailand/Vietnam)","Asia Selatan (India/Pakistan)"],"Kaukasia / Eropa": ["Eropa Utara / Nordik","Eropa Barat","Eropa Timur / Slavia","Mediterania"],"Afrika": ["Afrika (Umum)","Afrika Utara"]},
-                tema: { "Gaya & Estetika": ["Minimalis","High Fashion / Editorial","Street Style / Urban","Vintage / Retro","Bohemian / Boho","Grunge / Rock & Roll","Elegan / Klasik"], "Lokasi Kota (Indonesia)": ["Bali", "Yogyakarta", "Papua", "Jakarta", "Bandung", "Surabaya", "Semarang", "Medan", "Makassar", "Palembang", "Manado", "Labuan Bajo", "Lombok", "Bromo", "Raja Ampat", "Sumba", "Danau Toba", "Bogor", "Malang", "Solo"], "Lokasi Kota (Luar Negeri)": ["Paris", "New York", "Tokyo", "London", "Roma", "Seoul", "Dubai", "Santorini", "Kyoto", "Marrakech"], "Lokasi Umum": ["Arsitektur Modern","Cityscape / Perkotaan Modern","Pantai Tropis","Bangunan Tua / Bersejarah","Industri / Pabrik Tua","Pedesaan / Rustic","Alam Liar / Hutan Belantara"], "Konsep & Imajinasi": ["Fantasi / Negeri Dongeng","Surrealisme / Abstrak","Sci-Fi / Futuristik","Galaksi / Luar Angkasa","Permukaan Bulan","Bawah Laut / Aquarium","Cyberpunk / Dystopian"], "Momen & Perayaan": ["Pernikahan (Wedding / Bridal)","Pesta Malam","Festival Musik"] },
-                lokasiSpesifik: { "Bali": ["Pura Uluwatu", "Teras Sawah Tegalalang", "Pantai Kuta", "Tanah Lot", "Nusa Penida", "Pura Lempuyang", "Seminyak", "Canggu", "Ubud Monkey Forest", "Tirta Empul"], "Yogyakarta": ["Candi Prambanan", "Jalan Malioboro", "Keraton Yogyakarta", "Taman Sari", "Candi Borobudur", "Hutan Pinus Mangunan", "Pantai Timang", "Gumuk Pasir Parangkusumo", "HeHa Sky View", "Punthuk Setumbu"], "Papua": ["Raja Ampat", "Lembah Baliem", "Danau Sentani", "Taman Nasional Lorentz", "Puncak Jayawijaya", "Pantai Bosnik", "Desa Sauwandarek", "Pulau Biak", "Air Terjun Wafsarak", "Teluk Cenderawasih"], "Jakarta": ["Kota Tua Jakarta", "Monumen Nasional (Monas)", "Bundaran HI", "Taman Mini Indonesia Indah", "Masjid Istiqlal & Katedral", "Pelabuhan Sunda Kelapa", "Ancol", "SCBD", "Kepulauan Seribu", "Hutan Mangrove PIK"], "Bandung": ["Kawah Putih", "Tangkuban Perahu", "Jalan Braga", "Gedung Sate", "Farmhouse Lembang", "The Great Asia Africa", "Ciwidey", "Floating Market Lembang", "Observatorium Bosscha", "Curug Dago"], "Paris": ["Eiffel Tower", "Louvre Museum", "Montmartre", "Arc de Triomphe", "Notre-Dame Cathedral", "Seine River Cruise", "Palace of Versailles", "Musée d'Orsay", "Sainte-Chapelle", "Jardin du Luxembourg"], "Tokyo": ["Shibuya Crossing", "Tokyo Tower", "Senso-ji Temple", "Tsukiji Fish Market", "Meiji Jingu Shrine", "Shinjuku Gyoen National Garden", "Akihabara", "Ginza District", "teamLab Borderless", "Imperial Palace"], "New York": ["Times Square", "Central Park", "Statue of Liberty", "Empire State Building", "Brooklyn Bridge", "The Metropolitan Museum of Art (The Met)", "Grand Central Terminal", "Rockefeller Center", "DUMBO", "The High Line"], "London": ["Tower Bridge", "Buckingham Palace", "The Shard", "London Eye", "Big Ben & Houses of Parliament", "British Museum", "Notting Hill", "Camden Market", "Hyde Park", "Trafalgar Square"], "Roma": ["Colosseum", "Trevi Fountain", "Pantheon", "Roman Forum", "Vatican City (St. Peter's Basilica, Vatican Museums)", "Spanish Steps", "Trastevere", "Piazza Navona", "Castel Sant'Angelo", "Villa Borghese"], },
-                makeup: [{"kategori":"Tampilan (Look/Style)","jenis":["Natural","Nude","Glamour","Bold","Smokey Eyes","Dewy Look","Matte Look","Korean Look"]},{"kategori":"Seni & Karakter","jenis":["Makeup Fantasi","Makeup Editorial","Makeup Avant-garde"]}],
-                pose: { tunggal: { "Pose Berdiri (Standing)": ["Berdiri Tegak (Power Stance)", "Kurva S (Contrapposto)", "Menyender Santai", "Tangan di Pinggul", "Berjalan di Tempat"], "Pose Duduk (Sitting)": ["Duduk Elegan di Kursi", "Duduk di Lantai", "Pose Berpikir (The Thinker)", "Duduk Menyamping"], "Dinamis & Ekspresif": ["Melompat", "Menari", "Rambut Tertipu Angin", "Tertawa Lepas"],"Potret": ["Close-Up Wajah (Beauty Shot)", "Melihat dari Balik Bahu", "Tangan Membingkai Wajah"] }, kelompok: { "Formasi Klasik": ["Berbaris Sejajar", "Formasi Segitiga (Piramida)", "Berdiri Berdampingan"], "Komposisi & Level": ["Kombinasi Duduk & Berdiri", "Bertumpu Satu Sama Lain", "Pose Bertingkat (Foreground/Background)"], "Interaksi Dinamis": ["Interaksi Candid (Tertawa/Berbicara)", "Berjalan Bersama", "Pelukan Grup", "Saling Menatap Intens"], "Pose Berpasangan": ["Berpegangan Tangan", "Pelukan dari Belakang", "Punggung Bertemu Punggung (Back to Back)"] } },
-                rambut: {"Opsi Fleksibel": ["Normal (sesuai tema)"],"Gaya Pria": {"Pendek": ["Buzz Cut","Side Part","Slick Back","Undercut"],"Sedang & Panjang": ["Quiff","Pompadour","Comma Hair","Man Bun"]},"Gaya Wanita": {"Terurai": ["Lurus & Rapi","Beach Waves","Blow-dry Bervolume"],"Diikat & Diangkat": ["Ponytail","Messy Bun","Chignon"],"Potongan Populer": ["Pixie Cut","Bob Cut","Layered Cut"]}, "Gaya Unisex": ["Mullet","Shag Cut","Rambut Warna Terang"] }
+        const outputContainer = document.getElementById('prompt-output-container');
+        const outputTextarea = document.getElementById('generated-prompt');
+        const copyBtn = document.getElementById('copy-btn');
+
+        // --- Form Submission Logic ---
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            // Validation
+            const allDropdownsSelected = Array.from(form.querySelectorAll('select')).every(select => select.selectedIndex > 0);
+            if (!allDropdownsSelected) {
+                showNotification('Harap lengkapi semua pilihan untuk menghasilkan prompt.');
+                return;
+            }
+
+            // Get selected text values
+            const selections = {
+                model: modelSelect.options[modelSelect.selectedIndex].text,
+                pencahayaan: pencahayaanSelect.options[pencahayaanSelect.selectedIndex].text,
+                latar: latarBelakangSelect.options[latarBelakangSelect.selectedIndex].text,
+                pose: poseSelect.options[poseSelect.selectedIndex].text,
+                shot: shotTypeSelect.options[shotTypeSelect.selectedIndex].text,
+                gaya: gayaEditorialSelect.options[gayaEditorialSelect.selectedIndex].text,
+                format: formatResolusiSelect.options[formatResolusiSelect.selectedIndex].text
             };
             
-            const UIElements = {
-                resolutionType: document.getElementById('resolution-type'),
-                shotType: document.getElementById('shot-type'),
-                jumlahModel: document.getElementById('jumlah-model'),
-                banyakModelContainer: document.getElementById('banyak-model-container'),
-                banyakModelInput: document.getElementById('banyak-model-input'),
-                modelDefinitionContainer: document.getElementById('model-definition-container'),
-                faceVariationContainer: document.getElementById('face-variation-container'),
-                faceVariationCheckbox: document.getElementById('face-variation-checkbox'),
-                tema: document.getElementById('tema'),
-                specificAreaContainer: document.getElementById('specific-area-container'),
-                specificAreaSelect: document.getElementById('specific-area-select'),
-                specificAreaOtherContainer: document.getElementById('specific-area-other-container'),
-                specificAreaOtherInput: document.getElementById('specific-area-other-input'),
-                includeFabric: document.getElementById('include-fabric'),
-                fabricInputContainer: document.getElementById('fabric-input-container'),
-                makeup: document.getElementById('makeup'),
-                pose: document.getElementById('pose'),
-                generateBtn: document.getElementById('generate-btn'),
-                resultContainer: document.getElementById('result-container'),
-                promptResult: document.getElementById('prompt-result'),
-                copyBtn: document.getElementById('copy-btn'),
-                toast: document.getElementById('toast-notification'),
-            };
+            // Fixed final sentence
+            const finalInstruction = "Pastikan bentuk, warna, dan detail desain baju tidak berubah — tetap sama persis dengan gambar asli. Fokus pada menampilkan baju secara realistis seperti dalam katalog fashion. Hindari distorsi pada bentuk baju.";
+
+            // Build the prompt with new structure
+            let generatedPrompt = `Hasilkan sebuah foto fashion profesional dalam format ${selections.format}. Gaya foto terinspirasi dari editorial ${selections.gaya}, menampilkan ${selections.model} dalam pose ${selections.pose}. Gunakan jenis pemotretan ${selections.shot} dengan ${selections.pencahayaan} pada latar belakang ${selections.latar}.`;
+
+            // List of poses that imply multiple models
+            const groupPoses = [
+                'Pose Duo Simetris (Sama Gender)',
+                'Komposisi Trio Dinamis',
+                'Pose Trio Berjejer (Lookbook)',
+                'Pose Grup Terstruktur (Komposisi)',
+                'Pose Grup Lifestyle (Candid/Bergerak)',
+                'Pose Pasangan Interaktif (Pria & Wanita)',
+                'Pose Back-to-Back'
+            ];
             
-            // --- FUNGSI-FUNGSI UTAMA ---
-            function populateSimpleGroup(select, data) { select.innerHTML = ''; for (const group in data) { const optgroup = document.createElement('optgroup'); optgroup.label = group; data[group].forEach(opt => { const option = document.createElement('option'); option.value = opt; option.textContent = opt; optgroup.appendChild(option); }); select.appendChild(optgroup); } }
-            function populateMakeup(select, data) { select.innerHTML = ''; data.forEach(group => { const optgroup = document.createElement('optgroup'); optgroup.label = group.kategori; group.jenis.forEach(opt => { const option = document.createElement('option'); option.value = opt; option.textContent = opt; optgroup.appendChild(option); }); select.appendChild(optgroup); }); }
-            function populateRambut(select, data) { select.innerHTML = ''; for (const mainGroup in data) { const subGroups = data[mainGroup]; if (Array.isArray(subGroups)) { const optgroup = document.createElement('optgroup'); optgroup.label = mainGroup; subGroups.forEach(opt => { const option = document.createElement('option'); option.value = opt; option.textContent = opt; optgroup.appendChild(option); }); select.appendChild(optgroup); } else { for (const subGroup in subGroups) { const optgroup = document.createElement('optgroup'); optgroup.label = `${mainGroup} - ${subGroup}`; subGroups[subGroup].forEach(opt => { const option = document.createElement('option'); option.value = opt; option.textContent = opt; optgroup.appendChild(option); }); select.appendChild(optgroup); } } } }
+            const isGroupModelSelected = selections.model === 'Model Indonesia (Grup)';
+            const isGroupPoseSelected = groupPoses.includes(selections.pose);
 
-            function createModelCard(index) {
-                const cardId = `model-card-${index}`;
-                const labelSuffix = UIElements.jumlahModel.value === 'banyak' ? 'Grup Model' : `Model ke-${index}`;
-
-                const cardHTML = `
-                    <div id="${cardId}" class="p-4 border border-gray-700 rounded-lg space-y-4 bg-gray-900/50">
-                        <h3 class="text-md font-semibold text-indigo-400">${labelSuffix}</h3>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                            <div>
-                                <label for="gender-model-${index}" class="block text-sm font-medium text-gray-300 mb-2">Gender</label>
-                                <select id="gender-model-${index}" class="form-select w-full bg-gray-700 border border-gray-600 rounded-lg py-2.5 px-3">
-                                    <option value="Wanita" selected>Wanita</option>
-                                    <option value="Pria">Pria</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label for="etnis-model-${index}" class="block text-sm font-medium text-gray-300 mb-2">Etnis</label>
-                                <select id="etnis-model-${index}" class="form-select w-full bg-gray-700 border border-gray-600 rounded-lg py-2.5 px-3"></select>
-                            </div>
-                        </div>
-                        <div>
-                            <label for="rambut-model-${index}" class="block text-sm font-medium text-gray-300 mb-2">Gaya Rambut</label>
-                            <select id="rambut-model-${index}" class="form-select w-full bg-gray-700 border border-gray-600 rounded-lg py-2.5 px-3"></select>
-                        </div>
-                    </div>
-                `;
-                UIElements.modelDefinitionContainer.insertAdjacentHTML('beforeend', cardHTML);
-                populateSimpleGroup(document.getElementById(`etnis-model-${index}`), DATA.etnis);
-                populateRambut(document.getElementById(`rambut-model-${index}`), DATA.rambut);
+            // Add clarification for unique faces if checkbox is checked and it's a group scenario
+            if (uniqueFacesCheckbox.checked && (isGroupModelSelected || isGroupPoseSelected)) {
+                generatedPrompt += ' Untuk model dengan gender yang sama, pastikan setiap individu memiliki fitur wajah yang unik dan berbeda satu sama lain.';
             }
+            
+            // Add the fixed final instruction
+            generatedPrompt += ` ${finalInstruction}`;
 
-
-            function updateUIForModelCount(count) {
-                ['faceVariationContainer', 'banyakModelContainer'].forEach(id => UIElements[id].classList.add('hidden'));
-                UIElements.fabricInputContainer.innerHTML = '';
-                UIElements.modelDefinitionContainer.innerHTML = '';
-                
-                let dynamicInputCount = 0;
-                const isMultiModel = count === '2' || count === '3' || count === 'banyak';
-                
-                if (isMultiModel) { UIElements.faceVariationContainer.classList.remove('hidden'); }
-                if (count === 'banyak') { UIElements.banyakModelContainer.classList.remove('hidden'); }
-                
-                if (count === '2') { dynamicInputCount = 2; } 
-                else if (count === '3') { dynamicInputCount = 3; } 
-                else { dynamicInputCount = 1; }
-
-                for (let i = 1; i <= dynamicInputCount; i++) {
-                    createModelCard(i);
-                    const labelSuffix = dynamicInputCount > 1 ? `Model ke-${i}` : 'Model';
-                    const fabricInputHTML = `<div><label for="fabric-type-${i}" class="block text-xs font-medium text-gray-400 mb-1">Jenis Kain ${labelSuffix}</label><input type="text" id="fabric-type-${i}" placeholder="sutra, satin, denim..." class="w-full bg-gray-600 border border-gray-500 rounded-lg py-2 px-3 text-sm placeholder-gray-400"></div>`;
-                    UIElements.fabricInputContainer.insertAdjacentHTML('beforeend', fabricInputHTML);
-                }
-                
-                if (count === 'banyak') {
-                    const fabricLabel = UIElements.fabricInputContainer.querySelector('label');
-                    if(fabricLabel) fabricLabel.textContent = 'Jenis Kain Grup';
-                }
-
-                populateSimpleGroup(UIElements.pose, count === '1' ? DATA.pose.tunggal : DATA.pose.kelompok);
-            }
-
-            function updateSpecificArea(selectedCity) {
-                const locations = DATA.lokasiSpesifik[selectedCity];
-                const select = UIElements.specificAreaSelect;
-                select.innerHTML = '';
-                if (locations) {
-                    locations.forEach(loc => { const option = document.createElement('option'); option.value = loc; option.textContent = loc; select.appendChild(option); });
-                }
-                const otherOption = document.createElement('option'); otherOption.value = 'Lainnya...'; otherOption.textContent = 'Lainnya...'; select.appendChild(otherOption);
-            }
-
-            // --- INISIALISASI ---
-            populateSimpleGroup(UIElements.tema, DATA.tema);
-            populateMakeup(UIElements.makeup, DATA.makeup);
-            updateUIForModelCount('1'); 
-
-            // --- EVENT LISTENERS ---
-            UIElements.jumlahModel.addEventListener('change', (e) => updateUIForModelCount(e.target.value));
-            UIElements.includeFabric.addEventListener('change', (e) => UIElements.fabricInputContainer.classList.toggle('hidden', !e.target.checked));
-            UIElements.tema.addEventListener('change', (e) => {
-                const selectedOptgroup = e.target.selectedOptions[0].parentElement;
-                const isLocation = selectedOptgroup.label.startsWith('Lokasi Kota');
-                UIElements.specificAreaContainer.classList.toggle('hidden', !isLocation);
-                if (isLocation) { updateSpecificArea(e.target.value); UIElements.specificAreaOtherContainer.classList.add('hidden'); UIElements.specificAreaOtherInput.value = ''; } 
-                else { UIElements.specificAreaOtherInput.value = ''; }
-            });
-            UIElements.specificAreaSelect.addEventListener('change', (e) => {
-                UIElements.specificAreaOtherContainer.classList.toggle('hidden', e.target.value !== 'Lainnya...');
-            });
-
-            UIElements.generateBtn.addEventListener('click', () => {
-                const count = UIElements.jumlahModel.value;
-                const faceVariationChecked = UIElements.faceVariationCheckbox.checked;
-
-                let modelDesc = '';
-
-                if (count === 'banyak') {
-                    const num = UIElements.banyakModelInput.value;
-                    const gender = document.getElementById('gender-model-1').value;
-                    const etnis = document.getElementById('etnis-model-1').value;
-                    const faceVariationText = faceVariationChecked ? " dengan fitur wajah yang berbeda satu sama lain" : "";
-                    modelDesc = `sekelompok ${num} model ${gender}, semuanya dari etnis ${etnis}${faceVariationText} dan memiliki tubuh proporsional`;
-                } else if (count === '1') {
-                    const gender = document.getElementById('gender-model-1').value;
-                    const etnis = document.getElementById('etnis-model-1').value;
-                    modelDesc = `seorang model ${gender} dengan tipe wajah ${etnis} dan tubuh proporsional`;
-                } else { // '2' atau '3'
-                    let modelClauses = [];
-                    const modelCards = UIElements.modelDefinitionContainer.querySelectorAll('[id^="model-card-"]');
-                    modelCards.forEach((card, index) => {
-                        const i = index + 1;
-                        const gender = document.getElementById(`gender-model-${i}`).value;
-                        const etnis = document.getElementById(`etnis-model-${i}`).value;
-                        const clause = `model ke-${i} adalah seorang ${gender} dengan tipe wajah ${etnis}`;
-                        modelClauses.push(clause);
-                    });
-                    modelDesc = `${modelClauses.join(' dan ')}, semuanya memiliki tubuh proporsional`;
-                    if (faceVariationChecked) {
-                        modelDesc += " dan fitur wajah yang berbeda satu sama lain";
-                    }
-                }
-                
-                let fabricDesc = 'mengenakan busana dengan desain yang detail dan menawan, ';
-                if (UIElements.includeFabric.checked) {
-                    const fabrics = Array.from(UIElements.fabricInputContainer.querySelectorAll('input')).map(input => input.value.trim()).filter(Boolean);
-                    if (fabrics.length > 0) fabricDesc = `mengenakan busana yang menonjolkan kain ${fabrics.join(', ')}, `;
-                }
-                
-                const rambutSelects = UIElements.modelDefinitionContainer.querySelectorAll('[id^="rambut-model-"]');
-                const rambutValues = Array.from(rambutSelects).map(select => select.value);
-                let rambutDesc = '';
-                if (rambutValues.every(val => val === 'Normal (sesuai tema)')) { rambutDesc = 'gaya rambut yang sesuai dengan tema'; }
-                else if (rambutValues.length === 1) { rambutDesc = `gaya rambut ${rambutValues[0]}`; }
-                else {
-                    const rambutTextParts = rambutValues.map((val, index) => `model ke-${index+1} memiliki gaya rambut ${val}`);
-                    rambutDesc = rambutTextParts.join(', ');
-                }
-                
-                let temaDesc = '';
-                const selectedTheme = UIElements.tema.value;
-                const isLocationTheme = !UIElements.specificAreaContainer.classList.contains('hidden');
-                let specificArea = UIElements.specificAreaSelect.value;
-                if (specificArea === 'Lainnya...') { specificArea = UIElements.specificAreaOtherInput.value.trim(); }
-                if (isLocationTheme) { temaDesc = specificArea ? `di lokasi ${specificArea}, ${selectedTheme}` : `di kota ${selectedTheme}`; }
-                else { temaDesc = `dalam konsep ${selectedTheme}`; }
-
-                const resolutionDesc = `Gambar harus dibuat dalam ${UIElements.resolutionType.value}.`;
-                const subject = (count === '1') ? 'Ia' : 'Mereka';
-                const modelSubject = (count === '1') ? 'Model tersebut' : 'Para model';
-
-                const prompt = `Sebuah ${UIElements.shotType.value} foto editorial fashion menampilkan ${modelDesc}. ${subject} berada ${temaDesc}, ${fabricDesc}dengan makeup ${UIElements.makeup.value} yang menawan dan ${rambutDesc}. ${modelSubject} dalam pose ${UIElements.pose.value}, menunjukkan ekspresi percaya diri. Pencahayaan dramatis, sinematik, fokus pada detail fashion dan mood. ${resolutionDesc}`;
-                
-                UIElements.promptResult.value = prompt;
-                UIElements.resultContainer.classList.remove('hidden');
-            });
-
-            UIElements.copyBtn.addEventListener('click', () => {
-                const textToCopy = UIElements.promptResult.value;
-                if (!textToCopy) return;
-                navigator.clipboard.writeText(textToCopy).then(() => {
-                    UIElements.toast.classList.add('show');
-                    setTimeout(() => { UIElements.toast.classList.remove('show'); }, 3000);
-                }).catch(err => console.error('Gagal menyalin:', err));
-            });
+            // Display prompt
+            outputTextarea.value = generatedPrompt;
+            outputContainer.classList.remove('hidden');
         });
+
+        copyBtn.addEventListener('click', () => {
+            outputTextarea.select();
+            try {
+                document.execCommand('copy');
+                copyBtn.textContent = 'Disalin!';
+                setTimeout(() => {
+                    copyBtn.textContent = 'Salin';
+                }, 2000);
+            } catch (err) {
+                console.error('Gagal menyalin prompt: ', err);
+                showNotification('Gagal menyalin. Silakan salin manual.');
+            }
+        });
+
+        function showNotification(message) {
+            const messageBox = document.createElement('div');
+            messageBox.style = 'position:fixed; top:20px; left:50%; transform:translateX(-50%); background-color:#ff4d4d; color:white; padding:12px 20px; border-radius:8px; z-index:1000; box-shadow:0 4px 6px rgba(0,0,0,0.1); font-size: 14px;';
+            messageBox.textContent = message;
+            document.body.appendChild(messageBox);
+            setTimeout(() => {
+                messageBox.remove();
+            }, 3000);
+        }
     </script>
 </body>
 </html>
