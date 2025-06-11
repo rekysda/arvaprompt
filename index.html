@@ -3,266 +3,380 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formulir Generator Prompt Fashion</title>
+    <title>Generator Prompt Fashion</title>
+    <!-- Memuat Tailwind CSS dari CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Memuat font Inter dari Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        /* Menggunakan font Inter sebagai default */
         body {
             font-family: 'Inter', sans-serif;
         }
+        /* Style kustom untuk select dropdown agar terlihat lebih baik di dark mode */
+        select {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%239ca3af' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+            background-position: right 0.5rem center;
+            background-repeat: no-repeat;
+            background-size: 1.5em 1.5em;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+        }
+        /* Style untuk kontainer hasil agar tersembunyi secara default */
+        #prompt-output-container {
+            display: none;
+        }
     </style>
 </head>
-<body class="bg-gray-100 min-h-screen flex items-center justify-center p-4">
-    <div class="bg-white p-8 md:p-10 rounded-2xl shadow-lg w-full max-w-2xl">
+<body class="bg-gray-900 text-gray-300 flex items-center justify-center min-h-screen p-4">
+
+    <div class="bg-gray-800 p-8 rounded-xl shadow-2xl w-full max-w-2xl">
         
-        <!-- Header -->
+        <!-- Judul Form -->
         <div class="text-center mb-8">
-            <h1 class="text-3xl font-bold text-gray-800">Formulir Generator Prompt Fashion</h1>
-            <p class="text-gray-500 mt-2">Atur parameter untuk menghasilkan prompt photoshoot yang detail.</p>
+            <h1 class="text-3xl font-bold text-white">Fashion Prompt Generator</h1>
+            <p class="text-gray-400 mt-1">Versi Final dengan Pratinjau Visual.</p>
         </div>
 
-        <form id="prompt-generator-form" class="space-y-8">
-
-            <!-- Dropdown Selections -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <!-- Model Selection -->
-                <div>
-                    <label for="model" class="block text-sm font-semibold text-gray-700">1. Model</label>
-                    <select id="model" name="model" class="mt-2 block w-full pl-3 pr-10 py-2.5 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md shadow-sm">
-                        <option selected disabled>Pilih tipe model...</option>
-                        <option>Model Wanita Indonesia</option>
-                        <option>Model Pria Indonesia</option>
-                        <option>Model Hijab Indonesia</option>
-                        <option>Model Etnis (Jawa, Bali, dll.)</option>
-                        <option>Model Indonesia (Grup)</option>
-                    </select>
-                </div>
+        <!-- Form Utama -->
+        <form id="fashion-form">
+            <div class="space-y-6">
                 
-                <!-- Lighting Selection -->
+                <!-- Baris untuk Resolusi & Tipe Shot -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label for="resolution" class="block text-sm font-medium text-gray-400 mb-2">Resolusi & Ukuran</label>
+                        <select id="resolution" name="resolution" class="w-full bg-gray-700 border border-gray-600 text-white rounded-lg p-3 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition">
+                            <option>Resolusi Maksimum</option>
+                            <option>Resolusi Standar</option>
+                            <option selected>Cetak HD Ukuran A4</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="shot-type" class="block text-sm font-medium text-gray-400 mb-2">Tipe Pengambilan Gambar</label>
+                        <select id="shot-type" name="shot-type" class="w-full bg-gray-700 border border-gray-600 text-white rounded-lg p-3 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition">
+                            <option>Medium Shot (Setengah Badan)</option>
+                            <option selected>Full Shot (Seluruh Badan)</option>
+                            <option>Close-up Shot</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Jumlah Model -->
                 <div>
-                    <label for="pencahayaan" class="block text-sm font-semibold text-gray-700">2. Pencahayaan</label>
-                    <select id="pencahayaan" name="pencahayaan" class="mt-2 block w-full pl-3 pr-10 py-2.5 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md shadow-sm">
-                        <option selected disabled>Pilih jenis pencahayaan...</option>
-                        <option>Cahaya Studio (Netral & Terkontrol)</option>
-                        <option>Cahaya Alami (Golden Hour)</option>
-                        <option>Cahaya Alami (Siang Hari Cerah)</option>
-                        <option>High-Key (Terang & Bersih)</option>
-                        <option>Low-Key (Dramatis & Bayangan)</option>
+                    <label for="num-models" class="block text-sm font-medium text-gray-400 mb-2">Jumlah Model</label>
+                    <select id="num-models" name="num-models" class="w-full bg-gray-700 border-2 border-indigo-500 text-white rounded-lg p-3 focus:ring-2 focus:ring-indigo-400 transition">
+                        <option value="1">1 Model</option>
+                        <option value="2">2 Model</option>
+                        <option value="3">3 Model</option>
                     </select>
                 </div>
 
-                <!-- Background Theme Selection -->
-                <div>
-                    <label for="latar-belakang" class="block text-sm font-semibold text-gray-700">3. Tema Latar Belakang</label>
-                    <select id="latar-belakang" name="latar-belakang" class="mt-2 block w-full pl-3 pr-10 py-2.5 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md shadow-sm">
-                        <option selected disabled>Pilih tema latar...</option>
-                        <option>Studio Putih/Abu-abu Polos</option>
-                        <option>Arsitektur Minimalis Modern</option>
-                        <option>Latar Alam (Taman, Pantai)</option>
-                        <option>Interior Kafe/Ruangan Estetik</option>
-                        <option>Dinding Tekstur (Beton, Kayu)</option>
-                        <option>Tema Galactica</option>
-                        <option>Tema Cityscape</option>
+                <!-- Kontainer untuk Detail Model -->
+                <div id="model-details-wrapper">
+                    <!-- JavaScript akan memasukkan detail model di sini -->
+                </div>
+
+
+                <!-- Tema & Konsep Foto -->
+                 <div>
+                    <label for="photo-theme" class="block text-sm font-medium text-gray-400 mb-2">Tema & Konsep Foto</label>
+                    <select id="photo-theme" name="photo-theme" class="w-full bg-gray-700 border border-gray-600 text-white rounded-lg p-3 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition">
+                        <optgroup label="Studio & Klasik">
+                            <option>Minimalis</option>
+                            <option>Vintage</option>
+                            <option>High-Fashion</option>
+                            <option>Pencahayaan Dramatis</option>
+                        </optgroup>
+                        <optgroup label="Urban & Modern">
+                            <option>Street Style</option>
+                            <option>Corporate Chic</option>
+                            <option>Nightlife Glam</option>
+                        </optgroup>
+                        <optgroup label="Alam & Luar Ruangan">
+                            <option>Pantai Tropis</option>
+                            <option>Hutan Ajaib</option>
+                            <option>Padang Pasir Eksotis</option>
+                        </optgroup>
+                        <optgroup label="Fantasi & Fiksi Ilmiah">
+                            <option>Futuristik</option>
+                            <option>Galactica Pandora (film Avatar)</option>
+                            <option>Cyberpunk</option>
+                            <option>Steampunk</option>
+                        </optgroup>
+                         <optgroup label="Kultural & Artistik">
+                            <option>Bohemian</option>
+                            <option>Tribal Futurism</option>
+                            <option>Royal/Kerajaan</option>
+                        </optgroup>
                     </select>
                 </div>
 
-                <!-- Pose Selection -->
-                <div>
-                    <label for="pose" class="block text-sm font-semibold text-gray-700">4. Pose Model</label>
-                    <select id="pose" name="pose" class="mt-2 block w-full pl-3 pr-10 py-2.5 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md shadow-sm">
-                        <option selected disabled>Pilih jumlah & pose...</option>
-                        <optgroup label="Satu Model (Solo)">
-                            <option>Pose Katalog (Depan, Samping, Belakang)</option>
-                            <option>Pose Dinamis & Ekspresif (Editorial)</option>
-                            <option>Pose Close-up (Fokus Detail Produk)</option>
-                            <option>Pose Lifestyle (Santai & Natural)</option>
-                            <option>Pose Duduk (Elegan/Kasual)</option>
-                        </optgroup>
-                        <optgroup label="Dua Model (Duo/Pasangan)">
-                            <option>Pose Pasangan Interaktif (Pria & Wanita)</option>
-                            <option>Pose Duo Simetris (Sama Gender)</option>
-                            <option>Pose Back-to-Back</option>
-                        </optgroup>
-                        <optgroup label="Tiga Model (Trio)">
-                             <option>Komposisi Trio Dinamis</option>
-                             <option>Pose Trio Berjejer (Lookbook)</option>
-                        </optgroup>
-                        <optgroup label="Grup (4+ Model)">
-                            <option>Pose Grup Terstruktur (Komposisi)</option>
-                            <option>Pose Grup Lifestyle (Candid/Bergerak)</option>
-                        </optgroup>
-                    </select>
-                </div>
-                
-                <!-- Shot Type Selection -->
-                <div>
-                    <label for="shot-type" class="block text-sm font-semibold text-gray-700">5. Jenis Pemotretan</label>
-                    <select id="shot-type" name="shot-type" class="mt-2 block w-full pl-3 pr-10 py-2.5 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md shadow-sm">
-                        <option selected disabled>Pilih jenis pemotretan...</option>
-                        <option>Full Body Shot (Seluruh badan)</option>
-                        <option>Three-Quarter Shot (Dari lutut ke atas)</option>
-                        <option>Medium Shot (Dari pinggang ke atas)</option>
-                        <option>Close-up Shot (Bahu ke atas)</option>
-                        <option>Detail Shot (Fokus pada detail produk)</option>
-                    </select>
-                </div>
-
-                <!-- Editorial Style Selection -->
-                <div>
-                    <label for="gaya-editorial" class="block text-sm font-semibold text-gray-700">6. Gaya Editorial</label>
-                    <select id="gaya-editorial" name="gaya-editorial" class="mt-2 block w-full pl-3 pr-10 py-2.5 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md shadow-sm">
-                        <option disabled>Pilih gaya editorial...</option>
-                        <option>Klasik, Mewah, High Fashion</option>
-                        <option selected>Elegan, Artistik, Modern</option>
-                        <option>Avant-Garde, Sureal</option>
-                        <option>Street Style, Potret Unik, Raw</option>
-                        <option>Provokatif, Minimalis, Arsitektural</option>
-                        <option>Sinematik, Glamor, Naratif</option>
-                        <option>Intelektual, Konseptual</option>
-                        <option>Intim, Spontan, Candid</option>
-                        <option>Cerdas, Subtel, Berkarakter</option>
-                    </select>
-                </div>
-
-                <!-- Format & Resolution Selection -->
-                <div class="md:col-span-2">
-                    <label for="format-resolusi" class="block text-sm font-semibold text-gray-700">7. Format & Resolusi</label>
-                    <select id="format-resolusi" name="format-resolusi" class="mt-2 block w-full pl-3 pr-10 py-2.5 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md shadow-sm">
-                        <option selected disabled>Pilih format output...</option>
-                        <option>Resolusi HD (1920x1080px)</option>
-                        <option>Resolusi 4K (3840x2160px)</option>
-                        <option>Ukuran Cetak A4 (Resolusi Tinggi 300dpi)</option>
-                        <option>Format Instagram Post (1080x1080px)</option>
-                        <option>Format Instagram Story (1080x1920px)</option>
-                        <option>Resolusi Ultra-Tinggi (Untuk Cetak Besar)</option>
-                    </select>
-                </div>
             </div>
 
-            <!-- Unique Faces Checkbox -->
-            <div class="relative flex items-start">
-                <div class="flex items-center h-5">
-                    <input id="unique-faces" name="unique-faces" type="checkbox" class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded" checked>
-                </div>
-                <div class="ml-3 text-sm">
-                    <label for="unique-faces" class="font-medium text-gray-700">Pastikan wajah model berbeda untuk gender yang sama</label>
-                </div>
-            </div>
-
-            <!-- Submit Button -->
-            <div>
-                <button type="submit" class="w-full flex justify-center py-3 px-4 mt-2 border border-transparent rounded-lg shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-all transform hover:scale-105">
-                    Hasilkan Prompt
+            <!-- Tombol Submit -->
+            <div class="mt-10">
+                <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-4 rounded-lg focus:outline-none focus:ring-4 focus:ring-indigo-500 focus:ring-opacity-50 transition-colors duration-300">
+                    Buat Prompt
                 </button>
             </div>
         </form>
 
-        <!-- Prompt Output Area -->
-        <div id="prompt-output-container" class="mt-8 hidden">
-            <label for="generated-prompt" class="block text-sm font-semibold text-gray-700">Prompt yang Dihasilkan:</label>
-            <div class="mt-2 relative">
-                <textarea id="generated-prompt" rows="8" class="block w-full text-sm text-gray-700 border-gray-300 rounded-md shadow-sm bg-gray-50 p-3 pr-20" readonly></textarea>
-                <button id="copy-btn" type="button" class="absolute top-2 right-2 inline-flex items-center px-3 py-1.5 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                    Salin
-                </button>
+        <!-- Area Hasil Prompt -->
+        <div id="prompt-output-container" class="mt-10">
+            <h2 class="text-xl font-semibold text-white mb-4">Prompt yang Dihasilkan</h2>
+            <div class="relative">
+                <textarea id="generated-prompt" readonly class="w-full bg-gray-900 border border-gray-600 rounded-lg p-4 text-gray-300 h-48 resize-none"></textarea>
+                <button id="copy-button" class="absolute top-3 right-3 bg-gray-700 hover:bg-gray-600 text-white font-bold py-1 px-3 rounded-md text-sm transition-colors">Salin</button>
             </div>
         </div>
 
     </div>
 
     <script>
-        const form = document.getElementById('prompt-generator-form');
-        const modelSelect = document.getElementById('model');
-        const pencahayaanSelect = document.getElementById('pencahayaan');
-        const latarBelakangSelect = document.getElementById('latar-belakang');
-        const poseSelect = document.getElementById('pose');
-        const shotTypeSelect = document.getElementById('shot-type');
-        const gayaEditorialSelect = document.getElementById('gaya-editorial');
-        const formatResolusiSelect = document.getElementById('format-resolusi');
-        const uniqueFacesCheckbox = document.getElementById('unique-faces');
+        // --- Elemen DOM ---
+        const numModelsSelect = document.getElementById('num-models');
+        const modelDetailsWrapper = document.getElementById('model-details-wrapper');
+        const fashionForm = document.getElementById('fashion-form');
+        const promptOutputContainer = document.getElementById('prompt-output-container');
+        const generatedPromptTextarea = document.getElementById('generated-prompt');
+        const copyButton = document.getElementById('copy-button');
 
-        const outputContainer = document.getElementById('prompt-output-container');
-        const outputTextarea = document.getElementById('generated-prompt');
-        const copyBtn = document.getElementById('copy-btn');
+        // --- Data untuk Pilihan Dinamis ---
+        const hairStyles = {
+            'Wanita': ['Rambut Panjang Lurus', 'Rambut Panjang Bergelombang', 'Rambut Ikal', 'Gaya Bob', 'Gaya Pixie', 'Sanggul Modern', 'Kuncir Kuda', 'Kepang', 'Rambut Sebahu', 'Cepol Rendah Bertekstur'],
+            'Pria': ['Rambut Pendek Rapi', 'Undercut', 'Pompadour', 'Crew Cut', 'Comma Hair', 'Two-block', 'Rambut Gondrong']
+        };
 
-        // --- Form Submission Logic ---
-        form.addEventListener('submit', (e) => {
-            e.preventDefault();
+        const makeupStyles = {
+            'Wanita': ['Natural', 'Glamor', 'Editorial', 'Tanpa Riasan', 'Ethereal/Fairy Makeup'],
+            'Pria': ['Natural', 'Tanpa Riasan', 'Avant-Garde', 'Editorial/Runway Makeup']
+        };
 
-            // Validation
-            const allDropdownsSelected = Array.from(form.querySelectorAll('select')).every(select => select.selectedIndex > 0 || select.id === 'gaya-editorial');
-            if (!allDropdownsSelected) {
-                showNotification('Harap lengkapi semua pilihan untuk menghasilkan prompt.');
-                return;
+        // --- Fungsi untuk memperbarui pilihan dropdown ---
+        const updateSelectOptions = (selectElement, options) => {
+            selectElement.innerHTML = '';
+            options.forEach(style => {
+                const option = document.createElement('option');
+                option.value = style;
+                option.textContent = style;
+                selectElement.appendChild(option);
+            });
+        };
+
+        // --- Fungsi untuk membuat blok input detail model ---
+        const createModelDetailBlock = (index) => {
+            return `
+                <div class="model-details-block border border-gray-700 rounded-lg p-6 space-y-6 mt-6">
+                    <h2 class="text-xl font-semibold text-white">Model #${index}</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label for="gender-${index}" class="block text-sm font-medium text-gray-400 mb-2">Jenis Kelamin</label>
+                            <select id="gender-${index}" name="gender-${index}" class="w-full bg-gray-700 border border-gray-600 text-white rounded-lg p-3 focus:ring-2 focus:ring-indigo-500 transition gender-select">
+                                <option>Wanita</option>
+                                <option>Pria</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="ethnicity-${index}" class="block text-sm font-medium text-gray-400 mb-2">Fitur Wajah</label>
+                            <select id="ethnicity-${index}" name="ethnicity-${index}" class="w-full bg-gray-700 border border-gray-600 text-white rounded-lg p-3 focus:ring-2 focus:ring-indigo-500 transition">
+                                <option>Fitur Asia Tenggara</option>
+                                <option>Fitur Asia Timur</option>
+                                <option>Fitur Asia Selatan</option>
+                                <option>Fitur Timur Tengah</option>
+                                <option>Fitur Kaukasia</option>
+                                <option>Fitur Afrika</option>
+                                <option>Fitur Latin/Hispanik</option>
+                                <option>Fitur Multi-rasial</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="hair-style-${index}" class="block text-sm font-medium text-gray-400 mb-2">Gaya Rambut</label>
+                            <select id="hair-style-${index}" name="hair-style-${index}" class="w-full bg-gray-700 border border-gray-600 text-white rounded-lg p-3 focus:ring-2 focus:ring-indigo-500 transition">
+                                <!-- Opsi diisi oleh JS -->
+                            </select>
+                        </div>
+                        <div>
+                            <label for="makeup-style-${index}" class="block text-sm font-medium text-gray-400 mb-2">Gaya Riasan</label>
+                            <select id="makeup-style-${index}" name="makeup-style-${index}" class="w-full bg-gray-700 border border-gray-600 text-white rounded-lg p-3 focus:ring-2 focus:ring-indigo-500 transition makeup-select">
+                                <!-- Opsi diisi oleh JS -->
+                            </select>
+                        </div>
+                    </div>
+                     <div>
+                        <label for="model-pose-${index}" class="block text-sm font-medium text-gray-400 mb-2">Pose Model</label>
+                        <select id="model-pose-${index}" name="model-pose-${index}" class="w-full bg-gray-700 border border-gray-600 text-white rounded-lg p-3 focus:ring-2 focus:ring-indigo-500 transition">
+                            <optgroup label="Berdiri">
+                                <option>Pose Tegas</option>
+                                <option>Berdiri Santai</option>
+                                <option>Menyandar</option>
+                                <option>Tangan di Saku</option>
+                            </optgroup>
+                            <optgroup label="Duduk">
+                                <option>Duduk di Kursi</option>
+                                <option>Duduk di Lantai</option>
+                                <option>Duduk Santai</option>
+                            </optgroup>
+                             <optgroup label="Dinamis & Aksi">
+                                <option>Berjalan</option>
+                                <option>Melompat</option>
+                                <option>Menari</option>
+                                <option>Berputar</option>
+                            </optgroup>
+                            <optgroup label="Ekspresif">
+                                <option>Kandid (Candid)</option>
+                                <option>Tertawa</option>
+                                <option>Misterius</option>
+                            </optgroup>
+                        </select>
+                    </div>
+                    <div class="space-y-2">
+                        <div class="flex items-center">
+                            <input id="include-fabric-${index}" name="include-fabric-${index}" type="checkbox" class="h-5 w-5 bg-gray-700 border-gray-600 text-indigo-600 rounded focus:ring-indigo-500 fabric-checkbox">
+                            <label for="include-fabric-${index}" class="ml-3 text-sm text-gray-300">Sertakan Deskripsi Bahan Pakaian?</label>
+                        </div>
+                        <textarea id="fabric-type-${index}" name="fabric-type-${index}" placeholder="Contoh: Katun premium dengan detail bordir tangan, atau Sutra satin yang jatuh dengan elegan." class="w-full bg-gray-700 border border-gray-600 text-white rounded-lg p-3 focus:ring-2 focus:ring-indigo-500 transition hidden fabric-input" rows="3"></textarea>
+                    </div>
+                </div>
+            `;
+        };
+        
+        // --- Fungsi untuk mengupdate jumlah form detail model ---
+        const updateModelDetails = () => {
+            const count = parseInt(numModelsSelect.value, 10);
+            modelDetailsWrapper.innerHTML = '';
+            for (let i = 1; i <= count; i++) {
+                modelDetailsWrapper.innerHTML += createModelDetailBlock(i);
             }
+            // Setelah membuat blok, isi dropdown dinamis untuk setiap blok
+            for (let i = 1; i <= count; i++) {
+                const genderSelect = document.getElementById(`gender-${i}`);
+                const hairStyleSelect = document.getElementById(`hair-style-${i}`);
+                const makeupStyleSelect = document.getElementById(`makeup-style-${i}`);
 
-            // Get selected text values
-            const selections = {
-                model: modelSelect.options[modelSelect.selectedIndex].text,
-                pencahayaan: pencahayaanSelect.options[pencahayaanSelect.selectedIndex].text,
-                latar: latarBelakangSelect.options[latarBelakangSelect.selectedIndex].text,
-                pose: poseSelect.options[poseSelect.selectedIndex].text,
-                shot: shotTypeSelect.options[shotTypeSelect.selectedIndex].text,
-                gaya: gayaEditorialSelect.options[gayaEditorialSelect.selectedIndex].text,
-                format: formatResolusiSelect.options[formatResolusiSelect.selectedIndex].text
-            };
-            
-            // Fixed final sentence
-            const finalInstruction = "Pastikan bentuk, warna, dan detail desain baju tidak berubah — tetap sama persis dengan gambar asli. Fokus pada menampilkan baju secara realistis seperti dalam katalog fashion. Hindari distorsi pada bentuk baju.";
-
-            // Build the prompt with new structure
-            let generatedPrompt = `Hasilkan sebuah foto fashion profesional dalam format ${selections.format}. Gaya foto terinspirasi dari editorial (${selections.gaya}), menampilkan ${selections.model} dalam pose ${selections.pose}. Gunakan jenis pemotretan ${selections.shot} dengan ${selections.pencahayaan} pada latar belakang ${selections.latar}.`;
-
-            // List of poses that imply multiple models
-            const groupPoses = [
-                'Pose Duo Simetris (Sama Gender)',
-                'Komposisi Trio Dinamis',
-                'Pose Trio Berjejer (Lookbook)',
-                'Pose Grup Terstruktur (Komposisi)',
-                'Pose Grup Lifestyle (Candid/Bergerak)',
-                'Pose Pasangan Interaktif (Pria & Wanita)',
-                'Pose Back-to-Back'
-            ];
-            
-            const isGroupModelSelected = selections.model === 'Model Indonesia (Grup)';
-            const isGroupPoseSelected = groupPoses.includes(selections.pose);
-
-            // Add clarification for unique faces if checkbox is checked and it's a group scenario
-            if (uniqueFacesCheckbox.checked && (isGroupModelSelected || isGroupPoseSelected)) {
-                generatedPrompt += ' Untuk model dengan gender yang sama, pastikan setiap individu memiliki fitur wajah yang unik dan berbeda satu sama lain.';
+                if (genderSelect && hairStyleSelect && makeupStyleSelect) {
+                    const selectedGender = genderSelect.value;
+                    updateSelectOptions(hairStyleSelect, hairStyles[selectedGender]);
+                    updateSelectOptions(makeupStyleSelect, makeupStyles[selectedGender]);
+                }
             }
-            
-            // Add the fixed final instruction
-            generatedPrompt += ` ${finalInstruction}`;
+        };
 
-            // Display prompt
-            outputTextarea.value = generatedPrompt;
-            outputContainer.classList.remove('hidden');
+        // --- Event Listener untuk perubahan pada wrapper detail model (Event Delegation) ---
+        modelDetailsWrapper.addEventListener('change', (event) => {
+            // Cek apakah yang berubah adalah dropdown jenis kelamin
+            if (event.target.classList.contains('gender-select')) {
+                const index = event.target.id.split('-')[1];
+                const selectedGender = event.target.value;
+                const hairStyleSelect = document.getElementById(`hair-style-${index}`);
+                const makeupStyleSelect = document.getElementById(`makeup-style-${index}`);
+
+                if (hairStyleSelect) {
+                    updateSelectOptions(hairStyleSelect, hairStyles[selectedGender]);
+                }
+                if (makeupStyleSelect) {
+                    updateSelectOptions(makeupStyleSelect, makeupStyles[selectedGender]);
+                }
+            }
+             // Cek apakah yang berubah adalah checkbox kain
+            if (event.target.classList.contains('fabric-checkbox')) {
+                const index = event.target.id.split('-')[2];
+                const fabricInput = document.getElementById(`fabric-type-${index}`);
+                if (fabricInput) {
+                    fabricInput.classList.toggle('hidden', !event.target.checked);
+                    if (!event.target.checked) {
+                        fabricInput.value = '';
+                    }
+                }
+            }
         });
 
-        copyBtn.addEventListener('click', () => {
-            outputTextarea.select();
-            try {
-                document.execCommand('copy');
-                copyBtn.textContent = 'Disalin!';
-                setTimeout(() => {
-                    copyBtn.textContent = 'Salin';
-                }, 2000);
-            } catch (err) {
-                console.error('Gagal menyalin prompt: ', err);
-                showNotification('Gagal menyalin. Silakan salin manual.');
+        // --- Event Listener untuk Form Submit ---
+        fashionForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            const formData = new FormData(fashionForm);
+            const data = Object.fromEntries(formData.entries());
+
+            let modelDescriptions = [];
+            const count = parseInt(data['num-models'], 10);
+            
+            for(let i = 1; i <= count; i++) {
+                const gender = data[`gender-${i}`];
+                const makeupStyle = data[`makeup-style-${i}`];
+                
+                let bodySpecText = '';
+                if (gender === 'Pria') {
+                    bodySpecText = ' (tinggi 180 cm, berat badan standar model Asia)';
+                } else if (gender === 'Wanita') {
+                    bodySpecText = ' (tinggi 175 cm, berat 55-57 kg)';
+                }
+
+                let makeupDetailText = `gaya riasan '${makeupStyle}'`;
+                if (makeupStyle === 'Avant-Garde' || makeupStyle === 'Editorial/Runway Makeup') {
+                    makeupDetailText = `gaya riasan '${makeupStyle}' yang menekankan detail inovatif: penggunaan warna neon atau kontras, pola geometri, tekstur unik, dan bentuk yang tidak biasa pada mata atau bibir`;
+                } else if (makeupStyle === 'Ethereal/Fairy Makeup') {
+                    makeupDetailText = `gaya riasan '${makeupStyle}' yang menekankan detail magis: penggunaan glitter halus, warna pastel berkilauan, dan tekstur yang memberikan efek cahaya lembut`;
+                }
+                
+                const fabricText = (data[`include-fabric-${i}`] && data[`fabric-type-${i}`]) ? ` mengenakan baju dengan bahan: ${data[`fabric-type-${i}`]}` : '';
+                
+                const modelDetail = `seorang ${gender}${bodySpecText} dengan fitur wajah ${data[`ethnicity-${i}`]}, gaya rambut '${data[`hair-style-${i}`]}', ${makeupDetailText}, dan dalam pose '${data[`model-pose-${i}`]}'${fabricText}.`;
+                
+                modelDescriptions.push(modelDetail);
             }
+            
+            let fullModelDescription;
+            if (count === 1) {
+                fullModelDescription = `dengan model ${modelDescriptions[0]}`;
+            } else {
+                const numberedDescriptions = modelDescriptions.map((desc, index) => `Model ${index + 1} adalah ${desc}`);
+                fullModelDescription = `dengan ${count} model. ${numberedDescriptions.join(' ')}`;
+            }
+
+            const introPrompt = `Setiap pakaian harus direalisasikan secara presisi 100%, meniru setiap detail visual dalam gambar referensi, termasuk:\nBentuk dan potongan pakaian sesuai sketsa/desain asli.\nWarna dan gradasi identik tanpa perubahan tonal.\nTekstur bahan yang terlihat dan terasa nyata (misal: satin yang mengilap lembut, sifon transparan ringan, denim kaku, katun tebal, atau kulit sintetis).\nDetail kecil seperti jahitan, bordiran, kancing, resleting, kerah, ujung lengan, pinggang, aksen kain, dan lipatan.\n\n`;
+
+            let finalPrompt = introPrompt + `Hasilkan foto bergaya photoshoot fashion profesional ${fullModelDescription}.`;
+            finalPrompt += ` Konsep pemotretan adalah '${data['photo-theme']}'.`;
+
+            // Logika untuk latar belakang
+            if (data['photo-theme'] === 'Galactica Pandora (film Avatar)') {
+                 finalPrompt += ` Latar belakang adalah lanskap bioluminesen yang magis seperti di Pandora dari film Avatar, dengan flora dan fauna yang bersinar dalam gelap.`;
+            } else {
+                 finalPrompt += ` Gunakan pencahayaan natural atau studio dengan latar belakang bersih atau minimalis.`;
+            }
+
+            finalPrompt += ` Pastikan bentuk, warna, dan detail desain baju tidak berubah — tetap sama persis dengan gambar asli. Fokus utama adalah untuk menampilkan baju secara realistis seperti dalam katalog fashion. Pastikan pose model tidak menutupi bagian penting dari baju. Hindari distorsi pada bentuk baju. Resolusi: ${data.resolution}. Tipe shot: ${data['shot-type']}.`;
+
+
+            generatedPromptTextarea.value = finalPrompt;
+            promptOutputContainer.style.display = 'block';
+            promptOutputContainer.scrollIntoView({ behavior: 'smooth' });
         });
 
-        function showNotification(message) {
-            const messageBox = document.createElement('div');
-            messageBox.style = 'position:fixed; top:20px; left:50%; transform:translateX(-50%); background-color:#ff4d4d; color:white; padding:12px 20px; border-radius:8px; z-index:1000; box-shadow:0 4px 6px rgba(0,0,0,0.1); font-size: 14px;';
-            messageBox.textContent = message;
-            document.body.appendChild(messageBox);
+        // --- Event Listener untuk tombol Copy ---
+        copyButton.addEventListener('click', () => {
+            generatedPromptTextarea.select();
+            document.execCommand('copy');
+            
+            const originalText = copyButton.textContent;
+            copyButton.textContent = 'Tersalin!';
             setTimeout(() => {
-                messageBox.remove();
-            }, 3000);
-        }
+                copyButton.textContent = originalText;
+            }, 2000);
+        });
+        
+        // --- Event Listener untuk mengubah jumlah model ---
+        numModelsSelect.addEventListener('change', updateModelDetails);
+
+        // --- Inisialisasi awal saat halaman dimuat ---
+        document.addEventListener('DOMContentLoaded', () => {
+            updateModelDetails();
+        });
+
     </script>
 </body>
 </html>
